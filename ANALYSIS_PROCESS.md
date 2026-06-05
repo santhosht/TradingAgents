@@ -5,16 +5,43 @@
 
 ## CLAUDE INSTRUCTIONS — READ THIS FIRST
 
+### ABSOLUTE RULES — NO EXCEPTIONS
+
+1. **Run isolation:** Every analysis run is completely independent. Do NOT use memory, prior conversation context, or recollections from previous runs to influence this analysis. Each run must be derived solely from the current data file.
+
+2. **File isolation:** Only read the current stock data file and this file. Do NOT read any files in `reports/`, any `*_ANALYSIS_*.md` files, or any prior run output. Reading prior outputs contaminates the current analysis with stale intelligence.
+
+3. **No cross-run influence:** Do not recall, reference, or be influenced by previous analysis conclusions — even if you remember them from this session. If a prior run said "entry $499", that number must be independently derived from the current data, not copied.
+
+4. **Data file is the only source of truth:** All prices, indicators, sentiment scores, news, and fundamentals must come from the current data file header timestamp. Do not use any external knowledge about the stock's current price or recent events beyond what is in the file.
+
+5. **Convergence is validation, not copying:** If independent runs produce the same result, that is meaningful signal. If they differ, that reflects new data — both outcomes are correct.
+
 When this file is shared, do the following **before starting any analysis**:
 
 **Step 1 — Check for data**
-If the user has not pasted stock data (the output of `fetch_data.py`), ask them:
-> "Please share the stock data file. Run this command and paste the output here:
+
+**In Claude Code mode (tools available):** If the user has not explicitly provided or named a specific data file, ALWAYS run `fetch_data.py` to generate fresh data. Do NOT reuse existing `*_YYYYMMDD_HHMMSS.txt` files sitting in the directory — those are stale runs. A request like "run analysis for AMD" means fetch fresh data now.
+
+```bash
+source /root/sant/app/TradingAgents/.venv/bin/activate
+python /root/sant/app/TradingAgents/fetch_data.py TICKER
+```
+
+**In Web chat mode (no tools):** If the user has not provided stock data, ask them:
+> "Please share the stock data file. Run this command and share the file here:
 > ```bash
 > source /root/sant/app/TradingAgents/.venv/bin/activate
 > python /root/sant/app/TradingAgents/fetch_data.py TICKER
 > ```
-> Replace TICKER with the stock symbol you want to analyze (e.g. AMD, NVDA, SPY)."
+> Replace TICKER with the stock symbol (e.g. AMD, NVDA, SPY).
+> The script saves a timestamped file like `AMD_20260605_043116.txt` — share that file."
+
+When data is available, read the `Run ID` and `Report dir` fields from the file header. Use them exactly — do not generate a new timestamp. Example header fields:
+```
+Run ID    : AMD_20260605_043116
+Report dir: reports/AMD_20260605_043116/
+```
 
 **Step 2 — Ask for analysis mode**
 Once data is available, ask the user:
@@ -37,10 +64,11 @@ Only after both data and mode are confirmed, proceed through the agents in order
 source /root/sant/app/TradingAgents/.venv/bin/activate
 python /root/sant/app/TradingAgents/fetch_data.py AMD
 ```
-2. Open Claude chat (claude.ai — no API needed)
-3. Paste contents of `AMD_data.txt`
-4. Paste this file
-5. Claude will ask for mode — reply Fast / Medium / Deep
+2. The script saves a timestamped file, e.g. `AMD_20260605_043116.txt`, and prints the report dir: `reports/AMD_20260605_043116/`
+3. Open Claude chat (claude.ai — no API needed)
+4. Share the timestamped `.txt` file and this file
+5. Claude reads the Run ID from the file header — no new timestamp is generated
+6. Claude will ask for mode — reply Fast / Medium / Deep
 
 ---
 
@@ -318,60 +346,179 @@ Data → [1] Market Analyst
 
 ---
 
-## AFTER ANALYSIS COMPLETES — SAVE REPORT
+## OUTPUT STRUCTURE
 
-Once the Portfolio Manager delivers the final decision, ask the user:
+### Step 0 — Detect environment before Agent 1 starts
 
-> "Analysis complete. Do you want me to save this as a markdown report file?
-> The file will include every agent's output, the full debate, and a final summary table.
-> Reply **Yes** to save or **No** to skip."
+Check whether file-writing tools (Write / Edit / Bash) are available:
 
-If the user says **Yes**, create a file named `TICKER_ANALYSIS_DATE.md` (e.g. `AMD_ANALYSIS_2026-06-05.md`) with this structure:
+- **If tools are available → Claude Code mode** (writing to files)
+- **If no tools available → Web chat mode** (output in chat only)
+
+Announce the mode once at the start:
+```
+Environment: Claude Code — writing to reports/AMD_20260605_043116/
+```
+or:
+```
+Environment: Web chat — full output in chat, copy-paste to save at end
+```
+
+---
+
+### Claude Code mode
+
+Do NOT wait until the end to save. Write each agent's output to disk immediately after generating it. Print only a one-line status to chat per agent.
+
+**Directory:** Read the `Report dir` field from the data file header. Use it exactly — do not generate a new timestamp.
 
 ```
-# TICKER Analysis Report — DATE
+Run ID    : AMD_20260605_043116
+Report dir: reports/AMD_20260605_043116/
+```
 
-## Summary (Quick Reference)
+Create the directory before starting Agent 1. Write each file as the agent completes.
+
+**File layout:**
+```
+reports/AMD_20260605_043116/
+  complete_report.md        ← single combined file, written last
+  1_analysts/
+    market.md
+    sentiment.md
+    news.md
+    fundamentals.md
+  2_research/
+    bull.md
+    bear.md
+    manager.md
+  3_trading/
+    trader.md
+  4_risk/                   ← Deep mode only
+    aggressive.md
+    conservative.md
+    neutral.md
+  5_portfolio/
+    decision.md
+```
+
+Create all subdirectories before starting Agent 1.
+
+**Chat output per agent** — one line only:
+```
+✓ Market Analyst    → 1_analysts/market.md
+✓ Sentiment Analyst → 1_analysts/sentiment.md
+✓ News Analyst      → 1_analysts/news.md
+✓ Fundamentals      → 1_analysts/fundamentals.md
+✓ Bull (R1/R2/R3)   → 2_research/bull.md
+✓ Bear (R1/R2/R3)   → 2_research/bear.md
+✓ Research Manager  → 2_research/manager.md
+✓ Trader            → 3_trading/trader.md
+✓ Aggressive Risk   → 4_risk/aggressive.md
+✓ Conservative Risk → 4_risk/conservative.md
+✓ Neutral Risk      → 4_risk/neutral.md
+✓ Portfolio Manager → 5_portfolio/decision.md
+✓ Complete report   → complete_report.md
+```
+
+**After Portfolio Manager:** write `complete_report.md` (all agents concatenated in pipeline order), then print the final decision table to chat (see summary format below).
+
+---
+
+### Web chat mode
+
+No file tools available. Output each agent's content in chat inside a fenced markdown block so the user can read it as it generates. Do not suppress or shorten the output.
+
+**Per agent:** output a fenced block with a path comment at the top:
+
+~~~
+```markdown
+<!-- 1_analysts/market.md -->
+
+[full agent output here]
+```
+~~~
+
+**After Portfolio Manager:** output one final combined fenced block containing all agents concatenated — this is the single copy-paste block the user saves as `complete_report.md`:
+
+~~~
+```markdown
+<!-- SAVE AS: reports/AMD_20260605_043116/complete_report.md -->
+
+[all agent outputs combined]
+```
+~~~
+
+Then print the summary table to chat (see summary format below).
+
+---
+
+### Summary table (both modes)
+
+Print this to chat after the Portfolio Manager in both modes:
+
+```
+## Summary — TICKER — RUN_ID
+
 | Parameter     | Value |
 |---------------|-------|
 | Signal        | BUY/SELL/HOLD |
 | Rating        | Overweight/etc |
-| Entry         | $xxx |
+| Entry         | $xxx (primary limit) |
+| Secondary entry| $xxx (only if primary zone breaks) |
+| Breakout entry| $xxx on close >$xxx vol >35M |
 | Stop Loss     | $xxx |
 | Target 1      | $xxx (timeframe) |
 | Target 2      | $xxx (timeframe) |
+| R:R           | x:1 |
+| Position Size | x% |
 | Confidence    | High/Medium/Low |
 | Mode          | Fast/Medium/Deep |
-
-## Agent 1 — Market Analyst
-[full output]
-
-## Agent 2 — Sentiment Analyst
-[full output]
-
-## Agent 3 — News Analyst
-[full output]
-
-## Agent 4 — Fundamentals Analyst
-[full output]
-
-## Bull/Bear Debate
-[all rounds]
-
-## Agent 7 — Research Manager Verdict
-[full output]
-
-## Agent 8 — Trader Proposal
-[full output]
-
-## Risk Panel Debate (Deep mode only)
-[full output]
-
-## Agent 10 — Portfolio Manager Final Decision
-[full output]
+| Report dir    | reports/TICKER_YYYYMMDD_HHMMSS/ |
 ```
 
-If the user says **No**, end the session normally.
+After the summary table, append a **plain English action section** filled with the actual numbers from this run. Use this template:
+
+```
+## What To Do — Plain English
+
+**Step 1 — Place the limit order (set and forget)**
+In your broker, set a limit buy order for TICKER at $[entry_mid] (range: $[entry_low]–$[entry_high]).
+Set it as GTC (Good Till Cancelled) valid for 5 trading days.
+It fills automatically — no watching needed.
+
+**Step 2 — Set the stop loss immediately after the limit fills**
+Place a stop loss sell order at $[stop].
+Hard floor — do not move it down, do not cancel it. It triggers automatically.
+Only trail upward after TICKER holds $[stop_trail_threshold] for 5 consecutive days.
+
+**Step 3 — Set your profit targets**
+- Sell half your position at $[target1] ([target1_timeframe] target)
+- Sell the other half at $[target2] ([target2_timeframe] target)
+Both fill automatically when TICKER reaches those prices.
+
+**Step 4 — The only thing needing your attention: breakout watch**
+Only relevant if TICKER never pulls back and keeps rising toward $[breakout_trigger].
+On any day TICKER is trading near $[breakout_trigger]:
+- Check your broker once at 3:30pm — look at today's total Volume and the price
+- If volume is already >28M and price is above $[breakout_trigger], watch the 4pm close
+- If TICKER closes above $[breakout_trigger] with volume >[breakout_volume] → buy at $[breakout_entry] next morning
+- Cancel your $[entry_low]–$[entry_high] limit order at the same time
+- Midday price touching $[breakout_trigger] does not count — always wait for 4pm close
+
+**Step 5 — One mandatory check: [next_earnings_label]**
+When TICKER reports earnings, check:
+- Revenue must be above $[revenue_threshold] ([revenue_context])
+- EPS must be above $[eps_threshold] (above Q[last_q] EPS)
+Both growing → hold. Either flat or declining → cut position to half or exit fully.
+
+**What to ignore:**
+Daily price moves between $[stop] and $[breakout_trigger] — normal noise, do nothing.
+News headlines unless it is an earnings report or a major product cancellation.
+The urge to move your stop loss down.
+```
+
+Fill every bracketed placeholder with the actual value from this run. Write no placeholders in the final output.
 
 ---
 
@@ -380,9 +527,10 @@ If the user says **No**, end the session normally.
 - **Deep mode** = 3 Bull/Bear rounds + full 3-way risk debate (most thorough)
 - **Medium mode** = 2 Bull/Bear rounds + brief risk summary
 - **Fast mode** = 1 Bull/Bear round + brief risk summary
+- Always detect environment (Claude Code vs web chat) before Agent 1 — announce it once
 - Always ask for mode before starting — do not assume Deep
 - Always check data is present before starting — ask user to run fetch_data.py if missing
-- Always ask to save report after analysis completes — do not save without asking
+- Do NOT ask to save — in Claude Code mode write files automatically; in web chat output full blocks
 - Stop loss must always be placed minimum **1.5×ATR** below entry
 - Price target must always be **above current price** (sanity check)
 - If data sources are missing (Reddit/StockTwits), flag in sentiment confidence — do not fabricate

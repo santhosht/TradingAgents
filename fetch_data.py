@@ -31,6 +31,8 @@ DATE          = sys.argv[2] if len(sys.argv) > 2 else datetime.date.today().strf
 LOOKBACK_DAYS = 60    # display days (after indicator warmup)
 NEWS_DAYS     = 7
 REDDIT_SUBS   = ["wallstreetbets", "stocks", "investing"]
+ST_MAX_POSTS  = 15    # max StockTwits posts to include (reduce for smaller token usage)
+ST_TEXT_LIMIT = 150   # max chars per StockTwits post text
 
 # Match the app's User-Agent so Reddit/StockTwits don't rate-limit
 _UA = "tradingagents/0.2 (+https://github.com/TauricResearch/TradingAgents)"
@@ -157,6 +159,48 @@ def format_price_section(df, ticker):
 
     return "\n".join(out)
 
+# ── 1b. Live Quote ────────────────────────────────────────────────────────────
+
+def fetch_live_quote(ticker):
+    out = [sep(f"LIVE QUOTE — {ticker} (intraday — NOT used in indicator calculations)")]
+    try:
+        fi = yf.Ticker(ticker).fast_info
+        price       = getattr(fi, "last_price", None)
+        prev_close  = getattr(fi, "previous_close", None)
+        day_high    = getattr(fi, "day_high", None)
+        day_low     = getattr(fi, "day_low", None)
+        volume      = getattr(fi, "last_volume", None)
+        market_cap  = getattr(fi, "market_cap", None)
+        market_time = getattr(fi, "regular_market_time", None)
+
+        if price is None:
+            out.append("  Quote unavailable.")
+            return "\n".join(out)
+
+        chg = price - prev_close if prev_close else None
+        pct = chg / prev_close * 100 if prev_close else None
+
+        out.append(f"  Current Price : ${safe(price)}")
+        if chg is not None:
+            out.append(f"  Change Today  : {'+' if chg>=0 else ''}{safe(chg)} ({'+' if pct>=0 else ''}{safe(pct)}%)")
+        out.append(f"  Prev Close    : ${safe(prev_close)}")
+        out.append(f"  Day High      : ${safe(day_high)}")
+        out.append(f"  Day Low       : ${safe(day_low)}")
+        if volume:
+            out.append(f"  Volume (so far): {int(volume):,}")
+        if market_cap:
+            out.append(f"  Market Cap    : ${market_cap/1e9:.2f}B")
+        if market_time:
+            try:
+                ts = datetime.datetime.fromtimestamp(int(market_time), tz=datetime.timezone.utc)
+                out.append(f"  As of (UTC)   : {ts.strftime('%Y-%m-%d %H:%M:%S UTC')}")
+            except Exception:
+                pass
+        out.append(f"\n  [Note: indicators above are based on completed daily candles only]")
+    except Exception as e:
+        out.append(f"  Unavailable: {type(e).__name__}")
+    return "\n".join(out)
+
 # ── 2. Fundamentals (overview) ────────────────────────────────────────────────
 
 def fetch_fundamentals(ticker):
@@ -223,31 +267,90 @@ def fetch_fundamentals(ticker):
 
 # ── 3. Financial Statements ───────────────────────────────────────────────────
 
-def _fmt_statement(df, title, ticker):
-    """Format a quarterly financial statement DataFrame cleanly."""
+_INCOME_ROWS = [
+    ("Revenue",        ["Total Revenue", "Operating Revenue"]),
+    ("Gross Profit",   ["Gross Profit"]),
+    ("Op Income",      ["Operating Income", "Total Operating Income As Reported"]),
+    ("EBITDA",         ["EBITDA", "Normalized EBITDA"]),
+    ("Net Income",     ["Net Income", "Net Income Common Stockholders"]),
+    ("R&D",            ["Research And Development"]),
+    ("SG&A",           ["Selling General And Administration"]),
+    ("EPS (Diluted)",  ["Diluted EPS"]),
+]
+
+_BALANCE_ROWS = [
+    ("Cash & ST Invest", ["Cash Cash Equivalents And Short Term Investments"]),
+    ("Accounts Recv",    ["Accounts Receivable"]),
+    ("Inventory",        ["Inventory"]),
+    ("Total Assets",     ["Total Assets"]),
+    ("Total Debt",       ["Total Debt"]),
+    ("Equity",           ["Common Stock Equity", "Stockholders Equity"]),
+    ("Tangible Book",    ["Tangible Book Value", "Net Tangible Assets"]),
+    ("Working Capital",  ["Working Capital"]),
+    ("Goodwill+Intang",  ["Goodwill And Other Intangible Assets"]),
+]
+
+_CASHFLOW_ROWS = [
+    ("Operating CF",   ["Operating Cash Flow", "Cash Flow From Continuing Operating Activities"]),
+    ("Capex",          ["Capital Expenditure"]),
+    ("Free Cash Flow", ["Free Cash Flow"]),
+    ("Stock Buybacks", ["Repurchase Of Capital Stock", "Common Stock Payments"]),
+    ("Stock Comp",     ["Stock Based Compensation"]),
+]
+
+def _fmt_key_rows(df, title, ticker, rows):
     out = [sep(f"{title} — {ticker} (Quarterly)")]
     if df is None or df.empty:
         out.append("  No data available.")
         return "\n".join(out)
-    # Show last 4 quarters, key rows only (limit rows to avoid context bloat)
-    df = df.iloc[:, :4]  # last 4 quarters
-    df.columns = [str(c)[:10] for c in df.columns]
-    out.append(df.to_string())
+    df = df.iloc[:, :4]
+    # Quarter headers: 2026-03-31 → Q1'26
+    def _qhdr(col):
+        try:
+            dt = pd.Timestamp(col)
+            q  = (dt.month - 1) // 3 + 1
+            return f"Q{q}'{str(dt.year)[2:]}"
+        except Exception:
+            return str(col)[:7]
+    hdrs = [_qhdr(c) for c in df.columns]
+    col_w = 10
+    label_w = 16
+    header_line = f"  {'':>{label_w}}  " + "  ".join(f"{h:>{col_w}}" for h in hdrs)
+    out.append(header_line)
+    out.append("  " + "-" * (label_w + (col_w + 2) * len(hdrs)))
+    for label, keys in rows:
+        row = None
+        for k in keys:
+            if k in df.index:
+                row = df.loc[k]
+                break
+        if row is None:
+            continue
+        def _fmt(v):
+            try:
+                f = float(v)
+                if abs(f) >= 1e9:  return f"${f/1e9:>8.3f}B"
+                if abs(f) >= 1e6:  return f"${f/1e6:>8.1f}M"
+                return f"{f:>9.2f}"
+            except Exception:
+                return f"{'N/A':>10}"
+        vals = "  ".join(_fmt(v) for v in row.values)
+        out.append(f"  {label:>{label_w}}  {vals}")
     return "\n".join(out)
 
 def fetch_financial_statements(ticker):
     t   = yf.Ticker(ticker)
     out = []
     try:
-        out.append(_fmt_statement(t.quarterly_income_stmt,  "INCOME STATEMENT", ticker))
+        out.append(_fmt_key_rows(t.quarterly_income_stmt,  "INCOME STATEMENT",   ticker, _INCOME_ROWS))
     except Exception as e:
         out.append(f"\n[Income Statement Error: {e}]")
     try:
-        out.append(_fmt_statement(t.quarterly_balance_sheet, "BALANCE SHEET", ticker))
+        out.append(_fmt_key_rows(t.quarterly_balance_sheet, "BALANCE SHEET",     ticker, _BALANCE_ROWS))
     except Exception as e:
         out.append(f"\n[Balance Sheet Error: {e}]")
     try:
-        out.append(_fmt_statement(t.quarterly_cashflow, "CASH FLOW STATEMENT", ticker))
+        out.append(_fmt_key_rows(t.quarterly_cashflow,      "CASH FLOW",         ticker, _CASHFLOW_ROWS))
     except Exception as e:
         out.append(f"\n[Cash Flow Error: {e}]")
     return "\n".join(out)
@@ -262,7 +365,9 @@ def fetch_insider_transactions(ticker):
         if data is None or data.empty:
             out.append("  No insider transactions reported.")
         else:
-            out.append(data.head(15).to_string())
+            drop_cols = [c for c in ["URL", "Text"] if c in data.columns]
+            data = data.drop(columns=drop_cols).head(15)
+            out.append(data.to_string())
     except Exception as e:
         out.append(f"  Error: {e}")
     return "\n".join(out)
@@ -310,7 +415,9 @@ def _strip_html(content):
     return " ".join(html.unescape(text).split())
 
 def _fetch_sub_json(ticker, sub, limit=5):
-    qs  = urlencode({"q": ticker, "restrict_sr": "on", "sort": "new", "t": "week", "limit": limit})
+    # Reddit JSON API blocks all non-authenticated requests with 403
+    # Kept for reference in case credentials are added later via PRAW
+    qs  = urlencode({"q": ticker, "restrict_sr": "on", "sort": "top", "t": "week", "limit": limit})
     url = f"https://www.reddit.com/r/{sub}/search.json?{qs}"
     req = Request(url, headers={"User-Agent": _UA, "Accept": "application/json"})
     try:
@@ -322,7 +429,8 @@ def _fetch_sub_json(ticker, sub, limit=5):
         return [], "json_failed"
 
 def _fetch_sub_rss(ticker, sub, limit=5):
-    qs  = urlencode({"q": ticker, "restrict_sr": "on", "sort": "new", "t": "week", "limit": limit})
+    # sort=top returns highest-upvoted posts for the week (community-ranked even without visible scores)
+    qs  = urlencode({"q": ticker, "restrict_sr": "on", "sort": "top", "t": "week", "limit": limit})
     url = f"https://www.reddit.com/r/{sub}/search.rss?{qs}"
     req = Request(url, headers={"User-Agent": _UA})
     ns  = {"atom": "http://www.w3.org/2005/Atom"}
@@ -364,7 +472,7 @@ def fetch_reddit(ticker, subs=REDDIT_SUBS):
             out.append(f"\n[r/{sub}]\n  No posts found mentioning {ticker} in the past 7 days.")
             continue
         header = f"\n[r/{sub} — {len(posts)} posts"
-        header += " via RSS (no scores)" if via_rss else ""
+        header += " via RSS — sorted by top votes, scores unavailable (Reddit API blocked)" if via_rss else ""
         header += "]"
         out.append(header)
         for p in posts:
@@ -399,20 +507,21 @@ def fetch_stocktwits(ticker):
             return "\n".join(out)
         bull = bear = unlabeled = 0
         lines = []
-        for m in msgs[:30]:
+        for m in msgs[:30]:  # fetch all 30 to get accurate ratio counts
             created  = m.get("created_at", "")
             user     = (m.get("user") or {}).get("username", "?")
             entities = m.get("entities") or {}
             sent_obj = entities.get("sentiment") or {}
             sentiment= sent_obj.get("basic") if isinstance(sent_obj, dict) else None
-            body     = (m.get("body") or "").replace("\n", " ").strip()[:280]
+            body     = (m.get("body") or "").replace("\n", " ").strip()[:ST_TEXT_LIMIT]
             if sentiment == "Bullish":
                 bull += 1; tag = "Bullish"
             elif sentiment == "Bearish":
                 bear += 1; tag = "Bearish"
             else:
                 unlabeled += 1; tag = "no-label"
-            lines.append(f"  [{created[:10]} · @{user} · {tag}] {body}")
+            if len(lines) < ST_MAX_POSTS:  # cap posts shown, but count all for ratio
+                lines.append(f"  [{created[:10]} · @{user} · {tag}] {body}")
         total = bull + bear + unlabeled
         bull_pct = round(100 * bull / total) if total else 0
         bear_pct = round(100 * bear / total) if total else 0
@@ -428,23 +537,36 @@ def fetch_stocktwits(ticker):
 def fetch_global_news():
     out = [sep("GLOBAL MACRO NEWS")]
     feeds = [
-        ("Reuters Markets", "https://feeds.reuters.com/reuters/businessNews"),
-        ("Yahoo Finance",   "https://finance.yahoo.com/news/rssindex"),
+        ("CNBC Markets",    "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=20910258"),
+        ("FT Markets",      "https://www.ft.com/markets?format=rss"),
+        # ("Reuters Markets", "https://feeds.reuters.com/reuters/businessNews"),  # DNS dead — Reuters removed public RSS
+        # ("Yahoo Finance",   "https://finance.yahoo.com/news/rssindex"),         # returns personal finance noise
     ]
+    _NOISE = ("personal loan", "student loan", "credit card", "mortgage", "insurance review",
+              "best loan", "bad credit", "same-day", "emergency loan", "bank review",
+              "checking account", "savings account", "long-term care")
+
     for name, url in feeds:
         out.append(f"\n[{name}]")
         try:
             req  = Request(url, headers={"User-Agent": _UA})
             with urlopen(req, timeout=10) as resp:
                 root = ET.fromstring(resp.read())
-            items = root.findall(".//item")[:8]
-            if not items:
-                out.append("  No items.")
-                continue
+            items = root.findall(".//item")
+            shown = 0
             for item in items:
                 t_el  = item.find("title")
-                title = t_el.text if t_el is not None else ""
-                out.append(f"  • {(title or '').strip()[:120]}")
+                title = (t_el.text or "").strip() if t_el is not None else ""
+                if not title:
+                    continue
+                if any(n in title.lower() for n in _NOISE):
+                    continue
+                out.append(f"  • {title[:120]}")
+                shown += 1
+                if shown >= 8:
+                    break
+            if shown == 0:
+                out.append("  No relevant items found.")
         except Exception as e:
             out.append(f"  Unavailable: {type(e).__name__}")
     return "\n".join(out)
@@ -454,23 +576,35 @@ def fetch_global_news():
 def main():
     print(f"\nFetching data for {TICKER} as of {DATE}...")
 
+    ts       = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    run_id   = f"{TICKER}_{ts}"
+    report_dir = f"reports/{run_id}"
+    import os; os.makedirs(report_dir, exist_ok=True)
+    filename = f"{report_dir}/{TICKER}_{ts}.txt"
+
     sections = []
 
     header = f"""
 {'#'*60}
   MARKET DATA REPORT
-  Ticker : {TICKER}
-  Date   : {DATE}
-  Generated: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+  Ticker    : {TICKER}
+  Date      : {DATE}
+  Generated : {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+  Run ID    : {run_id}
+  Data file : {report_dir}/{TICKER}_{ts}.txt
+  Report dir: {report_dir}/
 {'#'*60}
 
-[Claude: Follow ANALYSIS_PROCESS.md. Data below is the input for analysis.]
+[Claude: Follow ANALYSIS_PROCESS.md. Data file is {report_dir}/{TICKER}_{ts}.txt. Report dir is {report_dir}/. Do NOT read any other files.]
 """
     sections.append(header)
 
     print("  → Price & technicals...")
     df, err = fetch_price_and_technicals(TICKER)
     sections.append(format_price_section(df, TICKER) if not err else f"\n[Price Error: {err}]")
+
+    print("  → Live quote (intraday)...")
+    sections.append(fetch_live_quote(TICKER))
 
     print("  → Fundamentals overview...")
     sections.append(fetch_fundamentals(TICKER))
@@ -497,12 +631,12 @@ def main():
 
     output = "\n".join(sections)
 
-    filename = f"{TICKER}_data.txt"
     with open(filename, "w", encoding="utf-8") as f:
         f.write(output)
 
-    print(f"\n  ✓ Saved to {filename}")
-    print(f"  ✓ Paste into Claude chat with ANALYSIS_PROCESS.md\n")
+    print(f"\n  ✓ Report dir created : {report_dir}/")
+    print(f"  ✓ Data file saved    : {filename}")
+    print(f"  ✓ Paste {filename} into Claude chat with ANALYSIS_PROCESS.md\n")
     print(output)
 
 
