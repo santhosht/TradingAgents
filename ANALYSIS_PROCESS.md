@@ -46,9 +46,9 @@ Report dir: reports/AMD_20260605_043116/
 **Step 2 — Ask for analysis mode**
 Once data is available, ask the user:
 > "Which analysis mode do you want?
-> - **Fast** — 1 Bull/Bear debate round. Quick decision, less debate depth. (~5 min read)
-> - **Medium** — 2 Bull/Bear debate rounds. Balanced depth. (~8 min read)
-> - **Deep** — 3 Bull/Bear debate rounds + full risk panel debate. Most thorough. (~12 min read)
+> - **Fast** — 1 Bull/Bear debate round. No risk panel. Quick decision. (~5 min read)
+> - **Medium** — 2 Bull/Bear debate rounds. No risk panel. Balanced depth. (~8 min read)
+> - **Deep** — 3 Bull/Bear debate rounds + full risk panel (Aggressive→Conservative→Neutral). Most thorough. (~12 min read)
 >
 > Type Fast, Medium, or Deep."
 
@@ -80,16 +80,14 @@ Data → [1] Market Analyst
       → [3] News Analyst
       → [4] Fundamentals Analyst
       → [5] Bull Researcher  ←─┐
-      → [6] Bear Researcher  ←─┤  3 rounds of debate
-      → [5] Bull Researcher  ←─┤
-      → [6] Bear Researcher  ←─┤
-      → [5] Bull Researcher  ←─┤
+      → [6] Bear Researcher     │  N rounds (Fast=1, Medium=2, Deep=3)
+      → [5] Bull Researcher     │  strictly alternating, each round feeds the next
       → [6] Bear Researcher  ←─┘
       → [7] Research Manager (verdict)
       → [8] Trader (entry/stop proposal)
-      → [9a] Aggressive Risk Analyst ←─┐
-      → [9b] Conservative Risk Analyst ←┤  1 round
-      → [9c] Neutral Risk Analyst     ←─┘
+      → [9a] Aggressive Risk Analyst  ←─┐
+      → [9b] Conservative Risk Analyst    │  Deep mode only — 1 round, sequential
+      → [9c] Neutral Risk Analyst      ←─┘  each sees the others' last responses
       → [10] Portfolio Manager (FINAL DECISION)
 ```
 
@@ -193,35 +191,55 @@ Data → [1] Market Analyst
 
 ---
 
-## AGENTS 5 & 6 — BULL / BEAR DEBATE (3 rounds)
+## AGENTS 5 & 6 — BULL / BEAR DEBATE (rounds depend on mode)
 
-**Run 3 full rounds: Bull → Bear → Bull → Bear → Bull → Bear**
+**Rounds by mode:**
+- **Fast** — 1 round: Bull R1 → Bear R1
+- **Medium** — 2 rounds: Bull R1 → Bear R1 → Bull R2 → Bear R2
+- **Deep** — 3 rounds: Bull R1 → Bear R1 → Bull R2 → Bear R2 → Bull R3 → Bear R3
+
+Run strictly alternating — Bull always opens, Bear always responds. Each round's output is passed as input to the next round's opponent. This is what makes it a real debate — not two independent monologues.
+
+**Data flow (Deep example — truncate for Fast/Medium):**
+- Bull R1 output → passed as `last_bull_argument` into Bear R1
+- Bear R1 output → passed as `last_bear_argument` into Bull R2
+- Bull R2 output → passed as `last_bull_argument` into Bear R2
+- Bear R2 output → passed as `last_bear_argument` into Bull R3
+- Bull R3 output → passed as `last_bull_argument` into Bear R3
+
+Also pass the **full conversation history** (all prior arguments) into each round so agents can track the whole debate arc.
 
 ### BULL ANALYST prompt (each round):
 > You are a Bull Analyst advocating for investing in this stock. Build a strong, evidence-based case using the market report, sentiment report, news report, and fundamentals report provided.
+>
+> Debate history so far: {full_debate_history}
+> Last bear argument: {last_bear_argument}  ← (empty in Round 1)
 >
 > Focus on:
 > - **Growth Potential**: Market opportunities, revenue projections, scalability
 > - **Competitive Advantages**: Unique products, strong branding, dominant market positioning
 > - **Positive Indicators**: Financial health, industry trends, recent positive news
-> - **Bear Counterpoints**: In rounds 2 and 3, directly address the bear's previous argument with specific data. Do not ignore their points — refute them.
+> - **Bear Counterpoints**: From Round 2 onward, directly address the bear's previous argument with specific data. Do not ignore their points — refute them.
 > - **Style**: Conversational, engaging, debating — not just listing data
 >
-> Use the actual numbers. Be specific. Start Round 1 with your opening case. In Round 2 and 3, lead with rebuttals to the bear's last argument before making new points.
+> Use the actual numbers. Be specific. Start Round 1 with your opening case. From Round 2 onward, lead with rebuttals to the bear's last argument before making new points.
 
 ### BEAR ANALYST prompt (each round):
 > You are a Bear Analyst making the case against investing in this stock. Present a well-reasoned argument using the market report, sentiment report, news report, and fundamentals report provided.
+>
+> Debate history so far: {full_debate_history}
+> Last bull argument: {last_bull_argument}  ← (always provided — Bear never goes first)
 >
 > Focus on:
 > - **Risks and Challenges**: Market saturation, financial instability, macroeconomic threats
 > - **Competitive Weaknesses**: Vulnerabilities, declining innovation, threats from competitors
 > - **Negative Indicators**: Financial data, market trends, adverse news
-> - **Bull Counterpoints**: In rounds 2 and 3, directly address the bull's previous argument with specific data. Do not ignore their points — expose their weaknesses.
+> - **Bull Counterpoints**: Directly address the bull's previous argument with specific data. Do not ignore their points — expose their weaknesses.
 > - **Style**: Conversational, engaging, debating — not just listing facts
 >
-> Use the actual numbers. Be specific. Start Round 1 with your opening case. In Round 2 and 3, lead with rebuttals to the bull's last argument before making new points.
+> Use the actual numbers. Be specific. Lead with rebuttals to the bull's last argument before making new points.
 
-**Output stored as:** `investment_debate_history`
+**Output stored as:** `investment_debate_history` (append each round in order)
 
 ---
 
@@ -270,26 +288,50 @@ Data → [1] Market Analyst
 
 ---
 
-## AGENTS 9a/9b/9c — RISK DEBATE
+## AGENTS 9a/9b/9c — RISK DEBATE (Deep mode only)
 
-**Three risk analysts debate the trader's proposal simultaneously, then respond to each other.**
+**Fast and Medium modes skip this section entirely — go straight to Portfolio Manager.**
 
-### AGGRESSIVE RISK ANALYST:
-> As the Aggressive Risk Analyst, champion the high-reward opportunity in the trader's proposal. Emphasize bold strategies, upside potential, and competitive advantages. Challenge the conservative and neutral analysts directly — counter their caution with data-driven rebuttals showing why their assumptions may be overly conservative or why they are missing critical opportunities.
+Three risk analysts debate the trader's proposal **sequentially**: Aggressive → Conservative → Neutral. Each agent sees the full debate history and the last response from each of the other two — same data-passing pattern as Bull/Bear.
+
+**Order:** Aggressive always opens. Conservative responds next (sees Aggressive's argument). Neutral responds last (sees both Aggressive and Conservative's arguments).
+
+**Data flow:**
+- Aggressive R1: no prior risk responses yet — opens based on trader's proposal + analyst reports
+- Conservative R1 input: `{last_aggressive_response}` + all analyst reports + trader's proposal + `{risk_debate_history}`
+- Neutral R1 input: `{last_aggressive_response}` + `{last_conservative_response}` + all analyst reports + trader's proposal + `{risk_debate_history}`
+
+### AGGRESSIVE RISK ANALYST prompt:
+> As the Aggressive Risk Analyst, your role is to actively champion high-reward, high-risk opportunities, emphasizing bold strategies and competitive advantages. When evaluating the trader's decision or plan, focus intently on the potential upside, growth potential, and innovative benefits — even when these come with elevated risk.
 >
-> Use the market report, sentiment report, news report, and fundamentals report as evidence. Be conversational, not just data-listing. Respond directly to each point from the other analysts.
-
-### CONSERVATIVE RISK ANALYST:
-> As the Conservative Risk Analyst, protect assets and minimize volatility. Critically examine high-risk elements in the trader's proposal. Point out where the decision exposes the portfolio to undue risk and where more cautious alternatives could secure long-term gains.
+> Trader's proposal: {trader_decision}
+> Risk debate history so far: {risk_debate_history}
+> Last conservative argument: {last_conservative_response}  ← (empty in Round 1)
+> Last neutral argument: {last_neutral_response}  ← (empty in Round 1)
 >
-> Challenge the aggressive and neutral analysts directly — highlight where their views overlook potential threats or fail to prioritize sustainability. Use the market report, sentiment report, news report, and fundamentals report as evidence. Be conversational, not just data-listing.
+> Use the market report, sentiment report, news report, and fundamentals report as evidence. Question and critique the conservative and neutral stances — counter their caution with data-driven rebuttals showing why their assumptions may be overly conservative or why they are missing critical opportunities. If there are no responses yet, present your opening case based on the available data. Be conversational, not just data-listing.
 
-### NEUTRAL RISK ANALYST:
-> As the Neutral Risk Analyst, provide a balanced perspective weighing both benefits and risks. Challenge both the aggressive and conservative analysts — point out where each is overly optimistic or overly cautious.
+### CONSERVATIVE RISK ANALYST prompt:
+> As the Conservative Risk Analyst, your primary objective is to protect assets, minimize volatility, and ensure steady, reliable growth. You prioritize stability, security, and risk mitigation — carefully assessing potential losses, economic downturns, and market volatility.
 >
-> Use the market report, sentiment report, news report, and fundamentals report to support a moderate, sustainable adjustment to the trader's proposal. Be conversational. Show that a balanced view can lead to the most reliable outcomes.
+> Trader's proposal: {trader_decision}
+> Risk debate history so far: {risk_debate_history}
+> Last aggressive argument: {last_aggressive_response}  ← (always provided — Conservative never goes first)
+> Last neutral argument: {last_neutral_response}  ← (empty in Round 1)
+>
+> Use the market report, sentiment report, news report, and fundamentals report as evidence. Counter the aggressive and neutral analysts — highlight where their views overlook potential threats or fail to prioritize sustainability. Address each of their counterpoints to demonstrate why a conservative stance is the safest path. Be conversational, not just data-listing.
 
-**Output stored as:** `risk_debate_history`
+### NEUTRAL RISK ANALYST prompt:
+> As the Neutral Risk Analyst, your role is to provide a balanced perspective, weighing both the potential benefits and risks of the trader's decision. Evaluate the upsides and downsides while factoring in broader market trends, potential economic shifts, and diversification strategies.
+>
+> Trader's proposal: {trader_decision}
+> Risk debate history so far: {risk_debate_history}
+> Last aggressive argument: {last_aggressive_response}  ← (always provided — Neutral never goes first)
+> Last conservative argument: {last_conservative_response}  ← (always provided — Neutral never goes first)
+>
+> Use the market report, sentiment report, news report, and fundamentals report as evidence. Challenge both the aggressive and conservative analysts — point out where each is overly optimistic or overly cautious. Show that a balanced view can lead to the most reliable outcomes. Be conversational, not just data-listing.
+
+**Output stored as:** `risk_debate_history` (append each analyst's response in order)
 
 ---
 
@@ -338,10 +380,10 @@ Data → [1] Market Analyst
 | 2. Sentiment Analyst | Social mood | Score /10, band, confidence |
 | 3. News Analyst | Events | Catalysts, risks, macro context |
 | 4. Fundamentals | Financials | Valuation, margins, balance sheet |
-| 5/6. Bull/Bear (×3) | Debate | 3-round investment case debate |
+| 5/6. Bull/Bear (×N) | Debate | 1/2/3-round debate (Fast/Medium/Deep) |
 | 7. Research Manager | Verdict | Rating + investment plan |
 | 8. Trader | Execution | Entry, stop, position size |
-| 9. Risk Panel (×3) | Risk stress test | Aggressive/Conservative/Neutral |
+| 9. Risk Panel (×3) | Risk stress test | Aggressive→Conservative→Neutral (Deep only) |
 | 10. Portfolio Manager | Final decision | Rating, targets, time horizon |
 
 ---
@@ -404,19 +446,26 @@ reports/AMD_20260605_043116/
 
 Create all subdirectories before starting Agent 1.
 
-**Chat output per agent** — one line only:
+**Chat output per agent** — one line only (repeat Bull/Bear block N times based on mode):
 ```
 ✓ Market Analyst    → 1_analysts/market.md
 ✓ Sentiment Analyst → 1_analysts/sentiment.md
 ✓ News Analyst      → 1_analysts/news.md
 ✓ Fundamentals      → 1_analysts/fundamentals.md
-✓ Bull (R1/R2/R3)   → 2_research/bull.md
-✓ Bear (R1/R2/R3)   → 2_research/bear.md
+✓ Bull R1            → 2_research/bull.md (appended)
+✓ Bear R1            → 2_research/bear.md (appended)
+  ← Fast stops here
+✓ Bull R2            → 2_research/bull.md (appended)
+✓ Bear R2            → 2_research/bear.md (appended)
+  ← Medium stops here
+✓ Bull R3            → 2_research/bull.md (appended)
+✓ Bear R3            → 2_research/bear.md (appended)
+  ← Deep stops here
 ✓ Research Manager  → 2_research/manager.md
 ✓ Trader            → 3_trading/trader.md
-✓ Aggressive Risk   → 4_risk/aggressive.md
-✓ Conservative Risk → 4_risk/conservative.md
-✓ Neutral Risk      → 4_risk/neutral.md
+✓ Aggressive Risk   → 4_risk/aggressive.md  ← Deep mode only
+✓ Conservative Risk → 4_risk/conservative.md  ← Deep mode only
+✓ Neutral Risk      → 4_risk/neutral.md  ← Deep mode only
 ✓ Portfolio Manager → 5_portfolio/decision.md
 ✓ Complete report   → complete_report.md
 ```
@@ -524,9 +573,9 @@ Fill every bracketed placeholder with the actual value from this run. Write no p
 
 ## NOTES
 
-- **Deep mode** = 3 Bull/Bear rounds + full 3-way risk debate (most thorough)
-- **Medium mode** = 2 Bull/Bear rounds + brief risk summary
-- **Fast mode** = 1 Bull/Bear round + brief risk summary
+- **Deep mode** = 3 Bull/Bear rounds + full 3-way risk debate (Aggressive→Conservative→Neutral)
+- **Medium mode** = 2 Bull/Bear rounds — risk panel skipped entirely
+- **Fast mode** = 1 Bull/Bear round — risk panel skipped entirely
 - Always detect environment (Claude Code vs web chat) before Agent 1 — announce it once
 - Always ask for mode before starting — do not assume Deep
 - Always check data is present before starting — ask user to run fetch_data.py if missing
