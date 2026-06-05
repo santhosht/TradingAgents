@@ -142,6 +142,23 @@ def build_instrument_context(
             " Treat it as a crypto asset rather than a company, and do not "
             "assume company fundamentals are available."
         )
+
+    # ADR guard: some foreign companies (e.g. TSM, BABA, NIO) trade on US
+    # exchanges as American Depositary Receipts priced in USD, while their
+    # home-market shares trade in a foreign currency at a very different
+    # nominal price. Explicitly anchor all price references to USD so the
+    # model does not confuse the local-currency share price with the ADR price.
+    if identity:
+        exchange = (identity.get("exchange") or "").upper()
+        us_exchanges = {"NYQ", "NMS", "NGM", "PCX", "BATS", "NYB"}
+        if exchange in us_exchanges:
+            context += (
+                " IMPORTANT: All prices for this instrument are denominated in "
+                "USD (US dollars). Do not use local-currency share prices "
+                "(e.g. TWD, HKD, CNY, JPY) — use only the USD price from the "
+                "stock data provided."
+            )
+
     return context
 
 

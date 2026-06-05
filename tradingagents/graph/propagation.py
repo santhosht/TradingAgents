@@ -46,6 +46,7 @@ class Propagator:
                     "current_response": "",
                     "judge_decision": "",
                     "count": 0,
+                    "last_speaker": "",
                 }
             ),
             "risk_debate_state": RiskDebateState(

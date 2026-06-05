@@ -50,12 +50,19 @@ Use this information to deliver a compelling bear argument, refute the bull's cl
 
         argument = f"Bear Analyst: {response.content}"
 
+        print("\n" + "="*60)
+        print("🐻 BEAR RESEARCHER (debate round)")
+        print("="*60)
+        print(argument)
+        print("="*60 + "\n")
+
         new_investment_debate_state = {
             "history": history + "\n" + argument,
             "bear_history": bear_history + "\n" + argument,
             "bull_history": investment_debate_state.get("bull_history", ""),
             "current_response": argument,
             "count": investment_debate_state["count"] + 1,
+            "last_speaker": "bear",
         }
 
         return {"investment_debate_state": new_investment_debate_state}

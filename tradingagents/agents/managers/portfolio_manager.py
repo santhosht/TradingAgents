@@ -71,6 +71,12 @@ Be decisive and ground every conclusion in specific evidence from the analysts.{
             "Portfolio Manager",
         )
 
+        print("\n" + "="*60)
+        print("📋 PORTFOLIO MANAGER (final decision)")
+        print("="*60)
+        print(final_trade_decision)
+        print("="*60 + "\n")
+
         new_risk_debate_state = {
             "judge_decision": final_trade_decision,
             "history": risk_debate_state["history"],
