@@ -223,11 +223,13 @@ For each round, run sequentially:
 ```
 You are a Bull Analyst advocating for investing in {TICKER}.
 
-Your inputs:
-- Market report: {market_report}
-- Sentiment report: {sentiment_report}
-- News report: {news_report}
-- Fundamentals report: {fundamentals_report}
+Read your inputs from these files (already written to disk):
+- reports/{RUN_ID}/1_analysts/market.md
+- reports/{RUN_ID}/1_analysts/sentiment.md
+- reports/{RUN_ID}/1_analysts/news.md
+- reports/{RUN_ID}/1_analysts/fundamentals.md
+
+Additional context passed directly:
 - Debate history so far: {full_debate_history}
 - Last bear argument: {last_bear_argument}  [empty in Round 1]
 
@@ -246,11 +248,13 @@ Focus on: growth potential, competitive advantages, positive indicators, and ref
 ```
 You are a Bear Analyst making the case against investing in {TICKER}.
 
-Your inputs:
-- Market report: {market_report}
-- Sentiment report: {sentiment_report}
-- News report: {news_report}
-- Fundamentals report: {fundamentals_report}
+Read your inputs from these files (already written to disk):
+- reports/{RUN_ID}/1_analysts/market.md
+- reports/{RUN_ID}/1_analysts/sentiment.md
+- reports/{RUN_ID}/1_analysts/news.md
+- reports/{RUN_ID}/1_analysts/fundamentals.md
+
+Additional context passed directly:
 - Debate history so far: {full_debate_history}
 - Last bull argument: {last_bull_argument}  [always provided — Bear never goes first]
 
@@ -382,12 +386,14 @@ Spawn Aggressive, Conservative, and Neutral as **separate isolated sub-agents**,
 ```
 You are the Aggressive Risk Analyst evaluating a trader's proposal for {TICKER}.
 
-Your inputs:
-- Market report: {market_report}
-- Sentiment report: {sentiment_report}
-- News report: {news_report}
-- Fundamentals report: {fundamentals_report}
-- Trader's proposal: {trader_decision}
+Read your inputs from these files (already written to disk):
+- reports/{RUN_ID}/1_analysts/market.md
+- reports/{RUN_ID}/1_analysts/sentiment.md
+- reports/{RUN_ID}/1_analysts/news.md
+- reports/{RUN_ID}/1_analysts/fundamentals.md
+- reports/{RUN_ID}/3_trading/trader.md
+
+Additional context passed directly:
 - Risk debate history: {risk_debate_history}  [empty — you open]
 
 ROLE RULES — NO EXCEPTIONS:
@@ -402,12 +408,14 @@ ROLE RULES — NO EXCEPTIONS:
 ```
 You are the Conservative Risk Analyst evaluating a trader's proposal for {TICKER}.
 
-Your inputs:
-- Market report: {market_report}
-- Sentiment report: {sentiment_report}
-- News report: {news_report}
-- Fundamentals report: {fundamentals_report}
-- Trader's proposal: {trader_decision}
+Read your inputs from these files (already written to disk):
+- reports/{RUN_ID}/1_analysts/market.md
+- reports/{RUN_ID}/1_analysts/sentiment.md
+- reports/{RUN_ID}/1_analysts/news.md
+- reports/{RUN_ID}/1_analysts/fundamentals.md
+- reports/{RUN_ID}/3_trading/trader.md
+
+Additional context passed directly:
 - Risk debate history: {risk_debate_history}
 - Last aggressive argument: {last_aggressive_response}
 
@@ -423,12 +431,14 @@ ROLE RULES — NO EXCEPTIONS:
 ```
 You are the Neutral Risk Analyst evaluating a trader's proposal for {TICKER}.
 
-Your inputs:
-- Market report: {market_report}
-- Sentiment report: {sentiment_report}
-- News report: {news_report}
-- Fundamentals report: {fundamentals_report}
-- Trader's proposal: {trader_decision}
+Read your inputs from these files (already written to disk):
+- reports/{RUN_ID}/1_analysts/market.md
+- reports/{RUN_ID}/1_analysts/sentiment.md
+- reports/{RUN_ID}/1_analysts/news.md
+- reports/{RUN_ID}/1_analysts/fundamentals.md
+- reports/{RUN_ID}/3_trading/trader.md
+
+Additional context passed directly:
 - Risk debate history: {risk_debate_history}
 - Last aggressive argument: {last_aggressive_response}
 - Last conservative argument: {last_conservative_response}
