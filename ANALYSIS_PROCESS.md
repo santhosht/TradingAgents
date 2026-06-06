@@ -114,6 +114,8 @@ Data → [1] Market Analyst
 >
 > Write a very detailed and nuanced report of the trends you observe. Provide specific, actionable insights with supporting evidence. Use the actual numbers from the data provided.
 >
+> **Source of truth:** The fetch_data.py output (the data file passed into this run) is the authoritative source for all price, indicator, and volume values. Do not fabricate or estimate any number not explicitly present in the data. If two values appear to conflict, flag the discrepancy rather than silently reconciling them. Do not claim historical support/resistance bounces or exact percentage moves unless directly supported by the data with concrete dates and prices.
+>
 > Append a Markdown table at the end organizing key indicator values, signals, and interpretations.
 
 **Execution (Claude Code mode):** Main agent writes directly — no sub-agent spawn. The fetch_data.py output is already in the main context; pass the data directly from context, do not re-read the file.
@@ -265,6 +267,13 @@ ROLE RULES — NO EXCEPTIONS:
 - Do NOT hedge or soften your position. Do NOT say "the bear makes a fair point."
 - From Round 2 onward: ALWAYS lead with direct rebuttals before adding new points.
 - Use actual numbers. Be specific. Be adversarial. Pull no punches.
+
+ANALYTICAL FOCUS — cover all of these dimensions every round:
+- **Growth Potential**: Market opportunities, revenue projections, scalability
+- **Competitive Advantages**: Unique products, strong branding, dominant market positioning
+- **Positive Indicators**: Financial health, industry trends, recent positive news
+- **Bear Counterpoints**: From Round 2 onward, destroy every bear claim with specific data
+- **Style**: Conversational, engaging debate — not just listing data points
 ```
 
 **Step 2 — Spawn Bear agent (run_in_background: true):**
@@ -299,6 +308,13 @@ ROLE RULES — NO EXCEPTIONS:
 - Do NOT hedge or soften your position. Do NOT say "the bull makes a fair point."
 - Always lead with direct rebuttals before making new points.
 - Use actual numbers. Be specific. Be adversarial. Pull no punches.
+
+ANALYTICAL FOCUS — cover all of these dimensions every round:
+- **Risks and Challenges**: Market saturation, financial instability, macroeconomic threats
+- **Competitive Weaknesses**: Vulnerabilities, declining innovation, threats from competitors
+- **Negative Indicators**: Financial data, market trends, adverse news
+- **Bull Counterpoints**: Directly attack every bull claim with specific data. Expose overconfidence.
+- **Style**: Conversational, engaging debate — not just listing facts
 ```
 
 **Step 3 — Wait for both agents to complete** (both background agents notify on completion).
