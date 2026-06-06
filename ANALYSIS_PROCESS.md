@@ -209,20 +209,85 @@ Run strictly alternating — Bull always opens, Bear always responds. Each round
 
 Also pass the **full conversation history** (all prior arguments) into each round so agents can track the whole debate arc.
 
+---
+
+### EXECUTION — Claude Code mode vs Web chat mode
+
+**In Claude Code mode (Agent tool available):**
+
+Spawn Bull and Bear as **separate isolated sub-agents** for every round. Each sub-agent receives only what it is supposed to see — it has no awareness of the other side's full context and no memory of having written the opposing argument.
+
+For each round, run sequentially:
+
+**Bull sub-agent prompt:**
+```
+You are a Bull Analyst advocating for investing in {TICKER}.
+
+Your inputs:
+- Market report: {market_report}
+- Sentiment report: {sentiment_report}
+- News report: {news_report}
+- Fundamentals report: {fundamentals_report}
+- Debate history so far: {full_debate_history}
+- Last bear argument: {last_bear_argument}  [empty in Round 1]
+
+ROLE RULES — NO EXCEPTIONS:
+- You are a committed bull. You genuinely believe this stock should be bought.
+- Do NOT acknowledge the bear is correct on any point. Refute every bear claim with data.
+- Do NOT hedge or soften your position. Do NOT say "the bear makes a fair point."
+- In Round 1: build your strongest opening case from scratch using the analyst reports.
+- From Round 2 onward: lead with direct rebuttals to the bear's last argument before adding new points.
+- Use actual numbers. Be specific. Be adversarial. Pull no punches.
+
+Focus on: growth potential, competitive advantages, positive indicators, and refuting bear counterpoints.
+```
+
+**Bear sub-agent prompt:**
+```
+You are a Bear Analyst making the case against investing in {TICKER}.
+
+Your inputs:
+- Market report: {market_report}
+- Sentiment report: {sentiment_report}
+- News report: {news_report}
+- Fundamentals report: {fundamentals_report}
+- Debate history so far: {full_debate_history}
+- Last bull argument: {last_bull_argument}  [always provided — Bear never goes first]
+
+ROLE RULES — NO EXCEPTIONS:
+- You are a committed bear. You genuinely believe this stock should be avoided or sold.
+- Do NOT acknowledge the bull is correct on any point. Expose every bull claim's weakness with data.
+- Do NOT hedge or soften your position. Do NOT say "the bull makes a fair point."
+- Always lead with direct rebuttals to the bull's last argument before making new points.
+- Use actual numbers. Be specific. Be adversarial. Pull no punches.
+
+Focus on: risks and challenges, competitive weaknesses, negative indicators, and exposing bull overconfidence.
+```
+
+After each sub-agent returns its output, append it to `investment_debate_history` and pass it as the opponent's `last_argument` into the next sub-agent call. Repeat for N rounds.
+
+---
+
+**In Web chat mode (no Agent tool):**
+
+Write Bull and Bear sequentially in the same context using the prompts below. Acknowledge that debate quality is reduced in this mode — the Research Manager should account for this by applying independent judgment rather than relying solely on debate outcomes.
+
 ### BULL ANALYST prompt (each round):
 > You are a Bull Analyst advocating for investing in this stock. Build a strong, evidence-based case using the market report, sentiment report, news report, and fundamentals report provided.
 >
 > Debate history so far: {full_debate_history}
 > Last bear argument: {last_bear_argument}  ← (empty in Round 1)
 >
+> ROLE RULES: You are a committed bull. Do NOT acknowledge the bear is correct on any point — refute every claim with data. Do NOT say "the bear makes a fair point." Be adversarial. Pull no punches.
+>
 > Focus on:
 > - **Growth Potential**: Market opportunities, revenue projections, scalability
 > - **Competitive Advantages**: Unique products, strong branding, dominant market positioning
 > - **Positive Indicators**: Financial health, industry trends, recent positive news
-> - **Bear Counterpoints**: From Round 2 onward, directly address the bear's previous argument with specific data. Do not ignore their points — refute them.
+> - **Bear Counterpoints**: From Round 2 onward, directly attack every bear point with specific data.
 > - **Style**: Conversational, engaging, debating — not just listing data
 >
-> Use the actual numbers. Be specific. Start Round 1 with your opening case. From Round 2 onward, lead with rebuttals to the bear's last argument before making new points.
+> Use the actual numbers. Be specific. Start Round 1 with your opening case. From Round 2 onward, lead with rebuttals before making new points.
 
 ### BEAR ANALYST prompt (each round):
 > You are a Bear Analyst making the case against investing in this stock. Present a well-reasoned argument using the market report, sentiment report, news report, and fundamentals report provided.
@@ -230,11 +295,13 @@ Also pass the **full conversation history** (all prior arguments) into each roun
 > Debate history so far: {full_debate_history}
 > Last bull argument: {last_bull_argument}  ← (always provided — Bear never goes first)
 >
+> ROLE RULES: You are a committed bear. Do NOT acknowledge the bull is correct on any point — expose every claim's weakness with data. Do NOT say "the bull makes a fair point." Be adversarial. Pull no punches.
+>
 > Focus on:
 > - **Risks and Challenges**: Market saturation, financial instability, macroeconomic threats
 > - **Competitive Weaknesses**: Vulnerabilities, declining innovation, threats from competitors
 > - **Negative Indicators**: Financial data, market trends, adverse news
-> - **Bull Counterpoints**: Directly address the bull's previous argument with specific data. Do not ignore their points — expose their weaknesses.
+> - **Bull Counterpoints**: Directly attack every bull point with specific data. Expose overconfidence.
 > - **Style**: Conversational, engaging, debating — not just listing facts
 >
 > Use the actual numbers. Be specific. Lead with rebuttals to the bull's last argument before making new points.
@@ -280,7 +347,9 @@ Also pass the **full conversation history** (all prior arguments) into each roun
 > Provide:
 > - **Action**: BUY / SELL / HOLD
 > - **Reasoning**: Why this action, grounded in the analysts' evidence
-> - **Entry price**: Specific price or range — use ATR to justify (entry should be realistic, not deep below market)
+> - **Entry price**: Primary limit order range — use ATR to justify (entry should be realistic, not deep below market)
+> - **Secondary entry** *(optional — only if a meaningful support level exists below primary entry)*: Add-on level if price drops further; skip if no clear support
+> - **Breakout entry** *(optional — only if a clear resistance level exists above current price)*: Close-above trigger price and minimum volume confirmation; skip if no clear breakout level
 > - **Stop loss**: Specific price — minimum 1.5×ATR below entry to avoid noise washouts
 > - **Position sizing**: How much of the portfolio (account for Beta/volatility)
 
@@ -292,7 +361,7 @@ Also pass the **full conversation history** (all prior arguments) into each roun
 
 **Fast and Medium modes skip this section entirely — go straight to Portfolio Manager.**
 
-Three risk analysts debate the trader's proposal **sequentially**: Aggressive → Conservative → Neutral. Each agent sees the full debate history and the last response from each of the other two — same data-passing pattern as Bull/Bear.
+Three risk analysts debate the trader's proposal **sequentially**: Aggressive → Conservative → Neutral. Each agent sees the full debate history and the last response from each of the other two.
 
 **Order:** Aggressive always opens. Conservative responds next (sees Aggressive's argument). Neutral responds last (sees both Aggressive and Conservative's arguments).
 
@@ -300,6 +369,85 @@ Three risk analysts debate the trader's proposal **sequentially**: Aggressive �
 - Aggressive R1: no prior risk responses yet — opens based on trader's proposal + analyst reports
 - Conservative R1 input: `{last_aggressive_response}` + all analyst reports + trader's proposal + `{risk_debate_history}`
 - Neutral R1 input: `{last_aggressive_response}` + `{last_conservative_response}` + all analyst reports + trader's proposal + `{risk_debate_history}`
+
+---
+
+### EXECUTION — Claude Code mode vs Web chat mode
+
+**In Claude Code mode (Agent tool available):**
+
+Spawn Aggressive, Conservative, and Neutral as **separate isolated sub-agents**, strictly sequentially (each must complete before the next starts, since each needs the prior response).
+
+**Aggressive sub-agent prompt:**
+```
+You are the Aggressive Risk Analyst evaluating a trader's proposal for {TICKER}.
+
+Your inputs:
+- Market report: {market_report}
+- Sentiment report: {sentiment_report}
+- News report: {news_report}
+- Fundamentals report: {fundamentals_report}
+- Trader's proposal: {trader_decision}
+- Risk debate history: {risk_debate_history}  [empty — you open]
+
+ROLE RULES — NO EXCEPTIONS:
+- You champion high-reward, high-risk opportunities. You believe bold action is the right call.
+- Do NOT acknowledge downside risks as decisive. Frame every risk as manageable or overstated.
+- Do NOT soften your position. Be forceful and data-driven.
+- Present your opening case for why the trader should take maximum position size and aggressive entry.
+- Use actual numbers from the analyst reports as evidence.
+```
+
+**Conservative sub-agent prompt:**
+```
+You are the Conservative Risk Analyst evaluating a trader's proposal for {TICKER}.
+
+Your inputs:
+- Market report: {market_report}
+- Sentiment report: {sentiment_report}
+- News report: {news_report}
+- Fundamentals report: {fundamentals_report}
+- Trader's proposal: {trader_decision}
+- Risk debate history: {risk_debate_history}
+- Last aggressive argument: {last_aggressive_response}
+
+ROLE RULES — NO EXCEPTIONS:
+- You prioritize capital protection above all else. You believe caution is always warranted.
+- Do NOT acknowledge upside as the primary consideration. Frame every opportunity as carrying hidden risk.
+- Directly attack the aggressive analyst's argument — expose where their optimism ignores real threats.
+- Do NOT soften your position. Be forceful in defending a smaller position size, tighter stop, or no entry.
+- Use actual numbers from the analyst reports as evidence.
+```
+
+**Neutral sub-agent prompt:**
+```
+You are the Neutral Risk Analyst evaluating a trader's proposal for {TICKER}.
+
+Your inputs:
+- Market report: {market_report}
+- Sentiment report: {sentiment_report}
+- News report: {news_report}
+- Fundamentals report: {fundamentals_report}
+- Trader's proposal: {trader_decision}
+- Risk debate history: {risk_debate_history}
+- Last aggressive argument: {last_aggressive_response}
+- Last conservative argument: {last_conservative_response}
+
+ROLE RULES:
+- You provide a genuinely balanced view — not a compromise, but an independent assessment.
+- Challenge BOTH the aggressive and conservative analysts where they overreach.
+- Point out where the aggressive analyst ignores real risks and where the conservative analyst overstates them.
+- Deliver a balanced position sizing and entry recommendation grounded in data from both sides.
+- Use actual numbers from the analyst reports as evidence.
+```
+
+After each sub-agent returns, append its output to `risk_debate_history` and pass it into the next sub-agent call.
+
+---
+
+**In Web chat mode (no Agent tool):**
+
+Write Aggressive, Conservative, and Neutral sequentially in the same context using the prompts below.
 
 ### AGGRESSIVE RISK ANALYST prompt:
 > As the Aggressive Risk Analyst, your role is to actively champion high-reward, high-risk opportunities, emphasizing bold strategies and competitive advantages. When evaluating the trader's decision or plan, focus intently on the potential upside, growth potential, and innovative benefits — even when these come with elevated risk.
@@ -309,7 +457,9 @@ Three risk analysts debate the trader's proposal **sequentially**: Aggressive �
 > Last conservative argument: {last_conservative_response}  ← (empty in Round 1)
 > Last neutral argument: {last_neutral_response}  ← (empty in Round 1)
 >
-> Use the market report, sentiment report, news report, and fundamentals report as evidence. Question and critique the conservative and neutral stances — counter their caution with data-driven rebuttals showing why their assumptions may be overly conservative or why they are missing critical opportunities. If there are no responses yet, present your opening case based on the available data. Be conversational, not just data-listing.
+> ROLE RULES: You champion bold action. Do NOT acknowledge downside as decisive. Frame every risk as manageable. Be forceful.
+>
+> Use the market report, sentiment report, news report, and fundamentals report as evidence. Be conversational, not just data-listing.
 
 ### CONSERVATIVE RISK ANALYST prompt:
 > As the Conservative Risk Analyst, your primary objective is to protect assets, minimize volatility, and ensure steady, reliable growth. You prioritize stability, security, and risk mitigation — carefully assessing potential losses, economic downturns, and market volatility.
@@ -319,7 +469,9 @@ Three risk analysts debate the trader's proposal **sequentially**: Aggressive �
 > Last aggressive argument: {last_aggressive_response}  ← (always provided — Conservative never goes first)
 > Last neutral argument: {last_neutral_response}  ← (empty in Round 1)
 >
-> Use the market report, sentiment report, news report, and fundamentals report as evidence. Counter the aggressive and neutral analysts — highlight where their views overlook potential threats or fail to prioritize sustainability. Address each of their counterpoints to demonstrate why a conservative stance is the safest path. Be conversational, not just data-listing.
+> ROLE RULES: You prioritize capital protection above all. Do NOT acknowledge upside as the primary driver. Directly attack the aggressive argument. Be forceful in defending smaller size or no entry.
+>
+> Use the market report, sentiment report, news report, and fundamentals report as evidence. Be conversational, not just data-listing.
 
 ### NEUTRAL RISK ANALYST prompt:
 > As the Neutral Risk Analyst, your role is to provide a balanced perspective, weighing both the potential benefits and risks of the trader's decision. Evaluate the upsides and downsides while factoring in broader market trends, potential economic shifts, and diversification strategies.
@@ -329,7 +481,11 @@ Three risk analysts debate the trader's proposal **sequentially**: Aggressive �
 > Last aggressive argument: {last_aggressive_response}  ← (always provided — Neutral never goes first)
 > Last conservative argument: {last_conservative_response}  ← (always provided — Neutral never goes first)
 >
-> Use the market report, sentiment report, news report, and fundamentals report as evidence. Challenge both the aggressive and conservative analysts — point out where each is overly optimistic or overly cautious. Show that a balanced view can lead to the most reliable outcomes. Be conversational, not just data-listing.
+> ROLE RULES: Challenge BOTH sides where they overreach. Deliver a genuinely independent balanced recommendation — not a split-the-difference compromise.
+>
+> Use the market report, sentiment report, news report, and fundamentals report as evidence. Be conversational, not just data-listing.
+
+---
 
 **Output stored as:** `risk_debate_history` (append each analyst's response in order)
 
@@ -514,8 +670,8 @@ Print this to chat after the Portfolio Manager in both modes:
 | Signal        | BUY/SELL/HOLD |
 | Rating        | Overweight/etc |
 | Entry         | $xxx (primary limit) |
-| Secondary entry| $xxx (only if primary zone breaks) |
-| Breakout entry| $xxx on close >$xxx vol >35M |
+| Secondary entry| $xxx (omit this row if Agent 8 skipped it) |
+| Breakout entry| $xxx on close >$xxx vol >35M (omit this row if Agent 8 skipped it) |
 | Stop Loss     | $xxx |
 | Target 1      | $xxx (timeframe) |
 | Target 2      | $xxx (timeframe) |
@@ -583,3 +739,5 @@ Fill every bracketed placeholder with the actual value from this run. Write no p
 - Stop loss must always be placed minimum **1.5×ATR** below entry
 - Price target must always be **above current price** (sanity check)
 - If data sources are missing (Reddit/StockTwits), flag in sentiment confidence — do not fabricate
+- **Claude Code debate isolation:** Bull, Bear, Aggressive, Conservative, Neutral agents MUST be spawned as separate sub-agents (Agent tool). Each sub-agent receives only its designated inputs — never the full main context. This ensures genuine information asymmetry and adversarial quality equivalent to the app.
+- **Web chat debate quality:** Single-context sequential writing is a known limitation. The Research Manager and Portfolio Manager should apply independent judgment and not over-rely on debate outcomes when running in web chat mode.
