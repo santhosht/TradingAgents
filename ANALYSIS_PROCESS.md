@@ -116,6 +116,8 @@ Data → [1] Market Analyst
 >
 > Append a Markdown table at the end organizing key indicator values, signals, and interpretations.
 
+**Execution (Claude Code mode):** Main agent writes directly — no sub-agent spawn. The fetch_data.py output is already in the main context; pass the data directly from context, do not re-read the file.
+
 **Output stored as:** `market_report`
 
 ---
@@ -144,6 +146,8 @@ Data → [1] Market Analyst
 > - **narrative**: Full source-by-source breakdown, divergences, dominant themes, catalysts and risks
 > - Append a Markdown table of key sentiment signals (direction, source, supporting evidence)
 
+**Execution (Claude Code mode):** Main agent writes directly — no sub-agent spawn. Data already in main context.
+
 **Output stored as:** `sentiment_report`
 
 ---
@@ -164,6 +168,8 @@ Data → [1] Market Analyst
 > For each news item provide: what happened, why it matters for this stock, and the likely direction of impact (positive / negative / neutral).
 >
 > Provide specific, actionable insights with supporting evidence. Append a Markdown table organizing key news items by: Event, Date, Impact Direction, and Relevance to this stock.
+
+**Execution (Claude Code mode):** Main agent writes directly — no sub-agent spawn. Data already in main context.
 
 **Output stored as:** `news_report`
 
@@ -186,6 +192,8 @@ Data → [1] Market Analyst
 > Use the actual numbers from the data. Identify whether current valuation is justified, stretched, or cheap relative to the growth rate.
 >
 > Append a Markdown table organizing key fundamental metrics with values and assessments.
+
+**Execution (Claude Code mode):** Main agent writes directly — no sub-agent spawn. Data already in main context.
 
 **Output stored as:** `fundamentals_report`
 
@@ -384,9 +392,11 @@ Three risk analysts debate the trader's proposal **sequentially**: Aggressive �
 **Order:** Aggressive always opens. Conservative responds next (sees Aggressive's argument). Neutral responds last (sees both Aggressive and Conservative's arguments).
 
 **Data flow:**
-- Aggressive R1: no prior risk responses yet — opens based on trader's proposal + analyst reports
-- Conservative R1 input: `{last_aggressive_response}` + all analyst reports + trader's proposal + `{risk_debate_history}`
-- Neutral R1 input: `{last_aggressive_response}` + `{last_conservative_response}` + all analyst reports + trader's proposal + `{risk_debate_history}`
+- Aggressive R1: no prior risk responses yet — opens based on trader's proposal + market.md + fundamentals.md + debate history
+- Conservative R1 input: `{last_aggressive_response}` + trader's proposal + market.md + fundamentals.md + `{risk_debate_history}`
+- Neutral R1 input: `{last_aggressive_response}` + `{last_conservative_response}` + trader's proposal + `{risk_debate_history}` (main agent has all context)
+
+Note: news.md and sentiment.md are intentionally excluded from Risk agents — those insights are already synthesized in the full Bull/Bear debate history that is passed to each risk agent.
 
 ---
 
@@ -401,11 +411,11 @@ Spawn Aggressive and Conservative as **separate isolated sub-agents**, strictly 
 You are the Aggressive Risk Analyst evaluating a trader's proposal for {TICKER}.
 
 Read your inputs from these files (already written to disk):
-- reports/{RUN_ID}/1_analysts/market.md
-- reports/{RUN_ID}/1_analysts/sentiment.md
-- reports/{RUN_ID}/1_analysts/news.md
-- reports/{RUN_ID}/1_analysts/fundamentals.md
 - reports/{RUN_ID}/3_trading/trader.md
+- reports/{RUN_ID}/1_analysts/market.md
+- reports/{RUN_ID}/1_analysts/fundamentals.md
+
+Note: news and sentiment insights are already embedded in the debate history passed below — no need to re-read those files.
 
 Additional context passed directly:
 - Risk debate history: {risk_debate_history}  [empty — you open]
@@ -423,11 +433,11 @@ ROLE RULES — NO EXCEPTIONS:
 You are the Conservative Risk Analyst evaluating a trader's proposal for {TICKER}.
 
 Read your inputs from these files (already written to disk):
-- reports/{RUN_ID}/1_analysts/market.md
-- reports/{RUN_ID}/1_analysts/sentiment.md
-- reports/{RUN_ID}/1_analysts/news.md
-- reports/{RUN_ID}/1_analysts/fundamentals.md
 - reports/{RUN_ID}/3_trading/trader.md
+- reports/{RUN_ID}/1_analysts/market.md
+- reports/{RUN_ID}/1_analysts/fundamentals.md
+
+Note: news and sentiment insights are already embedded in the debate history passed below — no need to re-read those files.
 
 Additional context passed directly:
 - Risk debate history: {risk_debate_history}
@@ -648,18 +658,18 @@ reports/AMD_20260605_043116/
 Create all subdirectories before starting Agent 1.
 
 **Token tracking:** For every step, capture token usage as follows:
-- **Sub-agent steps** (Analysts 1–4, Bull R1, Bear R1, Aggressive, Conservative): read `subagent_tokens` from the Agent tool result — this is the exact isolated count
+- **Sub-agent steps** (Bull R1, Bear R1, Aggressive, Conservative): read `subagent_tokens` from the Agent tool result — this is the exact isolated count
 - **SendMessage steps** (Bull R2/R3, Bear R2/R3): read `subagent_tokens` from the SendMessage result
-- **Main-agent steps** (Research Manager, Trader, Neutral, Portfolio Manager): estimate by counting the approximate word count of the output × 1.3 (words-to-tokens ratio) — mark these as `~estimated`
+- **Main-agent steps** (Analysts 1–4, Research Manager, Trader, Neutral, Portfolio Manager): estimate by counting the approximate word count of the output × 1.3 (words-to-tokens ratio) — mark these as `~estimated`
 
 Store each count in a `token_log` dict keyed by agent name. Print the full table at the end (see token summary format below).
 
 **Chat output per agent** — one line only (repeat Bull/Bear block N times based on mode):
 ```
-✓ Market Analyst    → 1_analysts/market.md           [12,450 tokens]
-✓ Sentiment Analyst → 1_analysts/sentiment.md        [11,230 tokens]
-✓ News Analyst      → 1_analysts/news.md             [9,726 tokens]
-✓ Fundamentals      → 1_analysts/fundamentals.md     [9,858 tokens]
+✓ Market Analyst    → 1_analysts/market.md           [~2,100 tokens estimated]
+✓ Sentiment Analyst → 1_analysts/sentiment.md        [~1,800 tokens estimated]
+✓ News Analyst      → 1_analysts/news.md             [~1,900 tokens estimated]
+✓ Fundamentals      → 1_analysts/fundamentals.md     [~2,000 tokens estimated]
 ✓ Bull R1            → 2_research/bull.md (appended) [23,618 tokens]
 ✓ Bear R1            → 2_research/bear.md (appended) [23,729 tokens]
   ← Fast stops here
@@ -686,10 +696,10 @@ Store each count in a `token_log` dict keyed by agent name. Print the full table
 
 | Agent                | Type        | Tokens        |
 |----------------------|-------------|---------------|
-| Market Analyst       | sub-agent   | 12,450        |
-| Sentiment Analyst    | sub-agent   | 11,230        |
-| News Analyst         | sub-agent   | 9,726         |
-| Fundamentals Analyst | sub-agent   | 9,858         |
+| Market Analyst       | main agent  | ~2,100 est.   |
+| Sentiment Analyst    | main agent  | ~1,800 est.   |
+| News Analyst         | main agent  | ~1,900 est.   |
+| Fundamentals Analyst | main agent  | ~2,000 est.   |
 | Bull R1              | sub-agent   | 23,618        |
 | Bear R1              | sub-agent   | 23,729        |
 | Bull R2              | SendMessage | 23,802        |
@@ -819,9 +829,8 @@ Fill every bracketed placeholder with the actual value from this run. Write no p
 - Price target must always be **above current price** (sanity check)
 - If data sources are missing (Reddit/StockTwits), flag in sentiment confidence — do not fabricate
 - **Claude Code sub-agent strategy (token-efficient):**
-  - **Spawn as isolated sub-agents (8 total):** Analysts 1–4 (parallel), Bull R1, Bear R1, Aggressive Risk, Conservative Risk
-  - **Continue via SendMessage (no new spawn):** Bull R2/R3, Bear R2/R3 — reuse the R1 agent, it already has analyst files in context
-  - **Main agent writes directly (no spawn):** Research Manager, Trader, Neutral Risk, Portfolio Manager — these are synthesizers that need full context, not isolation
-  - Isolation matters for: Analysts (independent views), Bull R1/Bear R1 (adversarial starting positions), Aggressive/Conservative (independent risk stances)
-  - Isolation is unnecessary for: synthesizer roles (Research Manager, Trader, Neutral, Portfolio Manager) and continuation rounds (Bull/Bear R2/R3)
+  - **Main agent writes directly (no spawn):** Analysts 1–4, Research Manager, Trader, Neutral Risk, Portfolio Manager. Analysts 1–4 use data already in context from fetch_data.py — spawning sub-agents would duplicate the entire data payload per agent (4× waste). Synthesizer roles need full context anyway.
+  - **Spawn as isolated sub-agents (4 total):** Bull R1, Bear R1, Aggressive Risk, Conservative Risk — these need genuine isolation because they hold adversarial committed stances. Seeing the opposing side's argument before writing their own would contaminate the debate.
+  - **Continue via SendMessage (no new spawn):** Bull R2/R3, Bear R2/R3 — reuse the R1 agent; it already has analyst files in context and debate history accumulates naturally
+  - Isolation is unnecessary for: Analysts (different data domains, no cross-contamination risk), synthesizer roles (Research Manager, Trader, Neutral, Portfolio Manager), and continuation rounds (Bull/Bear R2/R3)
 - **Web chat debate quality:** Single-context sequential writing is a known limitation. The Research Manager and Portfolio Manager should apply independent judgment and not over-rely on debate outcomes when running in web chat mode.
