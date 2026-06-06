@@ -428,11 +428,11 @@ Three risk analysts debate the trader's proposal **sequentially**: Aggressive �
 **Order:** Aggressive always opens. Conservative responds next (sees Aggressive's argument). Neutral responds last (sees both Aggressive and Conservative's arguments).
 
 **Data flow:**
-- Aggressive R1: no prior risk responses yet — opens based on trader's proposal + market.md + fundamentals.md + debate history
-- Conservative R1 input: `{last_aggressive_response}` + trader's proposal + market.md + fundamentals.md + `{risk_debate_history}`
-- Neutral R1 input: `{last_aggressive_response}` + `{last_conservative_response}` + trader's proposal + `{risk_debate_history}` (main agent has all context)
+- Aggressive opens based on trader's proposal + market.md + fundamentals.md + full debate history
+- Conservative reads same files from disk + reads `aggressive.md` written by main after Aggressive returns
+- Neutral written by main directly — already has both outputs in context, zero extra token cost
 
-Note: news.md and sentiment.md are intentionally excluded from Risk agents — those insights are already synthesized in the full Bull/Bear debate history that is passed to each risk agent.
+Note: news.md and sentiment.md are intentionally excluded from Risk agents — those insights are already synthesized in the full Bull/Bear debate history passed to each agent.
 
 ---
 
@@ -440,9 +440,9 @@ Note: news.md and sentiment.md are intentionally excluded from Risk agents — t
 
 **In Claude Code mode (Agent tool available):**
 
-Spawn Aggressive and Conservative as **separate isolated sub-agents**, strictly sequentially. Neutral is written directly by the main agent after receiving both outputs — no spawn needed. The main agent already has Aggressive and Conservative outputs in context, and Neutral's job is to synthesize them (not produce an independent isolated view).
+Spawn Aggressive and Conservative as **two separate sequential sub-agents from main**. Main writes `aggressive.md` to disk after Aggressive returns so Conservative can read it. Neutral is written by main directly — no spawn needed.
 
-**Aggressive sub-agent prompt:**
+**Step 1 — Main spawns Aggressive:**
 ```
 You are the Aggressive Risk Analyst evaluating a trader's proposal for {TICKER}.
 
@@ -451,20 +451,23 @@ Read your inputs from these files (already written to disk):
 - reports/{RUN_ID}/1_analysts/market.md
 - reports/{RUN_ID}/1_analysts/fundamentals.md
 
-Note: news and sentiment insights are already embedded in the debate history passed below — no need to re-read those files.
+Note: news and sentiment insights are already embedded in the debate history below.
 
 Additional context passed directly:
-- Risk debate history: {risk_debate_history}  [empty — you open]
+- Full Bull/Bear debate history: {full_debate_history}
 
 ROLE RULES — NO EXCEPTIONS:
 - You champion high-reward, high-risk opportunities. You believe bold action is the right call.
 - Do NOT acknowledge downside risks as decisive. Frame every risk as manageable or overstated.
 - Do NOT soften your position. Be forceful and data-driven.
 - Present your opening case for why the trader should take maximum position size and aggressive entry.
-- Use actual numbers from the analyst reports as evidence.
-```
+- Use actual numbers from the files as evidence.
 
-**Conservative sub-agent prompt:**
+Return ONLY your analysis. Do not spawn further agents.
+```
+→ Main receives output, writes to `reports/{RUN_ID}/4_risk/aggressive.md`
+
+**Step 2 — Main spawns Conservative:**
 ```
 You are the Conservative Risk Analyst evaluating a trader's proposal for {TICKER}.
 
@@ -472,65 +475,37 @@ Read your inputs from these files (already written to disk):
 - reports/{RUN_ID}/3_trading/trader.md
 - reports/{RUN_ID}/1_analysts/market.md
 - reports/{RUN_ID}/1_analysts/fundamentals.md
-
-Note: news and sentiment insights are already embedded in the debate history passed below — no need to re-read those files.
-
-Additional context passed directly:
-- Risk debate history: {risk_debate_history}
-- Last aggressive argument: {last_aggressive_response}
+- reports/{RUN_ID}/4_risk/aggressive.md  ← Aggressive's full argument
 
 ROLE RULES — NO EXCEPTIONS:
 - You prioritize capital protection above all else. You believe caution is always warranted.
 - Do NOT acknowledge upside as the primary consideration. Frame every opportunity as carrying hidden risk.
-- Directly attack the aggressive analyst's argument — expose where their optimism ignores real threats.
+- Directly attack the aggressive analyst's argument point by point — expose where their optimism ignores real threats.
 - Do NOT soften your position. Be forceful in defending a smaller position size, tighter stop, or no entry.
-- Use actual numbers from the analyst reports as evidence.
+- Use actual numbers from the files as evidence.
+
+Return ONLY your analysis. Do not spawn further agents.
 ```
+→ Main receives output, writes to `reports/{RUN_ID}/4_risk/conservative.md`
 
-**Neutral sub-agent prompt:**
+**Step 3 — Main writes Neutral directly** (has both outputs in context, no spawn):
 ```
-You are the Neutral Risk Analyst evaluating a trader's proposal for {TICKER}.
-
-Read your inputs from these files (already written to disk):
-- reports/{RUN_ID}/1_analysts/market.md
-- reports/{RUN_ID}/1_analysts/sentiment.md
-- reports/{RUN_ID}/1_analysts/news.md
-- reports/{RUN_ID}/1_analysts/fundamentals.md
-- reports/{RUN_ID}/3_trading/trader.md
-
-Additional context passed directly:
-- Risk debate history: {risk_debate_history}
-- Last aggressive argument: {last_aggressive_response}
-- Last conservative argument: {last_conservative_response}
-
-ROLE RULES:
-- You provide a genuinely balanced view — not a compromise, but an independent assessment.
-- Challenge BOTH the aggressive and conservative analysts where they overreach.
-- Point out where the aggressive analyst ignores real risks and where the conservative analyst overstates them.
-- Deliver a balanced position sizing and entry recommendation grounded in data from both sides.
-- Use actual numbers from the analyst reports as evidence.
-```
-
-After each sub-agent returns, append its output to `risk_debate_history`.
-
-**Neutral — main agent writes directly:**
-After Conservative completes, the main agent has both Aggressive and Conservative outputs in context. Write neutral.md directly using the prompt below — do NOT spawn a sub-agent for Neutral.
-
-```
-You are the Neutral Risk Analyst. Provide a genuinely balanced, independent assessment.
+You are the Neutral Risk Analyst for {TICKER}. Provide a genuinely balanced, independent assessment.
 
 You have already seen:
-- Aggressive argument: {last_aggressive_response}
-- Conservative argument: {last_conservative_response}
-- Trader's proposal: (read reports/{RUN_ID}/3_trading/trader.md if needed)
-- Analyst reports: (in context from earlier in this run)
+- Aggressive argument: {aggressive_output}
+- Conservative argument: {conservative_output}
+- Trader's proposal and analyst reports: already in your context from this run
 
 ROLE RULES:
-- Challenge BOTH sides where they overreach.
-- Point out where the aggressive analyst ignores real risks and where the conservative analyst overstates them.
+- Challenge BOTH sides where they overreach — not a compromise, an independent verdict.
+- Point out where Aggressive ignores real risks and where Conservative overstates them.
 - Deliver a balanced position sizing and entry recommendation grounded in data from both sides.
-- Flag any structural problems in the current trading plan (entry/stop proximity, inconsistent R:R across tranches, etc.).
+- Flag any structural problems in the trading plan (entry/stop proximity, R:R inconsistency, etc.).
 ```
+→ Main writes to `reports/{RUN_ID}/4_risk/neutral.md`
+
+**Spawn count for risk panel: 2 from main** (Aggressive, Conservative). Neutral written by main for free.
 
 ---
 
@@ -867,8 +842,8 @@ Fill every bracketed placeholder with the actual value from this run. Write no p
 - **Claude Code sub-agent strategy (token-efficient):**
   - **Main agent writes directly (no spawn):** Analysts 1–4, Research Manager, Trader, Neutral Risk, Portfolio Manager. Analysts 1–4 use data already in context from fetch_data.py — spawning sub-agents would duplicate the entire data payload per agent (4× waste). Synthesizer roles need full context anyway.
   - **Spawn as persistent parallel agents (2 for debate):** One Bull agent + one Bear agent, each handling ALL rounds for their side. They run concurrently, coordinate through disk files via polling loops, and are configurable by mode (N=1/2/3). **No SendMessage needed. No re-spawning between rounds.**
-  - **Spawn as isolated sub-agents (2 for risk):** Aggressive Risk, Conservative Risk — sequential, each reads the prior agent's output file from disk before writing.
+  - **Spawn as sequential sub-agents (2 for risk):** Main spawns Aggressive first, writes `aggressive.md` to disk, then spawns Conservative which reads `aggressive.md` from disk. Neutral written by main directly (already has both in context).
   - **Total spawns per Deep run: 4** (Bull debate agent, Bear debate agent, Aggressive Risk, Conservative Risk)
-  - **Disk is the communication channel:** Sub-agents never receive inline content — they always read from disk files. Main agent always writes to disk. Sub-agents only read and return text.
+  - **Disk is the communication channel:** Sub-agents always read from disk files. Main agent always writes to disk. Sub-agents only return text.
   - Isolation is unnecessary for: Analysts (fetch data already in main context), synthesizer roles (Research Manager, Trader, Neutral, Portfolio Manager)
 - **Web chat debate quality:** Single-context sequential writing is a known limitation. The Research Manager and Portfolio Manager should apply independent judgment and not over-rely on debate outcomes when running in web chat mode.
