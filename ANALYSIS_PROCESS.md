@@ -1,5 +1,5 @@
 # TradingAgents Analysis Process
-**How to use:** Run `fetch_data.py TICKER`, paste the output into Claude chat, then paste this file and say "follow this process."
+**How to use:** Run `fetch_data.py TICKER` in Claude Code, then say "analyse for ANALYSIS_PROCESS.md for TICKER."
 
 ---
 
@@ -21,21 +21,12 @@ When this file is shared, do the following **before starting any analysis**:
 
 **Step 1 — Check for data**
 
-**In Claude Code mode (tools available):** If the user has not explicitly provided or named a specific data file, ALWAYS run `fetch_data.py` to generate fresh data. Do NOT reuse existing `*_YYYYMMDD_HHMMSS.txt` files sitting in the directory — those are stale runs. A request like "run analysis for AMD" means fetch fresh data now.
+If the user has not explicitly provided or named a specific data file, ALWAYS run `fetch_data.py` to generate fresh data. Do NOT reuse existing `*_YYYYMMDD_HHMMSS.txt` files sitting in the directory — those are stale runs. A request like "run analysis for AMD" means fetch fresh data now.
 
 ```bash
 source /root/sant/app/TradingAgents/.venv/bin/activate
 python /root/sant/app/TradingAgents/fetch_data.py TICKER
 ```
-
-**In Web chat mode (no tools):** If the user has not provided stock data, ask them:
-> "Please share the stock data file. Run this command and share the file here:
-> ```bash
-> source /root/sant/app/TradingAgents/.venv/bin/activate
-> python /root/sant/app/TradingAgents/fetch_data.py TICKER
-> ```
-> Replace TICKER with the stock symbol (e.g. AMD, NVDA, SPY).
-> The script saves a timestamped file like `AMD_20260605_043116.txt` — share that file."
 
 When data is available, read the `Run ID` and `Report dir` fields from the file header. Use them exactly — do not generate a new timestamp. Example header fields:
 ```
@@ -52,23 +43,33 @@ Once data is available, ask the user:
 >
 > Type Fast, Medium, or Deep."
 
+**Step 2b — Ask for debate mode**
+After the user confirms the analysis mode, ask:
+> "How do you want to run the Bull/Bear debate?
+> - **Agents** — Bull and Bear spawn as isolated parallel sub-agents. Each starts with a clean context, reads only the analyst files, and has no knowledge of the other's arguments until polling. More token cost (~66K for Deep), but genuinely independent adversarial tension. Best for ambiguous setups where independence matters.
+> - **Inline** — Bull and Bear run sequentially in the same context. Cheaper (~3.5K tokens for Deep), faster, but the same model writes both sides and has the accumulated analyst context already anchoring its view. Fine for clear-signal setups.
+>
+> Type Agents or Inline."
+
 **Step 3 — Run the pipeline**
-Only after both data and mode are confirmed, proceed through the agents in order.
+Only after data, analysis mode, and debate mode are confirmed, proceed through the agents in order.
+
+**Debate mode decision:**
+- If user said **Agents** → follow Path A in the AGENTS 5 & 6 section
+- If user said **Inline** → follow Path B in the AGENTS 5 & 6 section
 
 ---
 
 ## HOW TO RUN
 
-1. Fetch data:
 ```bash
 source /root/sant/app/TradingAgents/.venv/bin/activate
 python /root/sant/app/TradingAgents/fetch_data.py AMD
 ```
-2. The script saves a timestamped file, e.g. `AMD_20260605_043116.txt`, and prints the report dir: `reports/AMD_20260605_043116/`
-3. Open Claude chat (claude.ai — no API needed)
-4. Share the timestamped `.txt` file and this file
-5. Claude reads the Run ID from the file header — no new timestamp is generated
-6. Claude will ask for mode — reply Fast / Medium / Deep
+
+The script saves a timestamped file, e.g. `AMD_20260605_043116.txt`, and prints the report dir: `reports/AMD_20260605_043116/`
+
+Claude reads the Run ID from the file header — no new timestamp is generated. Claude will ask for mode (Fast/Medium/Deep) then debate mode (Agents/Inline).
 
 ---
 
@@ -118,7 +119,7 @@ Data → [1] Market Analyst
 >
 > Append a Markdown table at the end organizing key indicator values, signals, and interpretations.
 
-**Execution (Claude Code mode):** Main agent writes directly — no sub-agent spawn. The fetch_data.py output is already in the main context; pass the data directly from context, do not re-read the file.
+**Execution:** Main agent writes directly — no sub-agent spawn. The fetch_data.py output is already in the main context; pass the data directly from context, do not re-read the file.
 
 **Output stored as:** `market_report`
 
@@ -148,7 +149,7 @@ Data → [1] Market Analyst
 > - **narrative**: Full source-by-source breakdown, divergences, dominant themes, catalysts and risks
 > - Append a Markdown table of key sentiment signals (direction, source, supporting evidence)
 
-**Execution (Claude Code mode):** Main agent writes directly — no sub-agent spawn. Data already in main context.
+**Execution:** Main agent writes directly — no sub-agent spawn. Data already in main context.
 
 **Output stored as:** `sentiment_report`
 
@@ -171,7 +172,7 @@ Data → [1] Market Analyst
 >
 > Provide specific, actionable insights with supporting evidence. Append a Markdown table organizing key news items by: Event, Date, Impact Direction, and Relevance to this stock.
 
-**Execution (Claude Code mode):** Main agent writes directly — no sub-agent spawn. Data already in main context.
+**Execution:** Main agent writes directly — no sub-agent spawn. Data already in main context.
 
 **Output stored as:** `news_report`
 
@@ -195,7 +196,7 @@ Data → [1] Market Analyst
 >
 > Append a Markdown table organizing key fundamental metrics with values and assessments.
 
-**Execution (Claude Code mode):** Main agent writes directly — no sub-agent spawn. Data already in main context.
+**Execution:** Main agent writes directly — no sub-agent spawn. Data already in main context.
 
 **Output stored as:** `fundamentals_report`
 
@@ -208,22 +209,22 @@ Data → [1] Market Analyst
 - **Medium** — 2 rounds: Bull R1 → Bear R1 → Bull R2 → Bear R2
 - **Deep** — 3 rounds: Bull R1 → Bear R1 → Bull R2 → Bear R2 → Bull R3 → Bear R3
 
-Run strictly alternating — Bull always opens, Bear always responds. Each round's output is passed as input to the next round's opponent. This is what makes it a real debate — not two independent monologues.
+Run strictly alternating — Bull always opens, Bear always responds. Each round's output is passed as input to the next round's opponent.
 
 **Data flow — disk files are the communication channel:**
-- Bull writes `bull_r1.md` → Bear polls for it, reads it, writes `bear_r1.md`
-- Bear writes `bear_r1.md` → Bull polls for it, reads it, writes `bull_r2.md`
-- Bull writes `bull_r2.md` → Bear polls for it, reads it, writes `bear_r2.md`
-- Bear writes `bear_r2.md` → Bull polls for it, reads it, writes `bull_r3.md` (Deep only)
-- Bull writes `bull_r3.md` → Bear polls for it, reads it, writes `bear_r3.md` (Deep only)
-
-Each agent reads the opponent's latest file from disk before writing its next round. No arguments are passed inline — the disk is the shared state.
+- Bull writes `bull_r1.md` → Bear reads it, writes `bear_r1.md`
+- Bear writes `bear_r1.md` → Bull reads it, writes `bull_r2.md`
+- Bull writes `bull_r2.md` → Bear reads it, writes `bear_r2.md`
+- Bear writes `bear_r2.md` → Bull reads it, writes `bull_r3.md` (Deep only)
+- Bull writes `bull_r3.md` → Bear reads it, writes `bear_r3.md` (Deep only)
 
 ---
 
-### EXECUTION — Claude Code mode vs Web chat mode
+### EXECUTION — two paths based on debate mode
 
-**In Claude Code mode (Agent tool available):**
+---
+
+**Path A — Agents debate (isolated parallel sub-agents):**
 
 Spawn Bull and Bear as **two persistent parallel agents** — each handles ALL rounds for its side. They coordinate through disk files using a polling loop between rounds. **No SendMessage needed. No re-spawning between rounds. Two spawns total for the entire debate regardless of mode.**
 
@@ -342,51 +343,40 @@ Fast mode: N=1, stops after bull_r1 + bear_r1. Medium: N=2. Deep: N=3.
 
 ---
 
-**In Web chat mode (no Agent tool):**
+**Path B — Inline debate (sequential in main context):**
 
-Write Bull and Bear sequentially in the same context using the prompts below. Acknowledge that debate quality is reduced in this mode — the Research Manager should account for this by applying independent judgment rather than relying solely on debate outcomes.
+Write Bull and Bear sequentially in the main context — no sub-agent spawns. The analyst data is already in context from the fetch run, so no disk reads are needed. Write each round to disk immediately after generating it.
 
-### BULL ANALYST prompt (each round):
-> You are a Bull Analyst advocating for investing in this stock. Build a strong, evidence-based case using the market report, sentiment report, news report, and fundamentals report provided.
->
-> Debate history so far: {full_debate_history}
-> Last bear argument: {last_bear_argument}  ← (empty in Round 1)
->
-> ROLE RULES: You are a committed bull. Do NOT acknowledge the bear is correct on any point — refute every claim with data. Do NOT say "the bear makes a fair point." Be adversarial. Pull no punches.
->
-> Focus on:
-> - **Growth Potential**: Market opportunities, revenue projections, scalability
-> - **Competitive Advantages**: Unique products, strong branding, dominant market positioning
-> - **Positive Indicators**: Financial health, industry trends, recent positive news
-> - **Bear Counterpoints**: From Round 2 onward, directly attack every bear point with specific data.
-> - **Style**: Conversational, engaging, debating — not just listing data
->
-> Use the actual numbers. Be specific. Start Round 1 with your opening case. From Round 2 onward, lead with rebuttals before making new points.
+**Bias note:** Both sides are written by the same model in the same context. The accumulated analyst framing will influence both Bull and Bear. This is acceptable when the signal is clear; prefer Path A (Agents) when the setup is genuinely ambiguous.
 
-### BEAR ANALYST prompt (each round):
-> You are a Bear Analyst making the case against investing in this stock. Present a well-reasoned argument using the market report, sentiment report, news report, and fundamentals report provided.
->
-> Debate history so far: {full_debate_history}
-> Last bull argument: {last_bull_argument}  ← (always provided — Bear never goes first)
->
-> ROLE RULES: You are a committed bear. Do NOT acknowledge the bull is correct on any point — expose every claim's weakness with data. Do NOT say "the bull makes a fair point." Be adversarial. Pull no punches.
->
-> Focus on:
-> - **Risks and Challenges**: Market saturation, financial instability, macroeconomic threats
-> - **Competitive Weaknesses**: Vulnerabilities, declining innovation, threats from competitors
-> - **Negative Indicators**: Financial data, market trends, adverse news
-> - **Bull Counterpoints**: Directly attack every bull point with specific data. Expose overconfidence.
-> - **Style**: Conversational, engaging, debating — not just listing facts
->
-> Use the actual numbers. Be specific. Lead with rebuttals to the bull's last argument before making new points.
+**Round loop — execute for round = 1 to {N}:**
 
-**Output stored as:** `investment_debate_history` (append each round in order)
+```
+Bull R{round}:
+  - Round 1: build opening bull case from analyst data already in context
+  - Round 2+: read bear_r{prev}.md from disk, lead with rebuttals, then new arguments
+  - Write to: reports/{RUN_ID}/2_research/bull_r{round}.md immediately
+
+Bear R{round}:
+  - Every round: read bull_r{round}.md from disk (just written above)
+  - Round 1: lead with rebuttals to bull opening, then bear case
+  - Round 2+: lead with rebuttals to every bull claim, then new arguments
+  - Write to: reports/{RUN_ID}/2_research/bear_r{round}.md immediately
+
+Repeat until all {N} Bull + Bear rounds are written.
+```
+
+After all rounds, concatenate into `bull.md` and `bear.md` and delete per-round files (same bash as Path A Step 4).
+
+**Role rules apply in both paths — NO EXCEPTIONS:**
+- Bull: committed buyer, refute every bear claim, no hedging, lead with rebuttals from R2
+- Bear: committed seller, expose every bull claim's weakness, no hedging, always lead with rebuttals
 
 ---
 
 ## AGENT 7 — RESEARCH MANAGER
 
-**Execution (Claude Code mode):** Main agent writes directly — no sub-agent spawn. By this point the main agent has all analyst reports and the full debate history in context.
+**Execution:** Main agent writes directly — no sub-agent spawn. By this point the main agent has all analyst reports and the full debate history in context.
 
 **Role:** Judge the debate and produce a clear investment plan for the trader.
 
@@ -413,7 +403,7 @@ Write Bull and Bear sequentially in the same context using the prompts below. Ac
 
 ## AGENT 8 — TRADER
 
-**Execution (Claude Code mode):** Main agent writes directly — no sub-agent spawn. Has Research Manager verdict and market report in context.
+**Execution:** Main agent writes directly — no sub-agent spawn. Has Research Manager verdict and market report in context.
 
 **Role:** Convert the Research Manager's plan into a concrete transaction proposal.
 
@@ -447,14 +437,6 @@ Three risk analysts debate the trader's proposal **sequentially**: Aggressive �
 - Aggressive opens based on trader's proposal + analyst reports + full debate history already in main context
 - Conservative responds next — Aggressive's output already in main context, no disk read needed
 - Neutral responds last — both outputs already in main context
-
-Note: Role rules in each prompt are the primary safeguard for analytical independence. All three analysts have explicit "NO EXCEPTIONS" role constraints that override any accumulated context bias.
-
----
-
-### EXECUTION — Claude Code mode vs Web chat mode
-
-**In Claude Code mode (Agent tool available):**
 
 All three risk analysts are written by main directly — **no sub-agent spawns needed**. All required data (analyst reports, debate history, trader plan) is already in main context. Role rules enforce independence.
 
@@ -504,57 +486,13 @@ ROLE RULES:
 
 **Spawn count for risk panel: 0** — all three written by main directly. Role rules enforce independence.
 
----
-
-**In Web chat mode (no Agent tool):**
-
-Write Aggressive, Conservative, and Neutral sequentially in the same context using the prompts below.
-
-### AGGRESSIVE RISK ANALYST prompt:
-> As the Aggressive Risk Analyst, your role is to actively champion high-reward, high-risk opportunities, emphasizing bold strategies and competitive advantages. When evaluating the trader's decision or plan, focus intently on the potential upside, growth potential, and innovative benefits — even when these come with elevated risk.
->
-> Trader's proposal: {trader_decision}
-> Risk debate history so far: {risk_debate_history}
-> Last conservative argument: {last_conservative_response}  ← (empty in Round 1)
-> Last neutral argument: {last_neutral_response}  ← (empty in Round 1)
->
-> ROLE RULES: You champion bold action. Do NOT acknowledge downside as decisive. Frame every risk as manageable. Be forceful.
->
-> Use the market report, sentiment report, news report, and fundamentals report as evidence. Be conversational, not just data-listing.
-
-### CONSERVATIVE RISK ANALYST prompt:
-> As the Conservative Risk Analyst, your primary objective is to protect assets, minimize volatility, and ensure steady, reliable growth. You prioritize stability, security, and risk mitigation — carefully assessing potential losses, economic downturns, and market volatility.
->
-> Trader's proposal: {trader_decision}
-> Risk debate history so far: {risk_debate_history}
-> Last aggressive argument: {last_aggressive_response}  ← (always provided — Conservative never goes first)
-> Last neutral argument: {last_neutral_response}  ← (empty in Round 1)
->
-> ROLE RULES: You prioritize capital protection above all. Do NOT acknowledge upside as the primary driver. Directly attack the aggressive argument. Be forceful in defending smaller size or no entry.
->
-> Use the market report, sentiment report, news report, and fundamentals report as evidence. Be conversational, not just data-listing.
-
-### NEUTRAL RISK ANALYST prompt:
-> As the Neutral Risk Analyst, your role is to provide a balanced perspective, weighing both the potential benefits and risks of the trader's decision. Evaluate the upsides and downsides while factoring in broader market trends, potential economic shifts, and diversification strategies.
->
-> Trader's proposal: {trader_decision}
-> Risk debate history so far: {risk_debate_history}
-> Last aggressive argument: {last_aggressive_response}  ← (always provided — Neutral never goes first)
-> Last conservative argument: {last_conservative_response}  ← (always provided — Neutral never goes first)
->
-> ROLE RULES: Challenge BOTH sides where they overreach. Deliver a genuinely independent balanced recommendation — not a split-the-difference compromise.
->
-> Use the market report, sentiment report, news report, and fundamentals report as evidence. Be conversational, not just data-listing.
-
----
-
 **Output stored as:** `risk_debate_history` (append each analyst's response in order)
 
 ---
 
 ## AGENT 10 — PORTFOLIO MANAGER (FINAL DECISION)
 
-**Execution (Claude Code mode):** Main agent writes directly — no sub-agent spawn. Has full run context: all analyst reports, debate, Research Manager verdict, Trader plan, and all risk panel outputs.
+**Execution:** Main agent writes directly — no sub-agent spawn. Has full run context: all analyst reports, debate, Research Manager verdict, Trader plan, and all risk panel outputs.
 
 **Role:** Synthesize everything and deliver the final trade decision.
 
@@ -609,36 +547,16 @@ Write Aggressive, Conservative, and Neutral sequentially in the same context usi
 
 ## OUTPUT STRUCTURE
 
-### Step 0 — Detect environment before Agent 1 starts
-
-Check whether file-writing tools (Write / Edit / Bash) are available:
-
-- **If tools are available → Claude Code mode** (writing to files)
-- **If no tools available → Web chat mode** (output in chat only)
-
-Announce the mode once at the start:
+Announce the environment once at the start:
 ```
 Environment: Claude Code — writing to reports/AMD_20260605_043116/
 ```
-or:
-```
-Environment: Web chat — full output in chat, copy-paste to save at end
-```
-
----
-
-### Claude Code mode
 
 Do NOT wait until the end to save. Write each agent's output to disk immediately after generating it. Print only a one-line status to chat per agent.
 
 **Directory:** Read the `Report dir` field from the data file header. Use it exactly — do not generate a new timestamp.
 
-```
-Run ID    : AMD_20260605_043116
-Report dir: reports/AMD_20260605_043116/
-```
-
-Create the directory before starting Agent 1. Write each file as the agent completes.
+Create all subdirectories before starting Agent 1.
 
 **File layout:**
 ```
@@ -663,29 +581,25 @@ reports/AMD_20260605_043116/
     decision.md
 ```
 
-Create all subdirectories before starting Agent 1.
+**Token tracking:**
+- **Path A sub-agent steps** (Bull, Bear): read `subagent_tokens` from the Agent tool result
+- **Path B inline steps** (Bull, Bear): estimate word count × 1.3, mark as `~estimated`
+- **All other steps** (Analysts 1–4, Research Manager, Trader, Risk Panel, Portfolio Manager): estimate word count × 1.3, mark as `~estimated`
 
-**Token tracking:** For every step, capture token usage as follows:
-- **Sub-agent steps** (Bull R1, Bear R1, Aggressive, Conservative): read `subagent_tokens` from the Agent tool result — this is the exact isolated count
-- **SendMessage steps** (Bull R2/R3, Bear R2/R3): read `subagent_tokens` from the SendMessage result
-- **Main-agent steps** (Analysts 1–4, Research Manager, Trader, Neutral, Portfolio Manager): estimate by counting the approximate word count of the output × 1.3 (words-to-tokens ratio) — mark these as `~estimated`
-
-Store each count in a `token_log` dict keyed by agent name. Print the full table at the end (see token summary format below).
-
-**Chat output per agent** — one line only (repeat Bull/Bear block N times based on mode):
+**Chat output per agent** — one line only:
 ```
 ✓ Market Analyst    → 1_analysts/market.md           [~2,100 tokens estimated]
 ✓ Sentiment Analyst → 1_analysts/sentiment.md        [~1,800 tokens estimated]
 ✓ News Analyst      → 1_analysts/news.md             [~1,900 tokens estimated]
 ✓ Fundamentals      → 1_analysts/fundamentals.md     [~2,000 tokens estimated]
-✓ Bull R1            → 2_research/bull.md (appended) [23,618 tokens]
-✓ Bear R1            → 2_research/bear.md (appended) [23,729 tokens]
+✓ Bull R1            → 2_research/bull.md (appended) [~1,200 tokens estimated]
+✓ Bear R1            → 2_research/bear.md (appended) [~1,200 tokens estimated]
   ← Fast stops here
-✓ Bull R2            → 2_research/bull.md (appended) [23,802 tokens]
-✓ Bear R2            → 2_research/bear.md (appended) [24,480 tokens]
+✓ Bull R2            → 2_research/bull.md (appended) [~1,200 tokens estimated]
+✓ Bear R2            → 2_research/bear.md (appended) [~1,200 tokens estimated]
   ← Medium stops here
-✓ Bull R3            → 2_research/bull.md (appended) [23,333 tokens]
-✓ Bear R3            → 2_research/bear.md (appended) [23,344 tokens]
+✓ Bull R3            → 2_research/bull.md (appended) [~1,200 tokens estimated]
+✓ Bear R3            → 2_research/bear.md (appended) [~1,200 tokens estimated]
   ← Deep stops here
 ✓ Research Manager  → 2_research/manager.md          [~2,100 tokens estimated]
 ✓ Trader            → 3_trading/trader.md            [~1,800 tokens estimated]
@@ -696,9 +610,9 @@ Store each count in a `token_log` dict keyed by agent name. Print the full table
 ✓ Complete report   → complete_report.md
 ```
 
-**After Portfolio Manager:** write `complete_report.md` (all agents concatenated in pipeline order), then print the token summary table, then print the final decision table to chat (see formats below).
+**After Portfolio Manager:** write `complete_report.md` (all agents concatenated in pipeline order), then print the token summary table, then print the final decision table to chat.
 
-**Token summary format** — print after complete_report.md is written:
+**Token summary format:**
 ```
 ## Token Usage — TICKER — RUN_ID
 
@@ -708,75 +622,47 @@ Store each count in a `token_log` dict keyed by agent name. Print the full table
 | Sentiment Analyst    | main agent  | ~1,800 est.   |
 | News Analyst         | main agent  | ~1,900 est.   |
 | Fundamentals Analyst | main agent  | ~2,000 est.   |
-| Bull R1              | sub-agent   | 23,618        |
-| Bear R1              | sub-agent   | 23,729        |
-| Bull R2              | SendMessage | 23,802        |
-| Bear R2              | SendMessage | 24,480        |
-| Bull R3              | SendMessage | 23,333        |  ← Deep only
-| Bear R3              | SendMessage | 23,344        |  ← Deep only
+| Bull R1              | inline/agent| ~1,200 est.   |
+| Bear R1              | inline/agent| ~1,200 est.   |
+| Bull R2              | inline/agent| ~1,200 est.   |
+| Bear R2              | inline/agent| ~1,200 est.   |
+| Bull R3              | inline/agent| ~1,200 est.   |
+| Bear R3              | inline/agent| ~1,200 est.   |
 | Research Manager     | main agent  | ~2,100 est.   |
 | Trader               | main agent  | ~1,800 est.   |
-| Aggressive Risk      | main agent  | ~2,400 est.   |  ← Deep only
-| Conservative Risk    | main agent  | ~2,400 est.   |  ← Deep only
-| Neutral Risk         | main agent  | ~2,400 est.   |  ← Deep only
+| Aggressive Risk      | main agent  | ~2,400 est.   |
+| Conservative Risk    | main agent  | ~2,400 est.   |
+| Neutral Risk         | main agent  | ~2,400 est.   |
 | Portfolio Manager    | main agent  | ~1,600 est.   |
 |----------------------|-------------|---------------|
-| TOTAL                |             | 231,249       |
-| (of which estimated) |             | (~7,900 est.) |
+| TOTAL                |             | ~xxx          |
 ```
 
 ---
 
-### Web chat mode
+### Summary table
 
-No file tools available. Output each agent's content in chat inside a fenced markdown block so the user can read it as it generates. Do not suppress or shorten the output.
-
-**Per agent:** output a fenced block with a path comment at the top:
-
-~~~
-```markdown
-<!-- 1_analysts/market.md -->
-
-[full agent output here]
-```
-~~~
-
-**After Portfolio Manager:** output one final combined fenced block containing all agents concatenated — this is the single copy-paste block the user saves as `complete_report.md`:
-
-~~~
-```markdown
-<!-- SAVE AS: reports/AMD_20260605_043116/complete_report.md -->
-
-[all agent outputs combined]
-```
-~~~
-
-Then print the summary table to chat (see summary format below).
-
----
-
-### Summary table (both modes)
-
-Print this to chat after the Portfolio Manager in both modes:
+Print this to chat after the Portfolio Manager:
 
 ```
 ## Summary — TICKER — RUN_ID
 
-| Parameter     | Value |
-|---------------|-------|
-| Signal        | BUY/SELL/HOLD |
-| Rating        | Overweight/etc |
-| Entry         | $xxx (primary limit) |
-| Secondary entry| $xxx (omit this row if Agent 8 skipped it) |
-| Breakout entry| $xxx on close >$xxx vol >35M (omit this row if Agent 8 skipped it) |
-| Stop Loss     | $xxx |
-| Target 1      | $xxx (timeframe) |
-| Target 2      | $xxx (timeframe) |
-| R:R           | x:1 |
-| Position Size | x% |
-| Confidence    | High/Medium/Low |
-| Mode          | Fast/Medium/Deep |
-| Report dir    | reports/TICKER_YYYYMMDD_HHMMSS/ |
+| Parameter      | Value |
+|----------------|-------|
+| Signal         | BUY/SELL/HOLD |
+| Rating         | Overweight/etc |
+| Entry          | $xxx (primary limit) |
+| Secondary entry| $xxx (omit if Agent 8 skipped it) |
+| Breakout entry | $xxx on close >$xxx vol >35M (omit if Agent 8 skipped it) |
+| Stop Loss      | $xxx |
+| Target 1       | $xxx (timeframe) |
+| Target 2       | $xxx (timeframe) |
+| R:R            | x:1 |
+| Position Size  | x% |
+| Confidence     | High/Medium/Low |
+| Mode           | Fast/Medium/Deep |
+| Debate         | Agents/Inline |
+| Report dir     | reports/TICKER_YYYYMMDD_HHMMSS/ |
 ```
 
 After the summary table, append a **plain English action section** filled with the actual numbers from this run. Use this template:
@@ -829,17 +715,14 @@ Fill every bracketed placeholder with the actual value from this run. Write no p
 - **Deep mode** = 3 Bull/Bear rounds + full 3-way risk debate (Aggressive→Conservative→Neutral)
 - **Medium mode** = 2 Bull/Bear rounds — risk panel skipped entirely
 - **Fast mode** = 1 Bull/Bear round — risk panel skipped entirely
-- Always detect environment (Claude Code vs web chat) before Agent 1 — announce it once
 - Always ask for mode before starting — do not assume Deep
-- Always check data is present before starting — ask user to run fetch_data.py if missing
-- Do NOT ask to save — in Claude Code mode write files automatically; in web chat output full blocks
+- Always ask for debate mode (Agents/Inline) after mode is confirmed
+- Always check data is present before starting — run fetch_data.py if missing
 - Stop loss must always be placed minimum **1.5×ATR** below entry
 - Price target must always be **above current price** (sanity check)
 - If data sources are missing (Reddit/StockTwits), flag in sentiment confidence — do not fabricate
-- **Claude Code sub-agent strategy (token-efficient):**
-  - **Main agent writes directly (no spawn):** Analysts 1–4, Research Manager, Trader, Neutral Risk, Portfolio Manager. Analysts 1–4 use data already in context from fetch_data.py — spawning sub-agents would duplicate the entire data payload per agent (4× waste). Synthesizer roles need full context anyway.
-  - **Spawn as persistent parallel agents (2 for debate):** One Bull agent + one Bear agent, each handling ALL rounds for their side. They run concurrently, coordinate through disk files via polling loops, and are configurable by mode (N=1/2/3). **No SendMessage needed. No re-spawning between rounds.**
-  - **Total spawns per Deep run: 2** (Bull debate agent, Bear debate agent only)
-  - **Disk is the communication channel for debate agents:** Sub-agents always read from disk files. Main agent always writes to disk. Sub-agents only return text.
-  - **Risk panel requires no spawns:** Role rules enforce independence for all three risk analysts. Running inline saves ~32K tokens vs sub-agent spawns with no meaningful quality loss.
-- **Web chat debate quality:** Single-context sequential writing is a known limitation. The Research Manager and Portfolio Manager should apply independent judgment and not over-rely on debate outcomes when running in web chat mode.
+- **Debate mode guidance:**
+  - **Agents:** ~66K tokens for Deep; genuinely isolated contexts; best for ambiguous setups; runs in parallel so faster wall-clock time
+  - **Inline:** ~3.5K tokens for Deep; same-context bias acknowledged; acceptable for clear-signal setups; sequential so slower
+- **Main agent writes directly (no spawn):** Analysts 1–4, Research Manager, Trader, Risk Panel, Portfolio Manager — all use data already in context
+- **Risk panel requires no spawns:** Role rules enforce independence for all three risk analysts
