@@ -208,14 +208,14 @@ Data → [1] Market Analyst
 
 Run strictly alternating — Bull always opens, Bear always responds. Each round's output is passed as input to the next round's opponent. This is what makes it a real debate — not two independent monologues.
 
-**Data flow (Deep example — truncate for Fast/Medium):**
-- Bull R1 output → passed as `last_bull_argument` into Bear R1
-- Bear R1 output → passed as `last_bear_argument` into Bull R2
-- Bull R2 output → passed as `last_bull_argument` into Bear R2
-- Bear R2 output → passed as `last_bear_argument` into Bull R3
-- Bull R3 output → passed as `last_bull_argument` into Bear R3
+**Data flow — disk files are the communication channel:**
+- Bull writes `bull_r1.md` → Bear polls for it, reads it, writes `bear_r1.md`
+- Bear writes `bear_r1.md` → Bull polls for it, reads it, writes `bull_r2.md`
+- Bull writes `bull_r2.md` → Bear polls for it, reads it, writes `bear_r2.md`
+- Bear writes `bear_r2.md` → Bull polls for it, reads it, writes `bull_r3.md` (Deep only)
+- Bull writes `bull_r3.md` → Bear polls for it, reads it, writes `bear_r3.md` (Deep only)
 
-Also pass the **full conversation history** (all prior arguments) into each round so agents can track the whole debate arc.
+Each agent reads the opponent's latest file from disk before writing its next round. No arguments are passed inline — the disk is the shared state.
 
 ---
 
@@ -223,70 +223,106 @@ Also pass the **full conversation history** (all prior arguments) into each roun
 
 **In Claude Code mode (Agent tool available):**
 
-Spawn Bull and Bear as **separate isolated sub-agents for Round 1 only**. For R2 and R3, use `SendMessage` to continue the same agents — they already have the analyst files in context and the debate history accumulates naturally. This saves 4 sub-agent spawns (and their cold-start file reads) per Deep run.
+Spawn Bull and Bear as **two persistent parallel agents** — each handles ALL rounds for its side. They coordinate through disk files using a polling loop between rounds. **No SendMessage needed. No re-spawning between rounds. Two spawns total for the entire debate regardless of mode.**
 
-**Execution flow:**
+The number of rounds `{N}` is determined by mode: Fast=1, Medium=2, Deep=3. Pass `{N}` into each agent's prompt at spawn time.
 
-**Step 1 — Spawn Bull R1 (isolated sub-agent, capture agentId):**
+**File naming per round:**
 ```
-You are a Bull Analyst advocating for investing in {TICKER}.
+Bull writes: reports/{RUN_ID}/2_research/bull_r{round}.md
+Bear writes: reports/{RUN_ID}/2_research/bear_r{round}.md
+```
+After all rounds complete, main agent concatenates into `bull.md` and `bear.md`, then deletes the per-round files.
 
-Read your inputs from these files (already written to disk):
+**Step 1 — Spawn Bull agent (run_in_background: true):**
+```
+You are the Bull Analyst for {TICKER}. You will run {N} debate round(s).
+
+Read analyst files from disk before Round 1:
 - reports/{RUN_ID}/1_analysts/market.md
 - reports/{RUN_ID}/1_analysts/sentiment.md
 - reports/{RUN_ID}/1_analysts/news.md
 - reports/{RUN_ID}/1_analysts/fundamentals.md
 
-Additional context passed directly:
-- Debate history so far: [Round 1 — no prior debate]
-- Last bear argument: [none — this is Round 1]
+ROUND LOOP — execute for round = 1 to {N}:
+
+  Round 1:
+    - Build your strongest opening bull case from the analyst reports
+    - Write your full argument to: reports/{RUN_ID}/2_research/bull_r1.md
+
+  Round 2+ (only if N > 1):
+    - Poll for bear's previous round file before writing:
+        Use Bash: while [ ! -f reports/{RUN_ID}/2_research/bear_r{prev_round}.md ]; do sleep 5; done
+    - Read reports/{RUN_ID}/2_research/bear_r{prev_round}.md
+    - Lead with direct rebuttals to every bear claim, then add new arguments
+    - Write your full argument to: reports/{RUN_ID}/2_research/bull_r{round}.md
+
+  Repeat until all {N} rounds are written.
 
 ROLE RULES — NO EXCEPTIONS:
 - You are a committed bull. You genuinely believe this stock should be bought.
 - Do NOT acknowledge the bear is correct on any point. Refute every bear claim with data.
 - Do NOT hedge or soften your position. Do NOT say "the bear makes a fair point."
-- In Round 1: build your strongest opening case from scratch using the analyst reports.
-- From Round 2 onward: lead with direct rebuttals to the bear's last argument before adding new points.
+- From Round 2 onward: ALWAYS lead with direct rebuttals before adding new points.
 - Use actual numbers. Be specific. Be adversarial. Pull no punches.
-
-Focus on: growth potential, competitive advantages, positive indicators, and refuting bear counterpoints.
 ```
-→ Capture returned `agentId` as `bull_agent_id`
 
-**Step 2 — Spawn Bear R1 (isolated sub-agent, capture agentId):**
+**Step 2 — Spawn Bear agent (run_in_background: true):**
 ```
-You are a Bear Analyst making the case against investing in {TICKER}.
+You are the Bear Analyst for {TICKER}. You will run {N} debate round(s).
 
-Read your inputs from these files (already written to disk):
+Read analyst files from disk before Round 1:
 - reports/{RUN_ID}/1_analysts/market.md
 - reports/{RUN_ID}/1_analysts/sentiment.md
 - reports/{RUN_ID}/1_analysts/news.md
 - reports/{RUN_ID}/1_analysts/fundamentals.md
 
-Additional context passed directly:
-- Debate history so far: [Round 1]
-- Last bull argument: {bull_r1_output}
+ROUND LOOP — execute for round = 1 to {N}:
+
+  Every round — poll for bull's current round file first:
+    Use Bash: while [ ! -f reports/{RUN_ID}/2_research/bull_r{round}.md ]; do sleep 5; done
+    Read reports/{RUN_ID}/2_research/bull_r{round}.md
+
+  Round 1:
+    - Lead with direct rebuttals to the bull's opening, then make your strongest bear case
+    - Write your full argument to: reports/{RUN_ID}/2_research/bear_r1.md
+
+  Round 2+ (only if N > 1):
+    - Lead with direct rebuttals to every bull claim, then add new arguments
+    - Write your full argument to: reports/{RUN_ID}/2_research/bear_r{round}.md
+
+  Repeat until all {N} rounds are written.
 
 ROLE RULES — NO EXCEPTIONS:
 - You are a committed bear. You genuinely believe this stock should be avoided or sold.
 - Do NOT acknowledge the bull is correct on any point. Expose every bull claim's weakness with data.
 - Do NOT hedge or soften your position. Do NOT say "the bull makes a fair point."
-- Always lead with direct rebuttals to the bull's last argument before making new points.
+- Always lead with direct rebuttals before making new points.
 - Use actual numbers. Be specific. Be adversarial. Pull no punches.
-
-Focus on: risks and challenges, competitive weaknesses, negative indicators, and exposing bull overconfidence.
 ```
-→ Capture returned `agentId` as `bear_agent_id`
 
-**Steps 3–6 — R2 and R3 via SendMessage (no new spawns):**
+**Step 3 — Wait for both agents to complete** (both background agents notify on completion).
 
-For each subsequent round, use `SendMessage` to continue the existing agents:
-- Bull R2: `SendMessage(to: bull_agent_id, "Here is the bear's Round 1 argument: {bear_r1_output}. Write your Round 2 rebuttal and new arguments.")`
-- Bear R2: `SendMessage(to: bear_agent_id, "Here is the bull's Round 2 argument: {bull_r2_output}. Write your Round 2 rebuttal and new arguments.")`
-- Bull R3 (Deep only): `SendMessage(to: bull_agent_id, "Here is the bear's Round 2 argument: {bear_r2_output}. Write your Round 3 final argument.")`
-- Bear R3 (Deep only): `SendMessage(to: bear_agent_id, "Here is the bull's Round 3 argument: {bull_r3_output}. Write your Round 3 final argument.")`
+**Step 4 — Main agent concatenates and cleans up:**
+```bash
+RUN_DIR="reports/{RUN_ID}/2_research"
 
-After each response, append it to `investment_debate_history`. Fast mode stops after R1. Medium stops after R2. Deep runs all three.
+# Concatenate bull rounds
+for i in $(seq 1 {N}); do
+  printf "\n## Round $i\n\n" >> "$RUN_DIR/bull.md"
+  cat "$RUN_DIR/bull_r$i.md" >> "$RUN_DIR/bull.md"
+  rm "$RUN_DIR/bull_r$i.md"
+done
+
+# Concatenate bear rounds
+for i in $(seq 1 {N}); do
+  printf "\n## Round $i\n\n" >> "$RUN_DIR/bear.md"
+  cat "$RUN_DIR/bear_r$i.md" >> "$RUN_DIR/bear.md"
+  rm "$RUN_DIR/bear_r$i.md"
+done
+```
+
+Fast mode: N=1, stops after bull_r1 + bear_r1. Medium: N=2. Deep: N=3.
 
 ---
 
@@ -830,7 +866,9 @@ Fill every bracketed placeholder with the actual value from this run. Write no p
 - If data sources are missing (Reddit/StockTwits), flag in sentiment confidence — do not fabricate
 - **Claude Code sub-agent strategy (token-efficient):**
   - **Main agent writes directly (no spawn):** Analysts 1–4, Research Manager, Trader, Neutral Risk, Portfolio Manager. Analysts 1–4 use data already in context from fetch_data.py — spawning sub-agents would duplicate the entire data payload per agent (4× waste). Synthesizer roles need full context anyway.
-  - **Spawn as isolated sub-agents (4 total):** Bull R1, Bear R1, Aggressive Risk, Conservative Risk — these need genuine isolation because they hold adversarial committed stances. Seeing the opposing side's argument before writing their own would contaminate the debate.
-  - **Continue via SendMessage (no new spawn):** Bull R2/R3, Bear R2/R3 — reuse the R1 agent; it already has analyst files in context and debate history accumulates naturally
-  - Isolation is unnecessary for: Analysts (different data domains, no cross-contamination risk), synthesizer roles (Research Manager, Trader, Neutral, Portfolio Manager), and continuation rounds (Bull/Bear R2/R3)
+  - **Spawn as persistent parallel agents (2 for debate):** One Bull agent + one Bear agent, each handling ALL rounds for their side. They run concurrently, coordinate through disk files via polling loops, and are configurable by mode (N=1/2/3). **No SendMessage needed. No re-spawning between rounds.**
+  - **Spawn as isolated sub-agents (2 for risk):** Aggressive Risk, Conservative Risk — sequential, each reads the prior agent's output file from disk before writing.
+  - **Total spawns per Deep run: 4** (Bull debate agent, Bear debate agent, Aggressive Risk, Conservative Risk)
+  - **Disk is the communication channel:** Sub-agents never receive inline content — they always read from disk files. Main agent always writes to disk. Sub-agents only read and return text.
+  - Isolation is unnecessary for: Analysts (fetch data already in main context), synthesizer roles (Research Manager, Trader, Neutral, Portfolio Manager)
 - **Web chat debate quality:** Single-context sequential writing is a known limitation. The Research Manager and Portfolio Manager should apply independent judgment and not over-rely on debate outcomes when running in web chat mode.
