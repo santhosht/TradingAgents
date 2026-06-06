@@ -29,13 +29,57 @@ Contagion check before entry:
 
 Analysts who cover a stock full-time — they talk to management, build detailed models, know the business inside out — publish a "fair value" price called the mean target. If the stock is already trading above that number, you are paying more than what the average expert thinks it's worth. Any small piece of bad news brings the stock straight back down — and you're immediately in a loss with no buffer.
 
-**The rule:** Before entering, compare current price to analyst mean target. If price is above the mean target, either wait for a pullback below it, or accept you are betting on the most optimistic scenario with no margin for error.
+**The rule:** Before entering, compare current price to analyst mean target. If price is above the mean target, either wait for a pullback below it, or accept you are betting on the most optimistic scenario with no margin for error. Use the **mean target** for planning R:R and position sizing — not the high target. The high target is an outlier held by the most optimistic analyst; it belongs only as a trailing objective for a residual position after Target 1 hits, never as the basis for entry sizing.
 
 ```
 Analyst consensus check:
   Current price < Analyst mean target  → Good cushion, proceed
   Current price = Analyst mean target  → Caution, size smaller
   Current price > Analyst mean target  → Wait for pullback below mean target
+
+  For R:R and sizing: always use analyst mean as T2 baseline
+  Analyst high target: only valid as a trailing target for residual position after T1 hits
+```
+
+---
+
+### 🟠 Insider Selling Caps Position Size
+*(Learned: AMD analysis June 6 2026 — CEO sold $73M, CTO sold $18.4M, zero insider purchases in 3 months)*
+
+When a company's CEO and other senior insiders are consistently selling large amounts of stock with no one buying, it is a real signal that deserves to constrain your position size — even if the bull case is strong. These people know the actual product timelines, customer conversations, and competitive threats better than any analyst. Their revealed preference (cash over stock) is information.
+
+This does not mean you must avoid the stock. It means you cannot size aggressively when the most informed insiders are distributing.
+
+**The rule:** Before entering a high-valuation stock (P/E > 50×), check insider transactions for the last 90 days. If the CEO has sold >$50M with zero insider purchases across the leadership team, cap position size at 3–4% maximum regardless of the bull case quality.
+
+```
+Insider selling check (applies to high-valuation stocks, P/E > 50×):
+  CEO sales in last 90 days < $20M, or insider purchases exist  → No constraint, normal sizing
+  CEO sales $20M–$50M, no purchases                            → Reduce max size by 25%
+  CEO sales > $50M, no purchases, multiple officers selling     → Cap at 3–4% maximum
+```
+
+---
+
+### 🟠 High-Multiple Stocks — Count the Required Conditions
+*(Learned: AMD at 156× trailing P/E, AMD analysis June 6 2026)*
+
+When a stock trades at a very high trailing P/E (above 100×), the entire valuation rests on a chain of future assumptions all holding simultaneously. The more conditions that must hold, the more fragile the bull case — because you only need one to crack for the thesis to break and estimates to get cut.
+
+Before sizing, enumerate the required conditions explicitly. Each one that must hold independently is a risk multiplier.
+
+**The rule:** At P/E > 100× trailing, list every assumption required for the bull case. If there are more than 3 independent conditions that must all hold, cap position at 5% maximum.
+
+```
+AMD June 2026 example — required conditions (5 total):
+  1. EPS inflects from $3.36 annualized → $13.08 forward (4× in a few quarters)
+  2. MI400 ramps without Nvidia capturing incremental market
+  3. Hyperscaler capex continues — no deceleration beyond Broadcom guidance
+  4. China export restrictions don't escalate
+  5. Rate pressure doesn't trigger further multiple compression
+
+  5 required conditions → cap at 5% even with Overweight rating
+  Bear needs only 1 to crack → asymmetric fragility at high multiples
 ```
 
 ---
@@ -85,9 +129,13 @@ ENTRY FORMULA
 
   Tranche 1 = 50–60% of intended position at primary support
   Tranche 2 = remaining 40–50% only if:
+                → price CLOSES above Tranche 1 zone (not just intraday touch)
                 → price holds Tranche 1 zone for 2+ days
                 → RSI stays above 40
                 → no new negative catalyst
+
+  Intraday touches of support that don't hold into the close are whipsaws.
+  Always wait for the daily close to confirm support is holding before adding.
 ```
 
 ### Key Support Levels to Look For (in priority order)
@@ -136,9 +184,15 @@ STOP LOSS FORMULA
 ### Trailing Stop After Target 1
 ```
   After price reaches Target 1:
-    → Sell 35–40% of position
+    → Sell 35–40% of position (standard)
     → Move stop up to just below major support (e.g., Bollinger midline)
     → Let remaining position run to Target 2
+
+  Exception — thin R:R to T1 (R:R < 1.5:1 to T1 but > 2.5:1 to T2):
+    → Sell 50% at Target 1 instead of 35–40%
+    → Trail remaining 50% toward Target 2 with a tighter trailing stop
+    → This locks in more profit early when T1 is close to entry,
+      while keeping participation if T2 is far enough to justify the trade
 ```
 
 ---
@@ -295,9 +349,11 @@ BEFORE ENTERING
   □ Cooldown confirmed (2 green closes + RSI 45–55 + volume shrinking)
   □ Entry is at a key support level (VWMA / BB mid / consolidation zone)
   □ Stop loss calculated (1.5×ATR below entry)
-  □ R:R is at least 1.5:1 to Target 1
+  □ R:R is at least 1.5:1 to Target 1 (use analyst MEAN for T2, not high target)
   □ Position size calculated (1–2% portfolio risk max)
   □ Beta adjusted (reduce size if Beta > 2)
+  □ Insider check (P/E > 50×): CEO sold > $50M in 90 days? → cap at 3–4%
+  □ Conditions check (P/E > 100×): more than 3 required assumptions? → cap at 5%
   □ Limit order placed (NOT market order)
 
 AFTER ENTRY
