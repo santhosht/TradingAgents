@@ -46,15 +46,17 @@ Once data is available, ask the user:
 **Step 2b — Ask for debate mode**
 After the user confirms the analysis mode, ask:
 > "How do you want to run the Bull/Bear debate?
-> - **Agents** — Bull and Bear spawn as isolated parallel sub-agents. Each starts with a clean context, reads only the analyst files, and has no knowledge of the other's arguments until polling. More token cost (~66K for Deep), but genuinely independent adversarial tension. Best for ambiguous setups where independence matters.
-> - **Inline** — Bull and Bear run sequentially in the same context. Cheaper (~3.5K tokens for Deep), faster, but the same model writes both sides and has the accumulated analyst context already anchoring its view. Fine for clear-signal setups.
+> - **Brief Agents** *(Recommended)* — A distiller runs first in main context, extracting all debate-relevant data from the 4 analyst reports into a structured brief. Bull and Bear then spawn as isolated parallel sub-agents reading only the brief. Same independent adversarial reasoning as Agents at ~30% of the token cost (~20K for Deep).
+> - **Agents** — Bull and Bear spawn as isolated parallel sub-agents, each reading the full analyst reports from disk. Genuinely independent reasoning, highest argument depth. Higher token cost (~85K for Deep). Best when you want maximum depth and cost is not a concern.
+> - **Inline** — Bull and Bear run sequentially in the same context. Cheapest (~3.5K tokens for Deep), fastest, but the same model writes both sides. Fine for clear-signal setups.
 >
-> Type Agents or Inline."
+> Type Brief Agents, Agents, or Inline."
 
 **Step 3 — Run the pipeline**
 Only after data, analysis mode, and debate mode are confirmed, proceed through the agents in order.
 
 **Debate mode decision:**
+- If user said **Brief Agents** → run Distiller after Agent 4, then follow Path C in the AGENTS 5 & 6 section
 - If user said **Agents** → follow Path A in the AGENTS 5 & 6 section
 - If user said **Inline** → follow Path B in the AGENTS 5 & 6 section
 
@@ -202,6 +204,63 @@ Data → [1] Market Analyst
 
 ---
 
+## AGENT 4.5 — DEBATE DISTILLER (Brief Agents mode only)
+
+**Skip this section entirely for Agents and Inline modes.**
+
+**Role:** Read all 4 analyst reports (already in main context) and extract exactly what Bull and Bear need to build specific, number-grounded arguments. This is NOT a summary — it is a structured extraction for debate consumption.
+
+**Execution:** Main agent writes directly — no sub-agent spawn. Analyst reports are already in context. One `llm.invoke()` call.
+
+**Output stored as:** `reports/{RUN_ID}/2_research/debate_brief.md`
+
+**Prompt:**
+> You are a Debate Context Distiller. You have just read 4 analyst reports for {TICKER}.
+> Your job is NOT to summarize them. Your job is to extract exactly what Bull and Bear
+> analysts need to build specific, number-grounded arguments.
+>
+> Output the following sections — no more, no less:
+>
+> **## The Core Situation**
+> 2–3 sentences: what happened, current price, what triggered the move, and critically —
+> what did NOT change operationally.
+>
+> **## Key Numbers — Cite These Precisely**
+> Every specific figure that could appear in a debate argument. No interpretation — just
+> the numbers and what they are:
+> - Price and technicals: current price, EMA/SMA levels, RSI, MACD line/signal/histogram,
+>   Bollinger bands (upper/mid/lower), ATR, VWMA, key support and resistance levels
+> - Valuation: TTM P/E, Forward P/E, PEG, EV/EBITDA, Price/Book, analyst mean/high/low
+>   targets, recommendation
+> - Financials: revenue by quarter (last 4Q), gross margin by quarter, operating margin
+>   by quarter, operating income by quarter, FCF by quarter, cash, debt, net cash,
+>   inventory (with trend), buybacks, R&D as % of revenue
+>
+> **## Bull-Relevant Signals**
+> Every data point that supports a buy thesis. Be exhaustive. Include:
+> - Obvious signals (FCF growth, cash position, analyst PT raises, macro-driven selloff)
+> - OVERLOOKED: Non-obvious signals that are easy to miss — secondary business segments,
+>   pricing power signals, non-AI revenue moats, international demand catalysts, anything
+>   the market appears to be ignoring. Label each with "OVERLOOKED:" so Bull knows to use it.
+>
+> **## Bear-Relevant Signals**
+> Every data point that supports a sell/avoid thesis. Be exhaustive. Include:
+> - Obvious signals (valuation multiples, insider selling, technical breakdown)
+> - Structural risks (competitive moat erosion, rate environment, regulatory threats,
+>   sequential deterioration in any financial metric)
+>
+> **## Contested / Ambiguous Points**
+> Data points where Bull and Bear will interpret the same fact differently. For each:
+> state the fact, the bull read, and the bear read. These are the core debate battlegrounds.
+>
+> Rules:
+> - No opinions. No conclusions. No recommendations.
+> - Every claim must be traceable to a specific number from the reports.
+> - If a source is low-confidence (e.g. small StockTwits sample, unverified social media
+>   claim), flag it explicitly with the confidence level.
+
+---
+
 ## AGENTS 5 & 6 — BULL / BEAR DEBATE (rounds depend on mode)
 
 **Rounds by mode:**
@@ -340,6 +399,100 @@ done
 ```
 
 Fast mode: N=1, stops after bull_r1 + bear_r1. Medium: N=2. Deep: N=3.
+
+---
+
+**Path C — Brief Agents debate (isolated sub-agents reading debate brief):**
+
+Identical to Path A except sub-agents read `debate_brief.md` instead of the 4 full analyst files. The distiller has already run (Agent 4.5) and written the brief to disk. Two sub-agent spawns total, same polling coordination, same round loop.
+
+**Step 1 — Spawn Bull agent (run_in_background: true):**
+```
+You are the Bull Analyst for {TICKER}. You will run {N} debate round(s). Your task is to
+build a strong, evidence-based case emphasizing growth potential, competitive advantages,
+and positive market indicators. Use specific numbers to address concerns and counter
+bearish arguments.
+
+Read this single file from disk before Round 1 — it contains all the data you need:
+- reports/{RUN_ID}/2_research/debate_brief.md
+
+Pay special attention to items labelled "OVERLOOKED:" in the brief — these are non-obvious
+bull signals the market is ignoring. Use them.
+
+ROUND LOOP — execute for round = 1 to {N}:
+
+  Round 1:
+    - Build your strongest opening bull case from the debate brief
+    - Write your full argument to: reports/{RUN_ID}/2_research/bull_r1.md
+
+  Round 2+ (only if N > 1):
+    - Poll for bear's previous round file before writing:
+        Use Bash: while [ ! -f reports/{RUN_ID}/2_research/bear_r{prev_round}.md ]; do sleep 5; done
+    - Read reports/{RUN_ID}/2_research/bear_r{prev_round}.md
+    - Lead with direct rebuttals to every bear claim, then add new arguments
+    - Write your full argument to: reports/{RUN_ID}/2_research/bull_r{round}.md
+
+  Repeat until all {N} rounds are written.
+
+ANALYTICAL FOCUS — cover all of these dimensions every round:
+- **Growth Potential**: Market opportunities, revenue projections, scalability
+- **Competitive Advantages**: Unique products, strong branding, dominant market positioning
+- **Positive Indicators**: Financial health, industry trends, recent positive news
+- **Bear Counterpoints**: Critically analyze every bear argument with specific data; show why the bull perspective holds stronger merit
+- **Style**: Conversational, engaging debate — not just listing data points
+
+ROLE RULES — NO EXCEPTIONS:
+- You are a committed bull. You genuinely believe this stock should be bought.
+- Do NOT acknowledge the bear is correct on any point. Refute every bear claim with data.
+- Do NOT hedge or soften your position. Do NOT say "the bear makes a fair point."
+- From Round 2 onward: ALWAYS lead with direct rebuttals before adding new points.
+- Use actual numbers. Be specific. Be adversarial. Pull no punches.
+```
+
+**Step 2 — Spawn Bear agent (run_in_background: true):**
+```
+You are the Bear Analyst for {TICKER}. You will run {N} debate round(s). Your task is to
+present a well-reasoned argument emphasizing risks, challenges, and negative indicators.
+Use specific numbers to highlight potential downsides and counter bullish arguments.
+
+Read this single file from disk before Round 1 — it contains all the data you need:
+- reports/{RUN_ID}/2_research/debate_brief.md
+
+Pay special attention to the "Contested / Ambiguous Points" section — these are the
+battlegrounds where bull overreach is easiest to expose with the same data.
+
+ROUND LOOP — execute for round = 1 to {N}:
+
+  Every round — poll for bull's current round file first:
+    Use Bash: while [ ! -f reports/{RUN_ID}/2_research/bull_r{round}.md ]; do sleep 5; done
+    Read reports/{RUN_ID}/2_research/bull_r{round}.md
+
+  Round 1:
+    - Lead with direct rebuttals to the bull's opening, then make your strongest bear case
+    - Write your full argument to: reports/{RUN_ID}/2_research/bear_r1.md
+
+  Round 2+ (only if N > 1):
+    - Lead with direct rebuttals to every bull claim, then add new arguments
+    - Write your full argument to: reports/{RUN_ID}/2_research/bear_r{round}.md
+
+  Repeat until all {N} rounds are written.
+
+ANALYTICAL FOCUS — cover all of these dimensions every round:
+- **Risks and Challenges**: Market saturation, financial instability, macroeconomic threats
+- **Competitive Weaknesses**: Vulnerabilities, declining innovation, threats from competitors
+- **Negative Indicators**: Financial data, market trends, adverse news
+- **Bull Counterpoints**: Critically analyze every bull argument with specific data; expose weaknesses and over-optimistic assumptions
+- **Style**: Conversational, engaging debate — not just listing facts
+
+ROLE RULES — NO EXCEPTIONS:
+- You are a committed bear. You genuinely believe this stock should be avoided or sold.
+- Do NOT acknowledge the bull is correct on any point. Expose every bull claim's weakness with data.
+- Do NOT hedge or soften your position. Do NOT say "the bull makes a fair point."
+- Always lead with direct rebuttals before making new points.
+- Use actual numbers. Be specific. Be adversarial. Pull no punches.
+```
+
+**Steps 3 & 4** — identical to Path A (wait for completion, concatenate, clean up per-round files).
 
 ---
 
@@ -531,17 +684,18 @@ ROLE RULES:
 
 ## QUICK REFERENCE
 
-| Agent | Role | Key output |
-|-------|------|-----------|
-| 1. Market Analyst | Technicals | Trend, indicators, support/resistance |
-| 2. Sentiment Analyst | Social mood | Score /10, band, confidence |
-| 3. News Analyst | Events | Catalysts, risks, macro context |
-| 4. Fundamentals | Financials | Valuation, margins, balance sheet |
-| 5/6. Bull/Bear (×N) | Debate | 1/2/3-round debate (Fast/Medium/Deep) |
-| 7. Research Manager | Verdict | Rating + investment plan |
-| 8. Trader | Execution | Entry, stop, position size |
-| 9. Risk Panel (×3) | Risk stress test | Aggressive→Conservative→Neutral (Deep only) |
-| 10. Portfolio Manager | Final decision | Rating, targets, time horizon |
+| Agent | Role | Key output | Modes |
+|-------|------|-----------|-------|
+| 1. Market Analyst | Technicals | Trend, indicators, support/resistance | All |
+| 2. Sentiment Analyst | Social mood | Score /10, band, confidence | All |
+| 3. News Analyst | Events | Catalysts, risks, macro context | All |
+| 4. Fundamentals | Financials | Valuation, margins, balance sheet | All |
+| 4.5. Distiller | Brief extraction | Structured debate brief | Brief Agents only |
+| 5/6. Bull/Bear (×N) | Debate | 1/2/3-round debate (Fast/Medium/Deep) | All |
+| 7. Research Manager | Verdict | Rating + investment plan | All |
+| 8. Trader | Execution | Entry, stop, position size | All |
+| 9. Risk Panel (×3) | Risk stress test | Aggressive→Conservative→Neutral (Deep only) | All |
+| 10. Portfolio Manager | Final decision | Rating, targets, time horizon | All |
 
 ---
 
@@ -583,6 +737,7 @@ reports/AMD_20260605_043116/
 
 **Token tracking:**
 - **Path A sub-agent steps** (Bull, Bear): read `subagent_tokens` from the Agent tool result
+- **Path C sub-agent steps** (Distiller, Bull, Bear): Distiller is main agent — estimate word count × 1.3; Bull/Bear read `subagent_tokens` from Agent tool result
 - **Path B inline steps** (Bull, Bear): estimate word count × 1.3, mark as `~estimated`
 - **All other steps** (Analysts 1–4, Research Manager, Trader, Risk Panel, Portfolio Manager): estimate word count × 1.3, mark as `~estimated`
 
@@ -622,6 +777,7 @@ reports/AMD_20260605_043116/
 | Sentiment Analyst    | main agent  | ~1,800 est.   |
 | News Analyst         | main agent  | ~1,900 est.   |
 | Fundamentals Analyst | main agent  | ~2,000 est.   |
+| Debate Distiller     | main agent  | ~xxx est.     |  ← Brief Agents only
 | Bull R1              | inline/agent| ~1,200 est.   |
 | Bear R1              | inline/agent| ~1,200 est.   |
 | Bull R2              | inline/agent| ~1,200 est.   |
@@ -661,7 +817,7 @@ Print this to chat after the Portfolio Manager:
 | Position Size  | x% |
 | Confidence     | High/Medium/Low |
 | Mode           | Fast/Medium/Deep |
-| Debate         | Agents/Inline |
+| Debate         | Brief Agents/Agents/Inline |
 | Report dir     | reports/TICKER_YYYYMMDD_HHMMSS/ |
 ```
 
@@ -722,7 +878,8 @@ Fill every bracketed placeholder with the actual value from this run. Write no p
 - Price target must always be **above current price** (sanity check)
 - If data sources are missing (Reddit/StockTwits), flag in sentiment confidence — do not fabricate
 - **Debate mode guidance:**
-  - **Agents:** ~66K tokens for Deep; genuinely isolated contexts; best for ambiguous setups; runs in parallel so faster wall-clock time
+  - **Brief Agents:** ~20K tokens for Deep; distiller runs in main context then sub-agents read the brief; isolated reasoning at ~30% of Agents cost; recommended default
+  - **Agents:** ~85K tokens for Deep; genuinely isolated contexts reading full reports; maximum argument depth; best when cost is not a concern
   - **Inline:** ~3.5K tokens for Deep; same-context bias acknowledged; acceptable for clear-signal setups; sequential so slower
 - **Main agent writes directly (no spawn):** Analysts 1–4, Research Manager, Trader, Risk Panel, Portfolio Manager — all use data already in context
 - **Risk panel requires no spawns:** Role rules enforce independence for all three risk analysts
