@@ -56,6 +56,22 @@ A report is stale when ANY of these are true:
   - `2_research/manager.md` — bull/bear debate verdict
   - `1_analysts/fundamentals.md` — financial data
 
+### Step 2b — Fetch live data from Yahoo Finance
+Fetch all of the following in parallel:
+
+| URL | What to extract |
+|-----|----------------|
+| `https://finance.yahoo.com/quote/SYMBOL/` | Current price, day range, 52-week range, volume vs avg volume |
+| `https://finance.yahoo.com/quote/SYMBOL/key-statistics/` | P/E, forward P/E, EPS, gross margin, FCF, market cap |
+| `https://finance.yahoo.com/quote/SYMBOL/analysis/` | Analyst price targets (mean, low, high), EPS estimates, revenue estimates |
+| `https://finance.yahoo.com/quote/SYMBOL/news/` | Recent headlines (last 3–5) — flag anything that could affect the thesis |
+
+Use this data to:
+- Calculate P&L, distance to stop, distance to targets
+- Check if any financial metrics have shifted vs the original report (e.g. margin compression, EPS revision)
+- Flag any news that maps to exit triggers or upgrade conditions in the report
+- Note if next earnings date is imminent (within 2 weeks)
+
 ### Step 3 — Compare current reality to the thesis
 - Is the investment thesis still intact?
 - Has any exit trigger from the report fired?
