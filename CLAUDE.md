@@ -15,3 +15,15 @@
 | Analyze a new stock | `ANALYSIS_PROCESS.md` |
 | About an existing position / ticker | `POSITIONS.md` → `POSITION_TRACKING.md` |
 | What rules apply to a trade | `TRADING_RULES.md` |
+
+## MANDATORY: Position Review Protocol
+
+When the user asks ANYTHING about how a position is doing, its status, or whether to hold/exit — you MUST:
+
+1. Read `POSITIONS.md` (get entry price, stop, targets, report folder)
+2. Read `POSITION_TRACKING.md` (follow every step — do NOT skip)
+3. Read `reports/SYMBOL_.../5_portfolio/decision.md`
+4. Fetch all 4 data URLs in parallel (Yahoo Finance quote, Finviz, StockAnalysis financials, StockAnalysis overview)
+5. Deliver the update in the exact format defined in `POSITION_TRACKING.md` Step 4
+
+**Skipping any of these steps is wrong.** The format and data fetching are not optional.
