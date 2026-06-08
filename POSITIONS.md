@@ -2,18 +2,11 @@
 
 ## Open Positions
 
-_None yet — update this file when you enter a trade._
-
-<!--
-Template for each open position:
-
-### SYMBOL — entered YYYY-MM-DD
-- Entry: $X.XX | Size: X% | Stop: $X.XX
-- Target 1: $X.XX | Target 2: $X.XX
-- Based on: reports/SYMBOL_YYYYMMDD_HHMMSS
-- Next check: [catalyst / date / condition]
-- Notes: [anything relevant]
--->
+### MKC — entered 2026-06-08
+- Entry: $46.80 | Size: 4% | Stop: $43.80
+- Target 1: $51.00 | Target 2: $61.31
+- Based on: reports/MKC_20260607_185008
+- Next check: Q2 earnings Jun 25 — watch operating margin vs 15%
 
 ---
 
@@ -40,11 +33,6 @@ Template for each open position:
 - Suggested entry: $110–$114.50 | Size: 2–3% max | Stop: $104
 - Target 1: $135 | Target 2: $152
 - Based on: reports/LULU_20260607_060748
-
-### MKC — report 2026-06-07 — STALE AFTER 2026-06-14
-- Suggested entry: $46.80 limit | Size: 4% | Stop: $43.80
-- Target 1: $51 | Target 2: $61.31
-- Based on: reports/MKC_20260607_185008
 
 ### NKE — report 2026-06-07 — STALE AFTER 2026-06-14
 - Suggested entry: $42.50–$43.50 | Size: 2% | Stop: $40.00

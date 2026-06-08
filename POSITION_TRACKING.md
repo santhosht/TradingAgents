@@ -19,7 +19,7 @@ Read `POSITIONS.md` whenever the user:
 
 | Event | Action |
 |-------|--------|
-| User enters a trade | Move from Pending → Open Positions with actual entry price, size, date |
+| User enters a trade | Move from Pending → Open Positions with actual entry price, size, date. No Yahoo Finance fetch needed — just update the file. |
 | User closes a trade | Move from Open → Closed with exit price and result % |
 | Stop hit | Move to Closed, record "stopped out at $X" |
 | Target 1 reached | Note partial exit in Open Positions, update remaining size |
