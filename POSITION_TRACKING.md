@@ -13,6 +13,10 @@ Read `POSITIONS.md` whenever the user:
 - Says "I bought X" or "I sold X" — update POSITIONS.md accordingly
 - Asks "follow my position on X"
 
+**Pending vs Open — critical distinction:**
+- **Pending positions**: Read `POSITIONS.md` only. Report entry conditions, staleness, and upcoming catalysts. Do NOT fetch live data.
+- **Open positions**: Follow the full Step 2b live data fetch (Yahoo Finance quote + Finviz + StockAnalysis).
+
 ---
 
 ## 2. Updating POSITIONS.md

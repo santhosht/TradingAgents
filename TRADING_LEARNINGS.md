@@ -1,8 +1,8 @@
-# Trading Rules — Simple Reference Guide
+# Trading Learnings
 
-A practical, symbol-agnostic cheatsheet for entries, exits, hold periods, and cooldowns.
+Lessons captured from real trades and analysis. These are observations and context — not rules to mechanically apply. Each trade is judged on its own analysis.
 
-> **How this file works:** Rules marked 🔵 are general theory. Rules marked 🟠 came from a real trade or analysis — these are the ones that actually matter.
+> **How this file works:** Entries marked 🔵 are general observations. Entries marked 🟠 came from a specific real trade — these carry the most weight as context.
 
 ---
 
@@ -81,6 +81,160 @@ AMD June 2026 example — required conditions (5 total):
   5 required conditions → cap at 5% even with Overweight rating
   Bear needs only 1 to crack → asymmetric fragility at high multiples
 ```
+
+---
+
+### 🟠 Selling Winners Early, Holding Losers Forever — The Core Behavioral Mistake
+*(Learned: full transaction history review, June 2026)*
+
+The most expensive pattern in the history: profitable positions (NVDA, FTNT, GOOGL) were sold quickly, while losing positions (XRP, ADA, crypto) were held indefinitely with no exit.
+
+- NVDA bought at $90 → sold 9 shares at $186–$214, before it reached analyst mean $309
+- FTNT bought at $88 → sold 6 shares at $104–$113, before it reached $143
+- XRP fell from $2.16 to $1.15 with no exit
+- ADA fell from $0.62 to $0.16 with no exit
+
+This happens because booking a profit feels good and cutting a loss feels like failure. The market rewards the opposite.
+
+**The rule:** Don't sell because a stock is "up enough." Sell when it reaches the pre-defined target (analyst mean, resistance level). Hold the plan, not the emotion.
+
+---
+
+### 🟠 Crypto: When It Doubles, Sell Half
+*(Learned: BTC/XRP/ADA history review, June 2026)*
+
+Crypto moves faster and bigger than stocks. There is no analyst mean, no earnings floor, no fundamental anchor. When Fear & Greed turns, it drops from 90 to 10 in weeks.
+
+Real examples from this portfolio:
+- BTC entered at $94,136. Ran to $108,000 (+15%). Now $62,850. No partial exit taken.
+- XRP entered at $2.16. Ran to $3.40 (+57%). Now $1.15 (-47%). No partial exit taken.
+
+**The rule:** When any crypto position doubles from entry, sell half. You recover your original investment. The remaining half is house money running for free.
+
+```
+Crypto profit-taking trigger:
+  Position is up 100%+ from entry  → Sell 50%, hold rest with stop at entry
+  Position is up 50% from entry    → Sell 30%, move stop to entry
+  Fear & Greed drops below 30      → Sell another 20–30% regardless of price
+```
+
+---
+
+### 🟠 IPO FOMO — One Position Per Month
+*(Learned: September 2025 IPO rush — 7 IPOs bought in 3 weeks)*
+
+In Sep–Oct 2025, $3,123 was deployed across 7 new IPOs in 3 weeks with no time to research any of them properly. This is FOMO: excitement about new listings causing rushed entries without a thesis.
+
+Results: FIGR worked (+54%), CRWV partially worked, KLAR/VIA/STUB/GEMI/FRMI all deeply underwater.
+
+**The rule:** Maximum one new position opened per month. Research it before buying — understand the business, the lock-up expiry date, and the post-IPO selling pressure before committing capital.
+
+```
+IPO entry checklist:
+  □ What does the company actually do, and is it growing revenue?
+  □ When does the lock-up period expire? (90–180 days post-IPO = heavy selling)
+  □ Is the current price above or below the IPO price?
+  □ Have I waited for lock-up expiry selling to finish?
+  □ Is this the only new position I'm opening this month?
+```
+
+---
+
+### 🟠 Sold Quality Stock, Rebought Higher — Permanent Cost Basis Damage
+*(Learned: GOOGL trade Oct–Nov 2025)*
+
+GOOGL bought at $150 (great entry). Sold at $255–$291 to lock in profit. Immediately rebought at $276 — a higher price than the sale. The original $150 cost basis was permanently gone, replaced with a $276 entry.
+
+This happens when you sell a quality company but still believe in it. The result: pay taxes on the gain, lose the low entry, rebuild at a worse price.
+
+**The rule:** If you sell a quality stock for profit because you want to "take gains," don't buy it back in the same week. Either hold it or exit it. If you sell and immediately rebuy higher, you've paid taxes for nothing.
+
+---
+
+### 🔵 How to Find Support — Before Adding to Any Existing Position
+*(Applied whenever considering adding more shares to a current holding)*
+
+**Support level** = price floor where buyers historically step in. Adding to a position is only valid when price pulls back to a real support level — not just because it dropped from a recent high.
+
+**3 ways to identify support (check at least 2 before adding):**
+
+**Method 1 — Chart bounces**
+Open Yahoo Finance or TradingView. Set chart to 3–6 month view. Look for price levels where the stock touched and bounced back up at least twice. The more bounces, the stronger the support.
+
+**Method 2 — Moving averages (dynamic support)**
+- 50-day MA = medium-term support
+- 200-day MA = long-term support
+If stock is in an uptrend and pulls back to touch the 50-day MA with volume shrinking = strong add candidate.
+
+**Method 3 — Prior consolidation zone**
+Where did the stock trade sideways for 2+ weeks before a big move? That range becomes support on the way back down.
+
+**Step 1 — Find support levels FIRST (before watching price)**
+
+Open TradingView (free) → search the stock → 6 month chart → add two indicators:
+- MA 50 (50-day moving average line)
+- MA 200 (200-day moving average line)
+
+Wherever those lines sit = your support levels. Read the price off the line.
+
+Also look for: price levels where stock bounced 2+ times before (chart bounces), and flat sideways zones (prior consolidation).
+
+Write down your support levels before anything happens. Set a price alert in your broker at those levels.
+
+```
+NVDA example:
+  Support Level 1: ~$204  (50-day MA)
+  Support Level 2: ~$189  (200-day MA)
+  → Set price alerts at both levels
+  → Forget it, live your life, wait for alert
+```
+
+**Step 2 — When price alert triggers, run all 5 checks**
+
+Price reaching support = yellow light (start watching). NOT a buy signal yet.
+
+```
+Stock has pulled back to support. Should I add?
+
+  □ RSI between 40–55? (cooled down, not overbought)
+  □ Volume below average? (sellers exhausted)
+  □ 2 consecutive green closes at this level? (buyers confirmed)
+  □ MA line holding? (price above 50MA or 200MA, not broken)
+  □ Original thesis still intact? (earnings still growing?)
+
+  ALL 5 GREEN → ADD
+  ANY 1 RED   → Wait one more day, recheck
+```
+
+**The traffic signal:**
+| Signal | Meaning |
+|---|---|
+| Price reaches support | Yellow — slow down, start watching |
+| All 5 checks pass | Green — add now |
+| Any check fails | Red — wait one more day |
+
+**200-day MA — special rule:**
+The 200 MA is watched by every fund and institutional investor. When price drops to it and holds = one of the strongest add signals in the market.
+
+But if price **breaks below** 200 MA and closes below it 2 consecutive days → do NOT add. That is a breakdown, not a bounce. Exit or reduce instead.
+
+```
+200 MA holding (closes above it) → strong add signal
+200 MA broken (2 closes below)   → warning, reduce position
+```
+
+**What is NOT a valid reason to add:**
+- Stock dropped from a recent high (not the same as reaching support)
+- You want a lower average (averaging for the sake of averaging)
+- It "feels cheap" compared to where you bought
+
+**Support vs breakdown — how to tell:**
+| Signal | Pullback — add | Breakdown — wait |
+|--------|---------------|-----------------|
+| Volume | Shrinking as price falls | High on down days |
+| Price action | Bouncing at a clear level | Cutting through levels |
+| Moving averages | Holding above 50-day MA | Breaking below 50-day MA |
+| Green closes | 2 consecutive green closes | Lower lows every day |
 
 ---
 
@@ -338,6 +492,71 @@ Cooldown Volume  = below 60% of selloff day volume
 Tranche 2 rule   = only add if price holds Tranche 1 zone for 2+ days
 Trailing stop    = move up to prior support after Target 1 hits
 Earnings rule    = Revenue AND EPS both growing → hold
+```
+
+---
+
+## 11. ANALYSIS VALIDITY & WEEKLY CYCLE
+
+```
+ANALYSIS IS VALID FOR 5 TRADING DAYS (1 WEEK) ONLY
+
+After analysis gives you an entry zone (e.g. $430–$445):
+
+  Days 1–5:
+    Price inside zone AND 2 calm days?  → Enter
+    Price left zone (up or down)?       → Do NOT chase. Move on.
+    Week ends, never entered?           → Re-run analysis on Day 6
+
+  Day 6+: Analysis is stale. Re-run before doing anything.
+```
+
+### What "2 calm days" means
+```
+  Calm day = volume below 25M AND price move less than 1×ATR in the day
+  Not calm = big red/green candle, volume spike, news event
+```
+
+### The weekly cycle (repeat forever)
+```
+  Week 1: Watch entry zone for 5 days
+            2 calm days inside zone → enter
+            Never entered           → re-run analysis
+
+  Week 2: New analysis, new zone, same 2-calm-day rule
+            Repeat until entered or thesis changes
+```
+
+### What to do when price moves out of zone
+```
+  Price goes UP above zone  →  Don't chase. Existing position benefits. No new entry.
+  Price drops below zone    →  Do NOT enter. Risk has increased. Watch your stop.
+  Price hits stop loss      →  Broker exits automatically. Accept the loss.
+```
+
+### After stop loss triggers — re-entry cycle
+```
+  Stop hit → position closed
+           → Wait 2 calm days for price to stabilize
+           → THEN re-run analysis
+           → Treat it as a completely fresh trade
+           → No averaging, no memory of previous loss
+           → New entry zone, new stop, new targets
+```
+
+### Each entry is fully independent
+```
+  Every entry has its own stop and its own targets.
+  The $475 lot and the $440 lot are separate trades.
+  Stop hit on one does not affect the other.
+  Never adjust a stop downward to "save" a losing position.
+```
+
+### After Target 1 hits
+```
+  Sell half at Target 1
+  Move stop up to breakeven (your entry price) for remaining half
+  Let remaining half run to Target 2
 ```
 
 ---
