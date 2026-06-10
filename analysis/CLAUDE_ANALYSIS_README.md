@@ -18,13 +18,13 @@ Then tell Claude Code:
 
 > Analyse AMD using ANALYSIS_PROCESS.md
 
-Claude Code reads `ANALYSIS_PROCESS.md` as its playbook and runs the full analysis, writing reports to `reports/`.
+Claude Code reads `ANALYSIS_PROCESS.md` as its playbook and runs the full analysis, writing reports to `analysis/data/reports/`.
 
 ---
 
 ## Reports Viewer
 
-A local web UI for browsing analysis reports in `reports/`. Reads files on-the-fly — new reports appear automatically without restarting.
+A local web UI for browsing analysis reports in `analysis/data/reports/`. Reads files on-the-fly — new reports appear automatically without restarting.
 
 ### Start the viewer
 

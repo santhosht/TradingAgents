@@ -1,7 +1,7 @@
 # Position Tracking Process
 
 This file defines how to manage, review, and update positions.
-Data lives in `POSITIONS.md`. Analysis lives in `reports/`.
+Data lives in `POSITIONS.md`. Analysis lives in `analysis/data/reports/`.
 
 ---
 
@@ -42,7 +42,7 @@ A report is stale when ANY of these are true:
 
 **If stale:** Warn the user — "⚠ This report is X days old / [catalyst] has passed — analysis may be outdated. Consider re-running the pipeline for a fresh view." — then CONTINUE using the last known analysis. Do not block.
 
-**Report folder naming:** `reports/SYMBOL_YYYYMMDD_HHMMSS` — use the date in the folder name to check staleness.
+**Report folder naming:** `analysis/data/reports/SYMBOL_YYYYMMDD_HHMMSS` — use the date in the folder name to check staleness.
 
 ---
 
@@ -54,7 +54,7 @@ A report is stale when ANY of these are true:
 - Warn if stale, continue either way
 
 ### Step 2 — Read the analysis
-- Start with `reports/SYMBOL_YYYYMMDD_HHMMSS/5_portfolio/decision.md`
+- Start with `analysis/data/reports/SYMBOL_YYYYMMDD_HHMMSS/5_portfolio/decision.md`
 - If deeper context needed, also read:
   - `complete_report.md` — full pipeline summary
   - `2_research/manager.md` — bull/bear debate verdict

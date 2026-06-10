@@ -578,7 +578,7 @@ def main():
 
     ts       = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     run_id   = f"{TICKER}_{ts}"
-    report_dir = f"reports/{run_id}"
+    report_dir = f"analysis/data/reports/{run_id}"
     import os; os.makedirs(report_dir, exist_ok=True)
     filename = f"{report_dir}/{TICKER}_{ts}.txt"
 

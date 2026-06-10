@@ -9,7 +9,7 @@
 - Price/technicals fetched via yfinance directly in session — no script, no file saved
 - Reuse fetch_price_and_technicals() and fetch_live_quote() logic from fetch_data.py
 - Calm day check uses last 5 days from 60-day candle history — no manual tracking needed
-- Latest report = highest timestamp folder in reports/SYMBOL_*/
+- Latest report = highest timestamp folder in analysis/data/reports/SYMBOL_*/
 - Entry report = "Based on" field in POSITIONS.md
 
 ---
@@ -58,7 +58,7 @@ Wait for user to select entries. Then for each selected entry run Steps 3a–5.
 
 ### Step 3a — Check report age FIRST
 
-Find latest report: scan reports/SYMBOL_* folders, pick highest timestamp.
+Find latest report: scan analysis/data/reports/SYMBOL_* folders, pick highest timestamp.
 Calculate age in trading days only (Mon–Fri, skip weekends):
 
 ```
@@ -90,12 +90,12 @@ Default to A if no answer within one exchange.
 ### Step 3c — Read entry report
 
 From "Based on" field in POSITIONS.md:
-- Read reports/SYMBOL_YYYYMMDD_HHMMSS/5_portfolio/decision.md
-- Read reports/SYMBOL_YYYYMMDD_HHMMSS/2_research/manager.md
+- Read analysis/data/reports/SYMBOL_YYYYMMDD_HHMMSS/5_portfolio/decision.md
+- Read analysis/data/reports/SYMBOL_YYYYMMDD_HHMMSS/2_research/manager.md
 
 ### Step 3d — Read latest report
 
-Find latest report folder (highest timestamp in reports/SYMBOL_*):
+Find latest report folder (highest timestamp in analysis/data/reports/SYMBOL_*):
 - If same as entry report → skip, already read
 - If different → read decision.md + manager.md (or complete_report.md if user chose B)
 
@@ -106,7 +106,7 @@ Find latest report folder (highest timestamp in reports/SYMBOL_*):
 Run ONCE per symbol (reuse across all entries of same symbol). No file saved.
 
 ```bash
-python3 fetch_live_data.py SYMBOL
+python3 analysis/fetch_live_data.py SYMBOL
 ```
 
 Outputs: current price, day change %, volume, RSI, MACD, VWMA20, Bollinger, EMA10, ATR, last 5 days.

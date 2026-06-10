@@ -9,7 +9,7 @@
 
 1. **Run isolation:** Every analysis run is completely independent. Do NOT use memory, prior conversation context, or recollections from previous runs to influence this analysis. Each run must be derived solely from the current data file.
 
-2. **File isolation:** Only read the current stock data file and this file. Do NOT read any files in `reports/`, any `*_ANALYSIS_*.md` files, or any prior run output. Reading prior outputs contaminates the current analysis with stale intelligence.
+2. **File isolation:** Only read the current stock data file and this file. Do NOT read any files in `analysis/data/reports/`, any `*_ANALYSIS_*.md` files, or any prior run output. Reading prior outputs contaminates the current analysis with stale intelligence.
 
 3. **No cross-run influence:** Do not recall, reference, or be influenced by previous analysis conclusions — even if you remember them from this session. If a prior run said "entry $499", that number must be independently derived from the current data, not copied.
 
@@ -31,7 +31,7 @@ python /root/sant/app/TradingAgents/fetch_data.py TICKER
 When data is available, read the `Run ID` and `Report dir` fields from the file header. Use them exactly — do not generate a new timestamp. Example header fields:
 ```
 Run ID    : AMD_20260605_043116
-Report dir: reports/AMD_20260605_043116/
+Report dir: analysis/data/reports/AMD_20260605_043116/
 ```
 
 **Step 2 — Ask for analysis mode**
@@ -69,7 +69,7 @@ source /root/sant/app/TradingAgents/.venv/bin/activate
 python /root/sant/app/TradingAgents/fetch_data.py AMD
 ```
 
-The script saves a timestamped file, e.g. `AMD_20260605_043116.txt`, and prints the report dir: `reports/AMD_20260605_043116/`
+The script saves a timestamped file, e.g. `AMD_20260605_043116.txt`, and prints the report dir: `analysis/data/reports/AMD_20260605_043116/`
 
 Claude reads the Run ID from the file header — no new timestamp is generated. Claude will ask for mode (Fast/Medium/Deep) then debate mode (Agents/Inline).
 
@@ -212,7 +212,7 @@ Data → [1] Market Analyst
 
 **Execution:** Main agent writes directly — no sub-agent spawn. Analyst reports are already in context. One `llm.invoke()` call.
 
-**Output stored as:** `reports/{RUN_ID}/2_research/debate_brief.md`
+**Output stored as:** `analysis/data/reports/{RUN_ID}/2_research/debate_brief.md`
 
 **Prompt:**
 > You are a Debate Context Distiller. You have just read 4 analyst reports for {TICKER}.
@@ -291,8 +291,8 @@ The number of rounds `{N}` is determined by mode: Fast=1, Medium=2, Deep=3. Pass
 
 **File naming per round:**
 ```
-Bull writes: reports/{RUN_ID}/2_research/bull_r{round}.md
-Bear writes: reports/{RUN_ID}/2_research/bear_r{round}.md
+Bull writes: analysis/data/reports/{RUN_ID}/2_research/bull_r{round}.md
+Bear writes: analysis/data/reports/{RUN_ID}/2_research/bear_r{round}.md
 ```
 After all rounds complete, main agent concatenates into `bull.md` and `bear.md`, then deletes the per-round files.
 
@@ -301,23 +301,23 @@ After all rounds complete, main agent concatenates into `bull.md` and `bear.md`,
 You are the Bull Analyst for {TICKER}. You will run {N} debate round(s). Your task is to build a strong, evidence-based case emphasizing growth potential, competitive advantages, and positive market indicators. Leverage the analyst reports to address concerns and counter bearish arguments with specific data.
 
 Read analyst files from disk before Round 1:
-- reports/{RUN_ID}/1_analysts/market.md
-- reports/{RUN_ID}/1_analysts/sentiment.md
-- reports/{RUN_ID}/1_analysts/news.md
-- reports/{RUN_ID}/1_analysts/fundamentals.md
+- analysis/data/reports/{RUN_ID}/1_analysts/market.md
+- analysis/data/reports/{RUN_ID}/1_analysts/sentiment.md
+- analysis/data/reports/{RUN_ID}/1_analysts/news.md
+- analysis/data/reports/{RUN_ID}/1_analysts/fundamentals.md
 
 ROUND LOOP — execute for round = 1 to {N}:
 
   Round 1:
     - Build your strongest opening bull case from the analyst reports
-    - Write your full argument to: reports/{RUN_ID}/2_research/bull_r1.md
+    - Write your full argument to: analysis/data/reports/{RUN_ID}/2_research/bull_r1.md
 
   Round 2+ (only if N > 1):
     - Poll for bear's previous round file before writing:
-        Use Bash: while [ ! -f reports/{RUN_ID}/2_research/bear_r{prev_round}.md ]; do sleep 5; done
-    - Read reports/{RUN_ID}/2_research/bear_r{prev_round}.md
+        Use Bash: while [ ! -f analysis/data/reports/{RUN_ID}/2_research/bear_r{prev_round}.md ]; do sleep 5; done
+    - Read analysis/data/reports/{RUN_ID}/2_research/bear_r{prev_round}.md
     - Lead with direct rebuttals to every bear claim, then add new arguments
-    - Write your full argument to: reports/{RUN_ID}/2_research/bull_r{round}.md
+    - Write your full argument to: analysis/data/reports/{RUN_ID}/2_research/bull_r{round}.md
 
   Repeat until all {N} rounds are written.
 
@@ -341,24 +341,24 @@ ROLE RULES — NO EXCEPTIONS:
 You are the Bear Analyst for {TICKER}. You will run {N} debate round(s). Your task is to present a well-reasoned argument emphasizing risks, challenges, and negative indicators. Leverage the analyst reports to highlight potential downsides and counter bullish arguments with specific data.
 
 Read analyst files from disk before Round 1:
-- reports/{RUN_ID}/1_analysts/market.md
-- reports/{RUN_ID}/1_analysts/sentiment.md
-- reports/{RUN_ID}/1_analysts/news.md
-- reports/{RUN_ID}/1_analysts/fundamentals.md
+- analysis/data/reports/{RUN_ID}/1_analysts/market.md
+- analysis/data/reports/{RUN_ID}/1_analysts/sentiment.md
+- analysis/data/reports/{RUN_ID}/1_analysts/news.md
+- analysis/data/reports/{RUN_ID}/1_analysts/fundamentals.md
 
 ROUND LOOP — execute for round = 1 to {N}:
 
   Every round — poll for bull's current round file first:
-    Use Bash: while [ ! -f reports/{RUN_ID}/2_research/bull_r{round}.md ]; do sleep 5; done
-    Read reports/{RUN_ID}/2_research/bull_r{round}.md
+    Use Bash: while [ ! -f analysis/data/reports/{RUN_ID}/2_research/bull_r{round}.md ]; do sleep 5; done
+    Read analysis/data/reports/{RUN_ID}/2_research/bull_r{round}.md
 
   Round 1:
     - Lead with direct rebuttals to the bull's opening, then make your strongest bear case
-    - Write your full argument to: reports/{RUN_ID}/2_research/bear_r1.md
+    - Write your full argument to: analysis/data/reports/{RUN_ID}/2_research/bear_r1.md
 
   Round 2+ (only if N > 1):
     - Lead with direct rebuttals to every bull claim, then add new arguments
-    - Write your full argument to: reports/{RUN_ID}/2_research/bear_r{round}.md
+    - Write your full argument to: analysis/data/reports/{RUN_ID}/2_research/bear_r{round}.md
 
   Repeat until all {N} rounds are written.
 
@@ -381,7 +381,7 @@ ROLE RULES — NO EXCEPTIONS:
 
 **Step 4 — Main agent concatenates and cleans up:**
 ```bash
-RUN_DIR="reports/{RUN_ID}/2_research"
+RUN_DIR="analysis/data/reports/{RUN_ID}/2_research"
 
 # Concatenate bull rounds
 for i in $(seq 1 {N}); do
@@ -414,7 +414,7 @@ and positive market indicators. Use specific numbers to address concerns and cou
 bearish arguments.
 
 Read this single file from disk before Round 1 — it contains all the data you need:
-- reports/{RUN_ID}/2_research/debate_brief.md
+- analysis/data/reports/{RUN_ID}/2_research/debate_brief.md
 
 Pay special attention to items labelled "OVERLOOKED:" in the brief — these are non-obvious
 bull signals the market is ignoring. Use them.
@@ -423,14 +423,14 @@ ROUND LOOP — execute for round = 1 to {N}:
 
   Round 1:
     - Build your strongest opening bull case from the debate brief
-    - Write your full argument to: reports/{RUN_ID}/2_research/bull_r1.md
+    - Write your full argument to: analysis/data/reports/{RUN_ID}/2_research/bull_r1.md
 
   Round 2+ (only if N > 1):
     - Poll for bear's previous round file before writing:
-        Use Bash: while [ ! -f reports/{RUN_ID}/2_research/bear_r{prev_round}.md ]; do sleep 5; done
-    - Read reports/{RUN_ID}/2_research/bear_r{prev_round}.md
+        Use Bash: while [ ! -f analysis/data/reports/{RUN_ID}/2_research/bear_r{prev_round}.md ]; do sleep 5; done
+    - Read analysis/data/reports/{RUN_ID}/2_research/bear_r{prev_round}.md
     - Lead with direct rebuttals to every bear claim, then add new arguments
-    - Write your full argument to: reports/{RUN_ID}/2_research/bull_r{round}.md
+    - Write your full argument to: analysis/data/reports/{RUN_ID}/2_research/bull_r{round}.md
 
   Repeat until all {N} rounds are written.
 
@@ -456,7 +456,7 @@ present a well-reasoned argument emphasizing risks, challenges, and negative ind
 Use specific numbers to highlight potential downsides and counter bullish arguments.
 
 Read this single file from disk before Round 1 — it contains all the data you need:
-- reports/{RUN_ID}/2_research/debate_brief.md
+- analysis/data/reports/{RUN_ID}/2_research/debate_brief.md
 
 Pay special attention to the "Contested / Ambiguous Points" section — these are the
 battlegrounds where bull overreach is easiest to expose with the same data.
@@ -464,16 +464,16 @@ battlegrounds where bull overreach is easiest to expose with the same data.
 ROUND LOOP — execute for round = 1 to {N}:
 
   Every round — poll for bull's current round file first:
-    Use Bash: while [ ! -f reports/{RUN_ID}/2_research/bull_r{round}.md ]; do sleep 5; done
-    Read reports/{RUN_ID}/2_research/bull_r{round}.md
+    Use Bash: while [ ! -f analysis/data/reports/{RUN_ID}/2_research/bull_r{round}.md ]; do sleep 5; done
+    Read analysis/data/reports/{RUN_ID}/2_research/bull_r{round}.md
 
   Round 1:
     - Lead with direct rebuttals to the bull's opening, then make your strongest bear case
-    - Write your full argument to: reports/{RUN_ID}/2_research/bear_r1.md
+    - Write your full argument to: analysis/data/reports/{RUN_ID}/2_research/bear_r1.md
 
   Round 2+ (only if N > 1):
     - Lead with direct rebuttals to every bull claim, then add new arguments
-    - Write your full argument to: reports/{RUN_ID}/2_research/bear_r{round}.md
+    - Write your full argument to: analysis/data/reports/{RUN_ID}/2_research/bear_r{round}.md
 
   Repeat until all {N} rounds are written.
 
@@ -508,13 +508,13 @@ Write Bull and Bear sequentially in the main context — no sub-agent spawns. Th
 Bull R{round}:
   - Round 1: build opening bull case from analyst data already in context
   - Round 2+: read bear_r{prev}.md from disk, lead with rebuttals, then new arguments
-  - Write to: reports/{RUN_ID}/2_research/bull_r{round}.md immediately
+  - Write to: analysis/data/reports/{RUN_ID}/2_research/bull_r{round}.md immediately
 
 Bear R{round}:
   - Every round: read bull_r{round}.md from disk (just written above)
   - Round 1: lead with rebuttals to bull opening, then bear case
   - Round 2+: lead with rebuttals to every bull claim, then new arguments
-  - Write to: reports/{RUN_ID}/2_research/bear_r{round}.md immediately
+  - Write to: analysis/data/reports/{RUN_ID}/2_research/bear_r{round}.md immediately
 
 Repeat until all {N} Bull + Bear rounds are written.
 ```
@@ -606,7 +606,7 @@ ROLE RULES — NO EXCEPTIONS:
 - Present your opening case for why the trader should take maximum position size and aggressive entry.
 - Use actual numbers from the analyst data as evidence.
 ```
-→ Main writes output to `reports/{RUN_ID}/4_risk/aggressive.md`
+→ Main writes output to `analysis/data/reports/{RUN_ID}/4_risk/aggressive.md`
 
 **Step 2 — Main writes Conservative directly** (Aggressive output already in context):
 ```
@@ -621,7 +621,7 @@ ROLE RULES — NO EXCEPTIONS:
 - Do NOT soften your position. Be forceful in defending a smaller position size, tighter stop, or no entry.
 - Use actual numbers from the analyst data as evidence.
 ```
-→ Main writes output to `reports/{RUN_ID}/4_risk/conservative.md`
+→ Main writes output to `analysis/data/reports/{RUN_ID}/4_risk/conservative.md`
 
 **Step 3 — Main writes Neutral directly** (both outputs already in context):
 ```
@@ -635,7 +635,7 @@ ROLE RULES:
 - Deliver a balanced position sizing and entry recommendation grounded in data from both sides.
 - Flag any structural problems in the trading plan (entry/stop proximity, R:R inconsistency, etc.).
 ```
-→ Main writes to `reports/{RUN_ID}/4_risk/neutral.md`
+→ Main writes to `analysis/data/reports/{RUN_ID}/4_risk/neutral.md`
 
 **Spawn count for risk panel: 0** — all three written by main directly. Role rules enforce independence.
 
@@ -703,7 +703,7 @@ ROLE RULES:
 
 Announce the environment once at the start:
 ```
-Environment: Claude Code — writing to reports/AMD_20260605_043116/
+Environment: Claude Code — writing to analysis/data/reports/AMD_20260605_043116/
 ```
 
 Do NOT wait until the end to save. Write each agent's output to disk immediately after generating it. Print only a one-line status to chat per agent.
@@ -714,7 +714,7 @@ Create all subdirectories before starting Agent 1.
 
 **File layout:**
 ```
-reports/AMD_20260605_043116/
+analysis/data/reports/AMD_20260605_043116/
   complete_report.md        ← single combined file, written last
   1_analysts/
     market.md
@@ -818,7 +818,7 @@ Print this to chat after the Portfolio Manager:
 | Confidence     | High/Medium/Low |
 | Mode           | Fast/Medium/Deep |
 | Debate         | Brief Agents/Agents/Inline |
-| Report dir     | reports/TICKER_YYYYMMDD_HHMMSS/ |
+| Report dir     | analysis/data/reports/TICKER_YYYYMMDD_HHMMSS/ |
 ```
 
 After the summary table, append a **plain English action section** filled with the actual numbers from this run. Use this template:

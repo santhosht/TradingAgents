@@ -11,7 +11,7 @@ import datetime
 import pandas as pd
 import yfinance as yf
 
-sys.path.insert(0, ".")
+sys.path.insert(0, __file__.rsplit("/", 1)[0])
 from fetch_data import fetch_price_and_technicals, fetch_live_quote
 
 
