@@ -25,7 +25,7 @@ If the user has not explicitly provided or named a specific data file, ALWAYS ru
 
 ```bash
 source /root/sant/app/TradingAgents/.venv/bin/activate
-python /root/sant/app/TradingAgents/fetch_data.py TICKER
+python /root/sant/app/TradingAgents/analysis/fetch_data.py TICKER
 ```
 
 When data is available, read the `Run ID` and `Report dir` fields from the file header. Use them exactly — do not generate a new timestamp. Example header fields:
@@ -66,7 +66,7 @@ Only after data, analysis mode, and debate mode are confirmed, proceed through t
 
 ```bash
 source /root/sant/app/TradingAgents/.venv/bin/activate
-python /root/sant/app/TradingAgents/fetch_data.py AMD
+python /root/sant/app/TradingAgents/analysis/fetch_data.py AMD
 ```
 
 The script saves a timestamped file, e.g. `AMD_20260605_043116.txt`, and prints the report dir: `analysis/data/reports/AMD_20260605_043116/`
@@ -765,7 +765,23 @@ analysis/data/reports/AMD_20260605_043116/
 ✓ Complete report   → complete_report.md
 ```
 
-**After Portfolio Manager:** write `complete_report.md` (all agents concatenated in pipeline order), then print the token summary table, then print the final decision table to chat.
+**After Portfolio Manager:** write `complete_report.md` (all agents concatenated in pipeline order), then print the token summary table, then print the final decision table to chat, then update POSITIONS.md.
+
+**Update POSITIONS.md — always run after every analysis:**
+- If rating is **Buy or Overweight**: add or replace the symbol in the Pending section
+- If rating is **Hold, Underweight, or Sell**: do not add to Pending — note in chat "SYMBOL not added to POSITIONS.md (rating: [rating])"
+- If symbol already exists in Pending: replace the entire entry with the new one
+- If symbol already exists in Open: add to Pending anyway — it's a new tranche opportunity
+
+**Pending entry format:**
+```
+### SYMBOL — report YYYY-MM-DD — STALE AFTER [date 5 trading days from today][or post-[catalyst] if earnings/event named in decision]
+
+- Suggested entry: $[entry_low]–$[entry_high] | Size: [size]% | Stop: $[stop]
+- Target 1: $[target1] | Target 2: $[target2]
+- Key trigger: [catalyst from decision — e.g. "Jun 11 earnings — exit if gross margin <89%"] (omit if none)
+- Based on: analysis/data/reports/[RUN_ID]
+```
 
 **Token summary format:**
 ```

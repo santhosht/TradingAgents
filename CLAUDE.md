@@ -4,6 +4,7 @@
 - `analysis/ANALYSIS_PROCESS.md` — full pipeline for running a new stock analysis. Never skip steps, never carry state between runs.
 - `analysis/POSITION_TRACKING.md` — how to manage, review, and update positions. Read this before any position-related response.
 - `analysis/MORNING_CHECK.md` — daily morning check process. Read this when user says "morning check".
+- `analysis/STALE_CLEANUP.md` — cleanup stale pending positions. Read this when user says "cleanup stale", "clean pending", or "stale cleanup".
 - `analysis/TRADING_LEARNINGS.md` — log of lessons from real trades. Context only — not a rulebook. Suggest additions when new lessons emerge from analysis or real trades.
 
 ## Data Files
@@ -17,6 +18,7 @@
 | About an existing position / ticker | `analysis/POSITION_TRACKING.md` |
 | Review past trade learnings | `analysis/TRADING_LEARNINGS.md` |
 | Says "morning check" | `analysis/MORNING_CHECK.md` |
+| Says "cleanup stale" / "clean pending" / "stale cleanup" | `analysis/STALE_CLEANUP.md` |
 
 ## MANDATORY: Position Review Protocol
 

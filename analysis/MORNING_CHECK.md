@@ -16,7 +16,7 @@
 
 ## Step 1 — List positions and ask which to check
 
-Read POSITIONS.md. Show all open and pending symbols with entry count:
+Read POSITIONS.md. For each pending symbol check report age (trading days only, Mon–Fri). Show all open and pending symbols with entry count and staleness warnings:
 
 ```
 "You have these positions:
@@ -24,11 +24,15 @@ Read POSITIONS.md. Show all open and pending symbols with entry count:
    1. AMD (2 entries)
    2. MKC (1 entry)
  Pending:
-   1. ADBE
+   1. ADBE  ⚠ 12 trading days old — consider removing or re-running
    2. INTU
+   3. LULU
+   4. NKE
 
  Which symbols do you want to check today?"
 ```
+
+Pending staleness rule: if report age > 10 trading days, show ⚠ next to the symbol. No action required here — stale cleanup is a separate process.
 
 Wait for user to select symbols.
 
@@ -43,9 +47,9 @@ For each selected symbol extract:
 
 ---
 
-## Step 3 — Loop per symbol → ask which entries → loop per entry
+## Step 3 — Loop per symbol → branch on open vs pending
 
-For each symbol show its entries and ask which to check:
+- If **Open**: show its entries and ask which to check:
 
 ```
 "AMD has these entries:
@@ -55,6 +59,8 @@ For each symbol show its entries and ask which to check:
 ```
 
 Wait for user to select entries. Then for each selected entry run Steps 3a–5.
+
+- If **Pending**: skip entry selection. Go directly to Step 3a using the report from the "Based on" field in POSITIONS.md.
 
 ### Step 3a — Check report age FIRST
 
@@ -111,9 +117,21 @@ python3 analysis/fetch_live_data.py SYMBOL
 
 Outputs: current price, day change %, volume, RSI, MACD, VWMA20, Bollinger, EMA10, ATR, last 5 days.
 
+Also fetch Finviz in parallel (ONCE per symbol):
+
+```
+WebFetch: https://finviz.com/quote.ashx?t=SYMBOL
+Extract: analyst price target, recent news headlines (top 3–5)
+```
+
+Use the news headlines in Step 5 to flag any exit triggers (earnings miss, sector contagion, guidance cut, analyst downgrade).
+
 ---
 
 ## Step 5 — Output per entry
+
+- If **Open**: show Part A then Part B (if applicable)
+- If **Pending**: skip Part A, go directly to Part B
 
 ### Part A — Current entry status
 
@@ -133,15 +151,20 @@ Thesis:  [Intact / Impaired / Broken]
 
 Action: [Hold / Watch stop closely / Exit / Take partial profit at $XXX]
 
+News: (top 3 from Finviz — only show if relevant to thesis or exit triggers)
+  · [headline]
+
 ⚠ Flags (only shown if triggered):
   Stop within 3%         → WATCH CLOSELY — stop $[stop], price $[price]
   Target 1 within 3%     → READY TO SELL HALF at $[t1]
   Earnings within 7 days → Check: revenue >[threshold], EPS >[threshold]
+  News exit trigger      → [headline that maps to: earnings miss / sector contagion / guidance cut / analyst downgrade]
 ```
 
 ### Part B — New entry opportunity from latest report
 
-Only shown if latest report differs from entry report AND suggests an entry zone.
+- If **Open**: only shown if latest report differs from entry report AND suggests an entry zone
+- If **Pending**: always shown — this is the primary output
 
 Using the 60-day candle data already fetched in Step 4, analyse last 5 days:
 - Count consecutive calm days inside zone
