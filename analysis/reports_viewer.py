@@ -10,7 +10,7 @@ import markdown as md
 
 ET = ZoneInfo("America/New_York")
 
-REPORTS_DIR = Path(__file__).parent / "reports"
+REPORTS_DIR = Path(__file__).parent / "data" / "reports"
 
 app = Flask(__name__)
 

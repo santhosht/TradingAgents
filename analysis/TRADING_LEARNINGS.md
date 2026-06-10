@@ -8,6 +8,26 @@ Lessons captured from real trades and analysis. These are observations and conte
 
 ## REAL LESSONS (experience-derived)
 
+### 🟠 Binary Catalyst Failure — Exit When the Thesis Dies, Not When the Price Recovers
+*(Learned: FRMI, entered ~$20 IPO price, anchor tenant walked, exited $5, ~$81M cash remaining June 2026)*
+
+FRMI's entire bull case rested on one event: a hyperscaler tenant signing a lease at Project Matador. When the anchor tenant walked, the thesis was dead — not weakened, dead. Zero revenue across 4 quarters, $81M cash left against $441M/quarter burn, no CEO, governance war. There was no secondary thesis to fall back on.
+
+The mistake was holding from $20 to $5 hoping for recovery. Once the single catalyst fails in a binary setup, there is no recovery — the stock reprices to distressed asset value ($2–3), not back to the thesis price.
+
+**The rule:** In any binary catalyst trade, define the thesis-failure condition before entering. When that condition is met — tenant walked, deal failed, deadline passed — exit immediately. Do not wait for a "recovery bounce." The bounce does not come in a binary failure.
+
+```
+Binary catalyst checklist:
+  Before entering: write down exactly what "thesis failed" looks like
+  FRMI example: "anchor tenant walks" or "July 13 passes with no deal"
+
+  Thesis-failure condition met → SELL ALL, same day, no debate
+  Do not hold for bounce
+  Do not average down
+  Do not wait for next earnings
+```
+
 ### 🟠 Sector Contagion — Don't Buy on the Panic Day
 *(Learned: AMD selloff June 5 2026, triggered by Broadcom earnings miss)*
 

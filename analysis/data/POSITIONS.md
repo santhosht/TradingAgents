@@ -20,6 +20,13 @@
 
 ## Pending (not yet entered — from recent analysis)
 
+### NVDA — report 2026-06-10 — STALE AFTER 2026-06-17 or post-Jun-11 Senate testimony
+
+- Suggested entry: $203–$208 | Size: 4% (scale to 6% post-Jun-11 if testimony benign) | Stop: $189.00
+- Target 1: $235 | Target 2: $298
+- Key trigger: Jun 11 Senate testimony on China business + CPI print — thesis-break exit if close <$199 two consecutive days post-adverse testimony; breakout alt: close >$220 vol >175M
+- Based on: analysis/data/reports/NVDA_20260610_054246
+
 ### ADBE — report 2026-06-07 — STALE AFTER 2026-06-13 or post-Jun-11 earnings
 - Suggested entry: $248–$252 | Size: 2% | Stop: $230 (closing stop)
 - Target 1: $290 | Target 2: $329.81
