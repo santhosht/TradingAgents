@@ -715,6 +715,7 @@ Create all subdirectories before starting Agent 1.
 **File layout:**
 ```
 analysis/data/reports/AMD_20260605_043116/
+  meta.json                 ← written immediately after Portfolio Manager; read by reports viewer
   complete_report.md        ← single combined file, written last
   1_analysts/
     market.md
@@ -762,10 +763,24 @@ analysis/data/reports/AMD_20260605_043116/
 ✓ Conservative Risk → 4_risk/conservative.md         [~2,400 tokens estimated]  ← Deep only
 ✓ Neutral Risk      → 4_risk/neutral.md              [~2,400 tokens estimated]  ← Deep only
 ✓ Portfolio Manager → 5_portfolio/decision.md        [~1,600 tokens estimated]
+✓ meta.json         → meta.json                      [no tokens — written directly]
 ✓ Complete report   → complete_report.md
 ```
 
-**After Portfolio Manager:** write `complete_report.md` (all agents concatenated in pipeline order), then print the token summary table, then print the final decision table to chat, then update POSITIONS.md.
+**After Portfolio Manager:**
+1. Write `meta.json` immediately — before complete_report.md:
+   ```json
+   {
+     "ticker": "TICKER",
+     "rating": "<rating from decision.md — exactly one of: Buy/Overweight/Hold/Underweight/Sell>",
+     "mode": "<Fast | Medium | Deep>",
+     "debate": "<Inline | Agents | Brief Agents>"
+   }
+   ```
+2. Write `complete_report.md` (all agents concatenated in pipeline order).
+3. Print the token summary table.
+4. Print the final decision table to chat.
+5. Update POSITIONS.md.
 
 **Update POSITIONS.md — always run after every analysis:**
 - If rating is **Buy or Overweight**: add or replace the symbol in the Pending section
