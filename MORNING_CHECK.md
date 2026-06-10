@@ -105,11 +105,11 @@ Find latest report folder (highest timestamp in reports/SYMBOL_*):
 
 Run ONCE per symbol (reuse across all entries of same symbol). No file saved.
 
-Run directly in session using yfinance:
-- fetch_live_quote() logic → current price, day change %, volume
-- fetch_price_and_technicals() logic → RSI, MACD, VWMA, Bollinger, EMA10, ATR (60 days)
+```bash
+python3 fetch_live_data.py SYMBOL
+```
 
-Both functions are defined in fetch_data.py — reuse the same logic.
+Outputs: current price, day change %, volume, RSI, MACD, VWMA20, Bollinger, EMA10, ATR, last 5 days.
 
 ---
 
