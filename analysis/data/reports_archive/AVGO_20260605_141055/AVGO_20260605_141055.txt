@@ -1,0 +1,301 @@
+
+############################################################
+  MARKET DATA REPORT
+  Ticker    : AVGO
+  Date      : 2026-06-05
+  Generated : 2026-06-05 14:10:55
+  Run ID    : AVGO_20260605_141055
+  Data file : reports/AVGO_20260605_141055/AVGO_20260605_141055.txt
+  Report dir: reports/AVGO_20260605_141055/
+############################################################
+
+[Claude: Follow ANALYSIS_PROCESS.md. Data file is reports/AVGO_20260605_141055/AVGO_20260605_141055.txt. Report dir is reports/AVGO_20260605_141055/. Do NOT read any other files.]
+
+
+============================================================
+  PRICE & TECHNICALS — AVGO
+============================================================
+
+[Last 20 Trading Days]
+
+Date             Open     High      Low    Close       Volume
+--------------------------------------------------------------
+2026-05-07     421.82   426.49   406.30   412.56   22,791,700
+2026-05-08     419.80   435.00   414.00   430.00   22,561,400
+2026-05-11     427.62   433.65   425.05   428.43   16,825,500
+2026-05-12     423.43   429.34   408.41   419.30   19,004,300
+2026-05-13     415.81   418.63   404.80   416.79   16,981,200
+2026-05-14     416.73   442.36   415.59   439.79   19,733,800
+2026-05-15     432.81   432.81   419.80   425.19   18,957,100
+2026-05-18     421.41   422.01   414.37   420.71   17,863,300
+2026-05-19     409.82   417.95   405.86   411.07   20,652,100
+2026-05-20     412.81   424.17   411.42   417.76   16,312,600
+2026-05-21     413.55   422.25   410.50   414.57   16,865,300
+2026-05-22     417.49   419.99   410.21   414.14   14,086,400
+2026-05-26     418.50   435.31   417.00   422.01   22,562,900
+2026-05-27     425.07   432.80   416.49   421.86   17,601,000
+2026-05-28     421.14   429.68   414.01   426.58   17,855,600
+2026-05-29     432.95   448.90   431.47   446.77   41,798,400
+2026-06-01     450.09   466.05   442.22   459.97   30,586,000
+2026-06-02     488.79   488.82   470.46   481.57   38,306,700
+2026-06-03     494.78   495.00   472.64   479.23   50,126,400
+2026-06-04     408.99   426.48   403.01   418.91   80,979,400
+
+============================================================
+  KEY INDICATORS (latest trading day)
+============================================================
+  Close        : $418.91
+  Prev Close   : $479.23
+  Day Change   : -60.32 (-12.59%)
+
+  EMA 10       : $442.54
+  SMA 50       : $397.07
+  SMA 200      : $354.46
+  VWMA 20      : $435.34
+
+  RSI (14)     : 43.84
+  MFI (14)     : 51.63
+  MACD         : 14.16
+  MACD Signal  : 13.27
+  MACD Hist    : 0.89
+
+  Bollinger Up : $472.22
+  Bollinger Mid: $430.36
+  Bollinger Low: $388.50
+  ATR (14)     : $21.93
+
+============================================================
+  PRICE vs MOVING AVERAGES
+============================================================
+  Price is 5.5% above SMA 50 ($397.07)
+  Price is 18.2% above SMA 200 ($354.46)
+  Price is 5.3% below EMA 10 ($442.54)
+
+============================================================
+  FUNDAMENTALS OVERVIEW — AVGO
+============================================================
+  Company           : Broadcom Inc.
+  Sector            : Technology
+  Industry          : Semiconductors
+  Exchange          : NMS
+  Currency          : USD
+  Market Cap        : $1894.46B
+  Beta              : 1.43
+  52W High          : 495.00
+  52W Low           : 241.11
+  50D Avg           : 395.06
+  200D Avg          : 354.77
+
+  P/E (TTM)         : 66.80
+  Forward P/E       : 20.90
+  PEG Ratio         : 1.05
+  Price/Book        : 21.66
+  EV/EBITDA         : 48.48
+  Book Value        : 18.47
+
+  Revenue (TTM)     : $75.46B
+  Gross Profit      : $57.57B
+  EBITDA            : $41.95B
+  Net Income        : $29.32B
+  Gross Margin      : 76.3%
+  Op Margin         : 49.0%
+  Profit Margin     : 38.8%
+  ROE               : 37.3%
+  ROA               : 12.1%
+
+  EPS (TTM)         : 5.99
+  Forward EPS       : 19.14
+
+  Cash              : $19.63B
+  Total Debt        : $64.91B
+  D/E Ratio         : 74.02
+  Current Ratio     : 2.24
+  FCF (TTM)         : $27.21B
+
+  Div Yield         : 62.00%
+  Payout Ratio      : 41.3%
+
+  Analyst Target    : $486.85
+  Target High       : $630.00
+  Target Low        : $215.88
+  Recommendation    : STRONG_BUY
+
+============================================================
+  INCOME STATEMENT — AVGO (Quarterly)
+============================================================
+                         Q1'26       Q4'25       Q3'25       Q2'25
+  ----------------------------------------------------------------
+           Revenue  $  19.311B  $  18.015B  $  15.952B  $  15.004B
+      Gross Profit  $  13.157B  $  12.249B  $  10.703B  $  10.197B
+         Op Income  $   8.666B  $   7.654B  $   6.074B  $   5.915B
+            EBITDA  $  11.149B  $   9.863B  $   8.294B  $   8.020B
+        Net Income  $   7.349B  $   8.518B  $   4.140B  $   4.965B
+               R&D  $   2.965B  $   2.981B  $   3.050B  $   2.693B
+              SG&A  $   1.019B  $   1.107B  $   1.072B  $   1.083B
+     EPS (Diluted)       1.50       1.74       0.85       1.03
+
+============================================================
+  BALANCE SHEET — AVGO (Quarterly)
+============================================================
+                         Q1'26       Q4'25       Q3'25       Q2'25
+  ----------------------------------------------------------------
+  Cash & ST Invest  $  14.174B  $  16.178B  $  10.718B  $   9.472B
+     Accounts Recv  $   8.460B  $   7.145B  $   6.494B  $   5.563B
+         Inventory  $   2.962B  $   2.270B  $   2.180B  $   2.017B
+      Total Assets  $ 169.903B  $ 171.092B  $ 165.621B  $ 164.630B
+        Total Debt  $  66.057B  $  65.136B  $  64.229B  $  67.282B
+            Equity  $  79.872B  $  81.292B  $  73.277B  $  69.586B
+     Tangible Book  $ -48.231B  $ -48.782B  $ -58.868B  $ -64.608B
+   Working Capital  $  15.203B  $  13.059B  $   8.294B  $   1.584B
+   Goodwill+Intang  $ 128.103B  $ 130.074B  $ 132.145B  $ 134.194B
+
+============================================================
+  CASH FLOW — AVGO (Quarterly)
+============================================================
+                         Q1'26       Q4'25       Q3'25       Q2'25
+  ----------------------------------------------------------------
+      Operating CF  $   8.260B  $   7.703B  $   7.166B  $   6.555B
+             Capex  $  -250.0M  $  -237.0M  $  -142.0M  $  -144.0M
+    Free Cash Flow  $   8.010B  $   7.466B  $   7.024B  $   6.411B
+    Stock Buybacks  $  -7.850B       0.00  $   -58.0M  $  -4.216B
+        Stock Comp  $   2.176B  $   2.195B  $   2.322B  $   1.771B
+
+============================================================
+  INSIDER TRANSACTIONS — AVGO
+============================================================
+    Shares     Value                  Insider                 Position Transaction Start Date Ownership
+0      864         0            SAMUELI HENRY                 Director             2026-04-21         D
+1      864         0          PAGE JUSTINE F.                 Director             2026-04-20         D
+2      864         0            HAO KENNETH Y                 Director             2026-04-20         D
+3      864         0              YOU HARRY L                 Director             2026-04-20         D
+4      864         0           BRYANT DIANE M                 Director             2026-04-20         D
+5      864         0           LOW CHECK KIAN                 Director             2026-04-20         D
+6      864         0            DELLY GAYLA J                 Director             2026-04-20         D
+7     8000   2964178            VELAGA S. RAM                  Officer             2026-04-10         D
+8    30215  10638012            VELAGA S. RAM                  Officer             2026-04-09         D
+9     1000    358310            DELLY GAYLA J                 Director             2026-04-09         D
+10    2018    712354          PAGE JUSTINE F.                 Director             2026-04-08         D
+11   10000   3452270         KAWWAS CHARLIE B                  Officer             2026-04-08         I
+12   22000         0               TAN HOCK E  Chief Executive Officer             2026-04-08         D
+13   64379  20819103            VELAGA S. RAM                  Officer             2026-03-17         D
+14   60154  19452716  SPEARS KIRSTEN MARGRETA  Chief Financial Officer             2026-03-17         D
+
+============================================================
+  NEWS — AVGO (last 7 days)
+============================================================
+
+• Broadcom's sell-off just entered megacap history
+  Source : Yahoo Finance
+  Date   : 2026-06-04
+  Summary: Broadcom is erasing nearly $320 billion in market value — the third-worst for US public stocks.
+
+• Stock market today: Dow jumps 875 points to record high, S&P 500 rebounds after Broadcom stumble
+  Source : Yahoo Finance
+  Date   : 2026-06-03
+  Summary: US stock futures slipped as doubts about President Trump's ability to end the war with Iran rattled Wall Street.
+
+• Tesla upgraded, Lululemon downgraded: Wall Street's top analyst calls
+  Source : The Fly
+  Date   : 2026-06-05
+  Summary: Tesla upgraded, Lululemon downgraded: Wall Street's top analyst calls
+
+• Tech Sector Pressure Points to Lower Start for Wall Street: Dow Jones, S&P, Nasdaq, Futures
+  Source : InvestorsHub
+  Date   : 2026-06-05
+  Summary: U. S. stock futures indicated a weaker opening on Friday, with technology stocks expected to remain under pressure following renewed concerns over valuations and growth expectations in the semiconductor sector.
+
+• US Equity Futures Mostly Lower Pre-Bell Amid Continued Tech Stock Sell-Off, US-Iran War Entering Fourth Month
+  Source : MT Newswires
+  Date   : 2026-06-05
+  Summary: US equity futures were mostly lower pre-bell Friday as a sell-off in tech stocks continued and the U
+
+• Chip ETFs to Buy as Broadcom Sinks Over 10% Despite Q2 Earnings Beat
+  Source : Zacks
+  Date   : 2026-06-05
+  Summary: Broadcom shares tumble despite a Q2 earnings beat as software revenues miss estimates, putting semiconductor ETFs with AVGO exposure in focus.
+
+• SpaceX Reveals It’s Really an AI Company — and That Changes Everything for Investors
+  Source : 24/7 Wall St.
+  Date   : 2026-06-05
+  Summary: Few IPOs in history have generated as much excitement as SpaceX‘s planned June 12 debut on Nasdaq under the ticker SPCX. The company is targeting a valuation of $1.75 trillion, putting it in the top 10 largest companies in the world by market cap — above Tesla‘s (NASDAQ:TSLA) current $1.57 trillion 
+
+• Broadcom Eyes $100 Billion AI Sales as Deal Focus Fades
+  Source : GuruFocus.com
+  Date   : 2026-06-05
+  Summary: AI growth takes priority as Hock Tan says acquisitions look less attractive than Broadcom's infrastructure demand.
+
+• Micron Gets Memory-Chip Approval From Nvidia. Why the Stock Is Falling.
+  Source : Barrons.com
+  Date   : 2026-06-05
+  Summary: Micron stock was falling again Friday even after confirmation it has qualified to supply the latest high-bandwidth memory to Nvidia.
+
+• Broadcom and Intel Stocks Drop. The Chip Selloff Isn’t Done Yet.
+  Source : Barrons.com
+  Date   : 2026-06-05
+  Summary: Chip makers have powered the market to record highs in recent months—but the rally may be about to grind to a halt.
+
+============================================================
+  REDDIT SENTIMENT — AVGO
+============================================================
+
+[r/wallstreetbets]
+  No posts found mentioning AVGO in the past 7 days.
+
+[r/stocks — 1 posts via RSS — sorted by top votes, scores unavailable (Reddit API blocked)]
+  [2026-06-03] Broadcom stock slips on disappointing software revenue
+    ↳ Broadcom reported weaker-than-expected revenue in its fiscal second-quarter earnings report. The stock slid in extended trading. Earnings per share: $2.44, adjusted, versus $2.40 estimated Revenue: $2
+
+[r/investing — 2 posts via RSS — sorted by top votes, scores unavailable (Reddit API blocked)]
+  [2026-06-01] What's with the massive single-name moves lately?
+    ↳ Just today, this is outrageous: AAPL + 2.1% AMZN -4.1% AVGO +5.7% COST -1.1% GOOG -2.2% NVDA +6.0% TSLA -5.0% And that's not any of the chip stocks lik AMD, MU or whatever hot chip stocks people have.
+  [2026-06-04] Is avgo still a good buy or is this its end?
+    ↳ I always heard that avgo is a good buy, but it dropped hard after earning, but the same happened to nvda, which makes me think it is still a good buy and what happened is like a black Friday sale, do 
+
+============================================================
+  STOCKTWITS SENTIMENT — AVGO
+============================================================
+  Bullish: 7 (23%) · Bearish: 2 (7%) · Unlabeled: 21 · Total: 30
+
+  [2026-06-05 · @lost200 · no-label] $AVGO retard got burned 🤣
+  [2026-06-05 · @sp122809 · Bullish] $NVDA $MU $SNDK  Oil is down, yields are same, no war news, then why the fuck market is down??    All because of POS $AVGO ?
+  [2026-06-05 · @Whiskeyunderthebed · no-label] $AVGO scalping the buyers from yesterday into a trap-just add more.
+  [2026-06-05 · @MK10 · no-label] $AMD Let&#39;s blame $AVGO for this downturn. They started this mess! $INTC $MU
+  [2026-06-05 · @Busman · no-label] $AMD $AVGO $NBIS $NVDA $QQQ hi cutie some stocks you just keep buying the dip all the way down
+  [2026-06-05 · @squibbly · no-label] $AVGO yeah wow this is over
+  [2026-06-05 · @JohnBender247 · no-label] $AVGO OMFG turn off your stops you dumb MFs
+  [2026-06-05 · @TopResources · Bullish] $MU nice we are down 8% and $AVGO ONLY 4% 😂
+  [2026-06-05 · @cubie · no-label] $QQQ $AMD $NBIS $AVGO $NVDA arm  🤭😅
+  [2026-06-05 · @sp122809 · Bullish] $MU $SNDK wow!! nobody needs memory anymore as mumbling hawk tua $AVGO didn&#39;t raise the forecast???     NVDA keep rasising forecast but that all g
+  [2026-06-05 · @jmoonstocks · no-label] $AVGO as long as its 420 or less they will try for 400.
+  [2026-06-05 · @MissionImpossibl · Bearish] $AVGO $CRWD bearish market ! SpaceX listing could be the tipping point
+  [2026-06-05 · @Gemrum · Bearish] $AVGO you would bring the whole tech market down fuck you
+  [2026-06-05 · @Yaaabuddy6 · Bullish] $INTC $AVGO Broadcom bounced hard off $400 support.... Get ready for Intel to jump
+  [2026-06-05 · @Eric1989 · no-label] $AVGO okay everything is dropping
+
+============================================================
+  GLOBAL MACRO NEWS
+============================================================
+
+[CNBC Markets]
+  • The May jobs report will be released Friday. Here's what to expect
+  • Long-term unemployment is surging in the U.S. There are hidden costs for workers and the economy
+  • Private payrolls grew by 122,000 in May, stronger than expected, ADP reports
+  • U.S. proposes fresh tariffs on 60 economies over forced labor trade practices
+  • U.S., Iran intensify attacks as ceasefire frays, peace talks stall
+  • Job openings in April surged to 7.6 million, the highest in nearly two years
+  • Inflation hits 3.2% in the euro zone as Iran war pushes energy costs higher
+  • Iran war cost: Average U.S. household paying $450 more on gas and energy
+
+[FT Markets]
+  • India exempts foreign investors from tax on bonds to shore up rupee
+  • Franklin’s Western Asset Management agrees $100mn settlement with SEC
+  • Musk’s SpaceX lines up retail investors for record IPO allocation
+  • The dollar’s decline is overstated — but still real
+  • Bond investors bet Colombia’s ‘Tiger’ will slash public spending
+  • UK retail investor demand for SpaceX surges to tens of thousands
+  • The battle over Ben & Jerry’s gets ugly
+  • The Musk exception on banking fees for SpaceX
+
+############################################################
+  END OF DATA
+############################################################

@@ -1,0 +1,12 @@
+# NVDA Portfolio Manager — Final Decision
+
+Rating         : Underweight
+Executive Summary: NVDA sits in a technically broken structure (lower highs/lower lows from $235.47, MACD histogram widening to -1.93, price below VWMA $218.60) while facing a confirmed $15B structural revenue hole from H20 restrictions and an inventory build that rhymes with the 2022 write-down cycle. The fundamental moat — Rubin in production, Vera CPU, FCF $48.59B, net cash $68B, PEG 0.66 — is undeniable and prevents an outright Sell, but the risk/reward at $205 does not justify full or new-money sizing until restoration conditions are met.
+Investment Thesis: Bear (~55%): H20 export restrictions = $15B structural hole (6% of TTM revenue permanently impaired). Inventory $14.96B → $25.80B (+72%) = 2022 write-down fingerprint. Four hyperscalers in production custom silicon. Broadcom fell on beat-and-raise = multiple-compression mode. VWMA $218.60 = $13.50 overhead = institutional distribution confirmed. Bull (~45%): FCF $48.59B/quarter + $68B net cash separates from 2022. Stevens $221M insider buy above current price. Computex 2026 extends TAM into Physical AI. Analyst target $298.07 (45% upside). TSMC near highs = wafer demand intact.
+Action         : TRIM EXISTING / CONDITIONAL STARTER. Holders: trim to 50–60% of full position now. New initiators: 12–15% starter at $195–200. Secondary at $188–190 (raised from $185 per Neutral's gap fix — $185/$186.50 was a $1.50 gap, non-viable). Full sizing only after 2 of 4 restoration conditions. Breakout path: close above $220 on ≥1.5× average volume with MACD histogram turning positive = upgrade to Overweight immediately.
+Entry          : $195–200 (starter); $188–190 (secondary add); $220+ on volume (full size breakout)
+Stop Loss      : $186.50 (hard, absolute — no averaging below this level)
+Price Target 1 : $228–232 (VWMA recapture + pre-distribution zone; 3–4 months, Q3 2026 earnings catalyst)
+Price Target 2 : $265–275 (Rubin/Vera cycle uptake, Physical AI monetization visible; 9–12 months)
+Time Horizon   : 9–12 months
+Key Risk       : Hyperscaler capex deceleration in next earnings print. If Azure/GCP/AWS Q3 capex guidance is cut or deferred, $12.68 forward EPS collapses, PEG 0.66 argument disappears, inventory becomes write-down cycle. That single event = downgrade to Sell, stop $186.50 becomes exit not floor. Watch: Azure/GCP/AWS Q3 capex commentary, TSMC order-book revision, H100/H200 utilization rates.

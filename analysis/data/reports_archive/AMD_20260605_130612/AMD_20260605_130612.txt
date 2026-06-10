@@ -1,0 +1,331 @@
+
+############################################################
+  MARKET DATA REPORT
+  Ticker    : AMD
+  Date      : 2026-06-05
+  Generated : 2026-06-05 13:06:12
+  Run ID    : AMD_20260605_130612
+  Data file : reports/AMD_20260605_130612/AMD_20260605_130612.txt
+  Report dir: reports/AMD_20260605_130612/
+############################################################
+
+[Claude: Follow ANALYSIS_PROCESS.md. Data file is reports/AMD_20260605_130612/AMD_20260605_130612.txt. Report dir is reports/AMD_20260605_130612/. Do NOT read any other files.]
+
+
+============================================================
+  PRICE & TECHNICALS — AMD
+============================================================
+
+[Last 20 Trading Days]
+
+Date             Open     High      Low    Close       Volume
+--------------------------------------------------------------
+2026-05-07     417.07   421.71   401.08   408.46   44,885,500
+2026-05-08     418.59   456.29   418.29   455.19   58,134,900
+2026-05-11     460.55   469.22   450.88   458.79   46,085,400
+2026-05-12     449.25   458.80   426.11   448.29   39,140,100
+2026-05-13     457.04   459.50   432.65   445.50   30,423,400
+2026-05-14     440.60   453.31   435.68   449.70   26,113,600
+2026-05-15     433.34   439.00   423.36   424.10   29,131,600
+2026-05-18     429.50   438.80   410.71   420.99   28,432,100
+2026-05-19     412.60   428.75   393.36   414.05   38,756,900
+2026-05-20     428.04   449.39   426.05   447.58   36,137,500
+2026-05-21     441.99   451.20   431.60   449.59   27,252,000
+2026-05-22     469.84   481.41   461.71   467.51   34,758,600
+2026-05-26     484.74   506.96   480.23   503.89   38,473,800
+2026-05-27     508.00   510.21   486.66   495.54   27,589,300
+2026-05-28     499.00   527.20   493.52   518.09   31,438,500
+2026-05-29     520.80   522.00   503.43   516.10   30,803,200
+2026-06-01     500.16   517.50   486.80   510.13   33,309,200
+2026-06-02     506.30   522.49   501.22   521.54   24,293,200
+2026-06-03     533.75   546.44   524.30   542.52   29,411,100
+2026-06-04     514.75   532.19   499.87   523.20   29,006,500
+
+============================================================
+  KEY INDICATORS (latest trading day)
+============================================================
+  Close        : $523.20
+  Prev Close   : $542.52
+  Day Change   : -19.32 (-3.56%)
+
+  EMA 10       : $503.63
+  SMA 50       : $353.80
+  SMA 200      : $244.47
+  VWMA 20      : $467.93
+
+  RSI (14)     : 67.01
+  MFI (14)     : 65.52
+  MACD         : 49.47
+  MACD Signal  : 48.63
+  MACD Hist    : 0.84
+
+  Bollinger Up : $554.08
+  Bollinger Mid: $471.04
+  Bollinger Low: $388.00
+  ATR (14)     : $29.38
+
+============================================================
+  PRICE vs MOVING AVERAGES
+============================================================
+  Price is 47.9% above SMA 50 ($353.80)
+  Price is 114.0% above SMA 200 ($244.47)
+  Price is 3.9% above EMA 10 ($503.63)
+
+============================================================
+  FUNDAMENTALS OVERVIEW — AMD
+============================================================
+  Company           : Advanced Micro Devices, Inc.
+  Sector            : Technology
+  Industry          : Semiconductors
+  Exchange          : NMS
+  Currency          : USD
+  Market Cap        : $853.13B
+  Beta              : 2.49
+  52W High          : 546.44
+  52W Low           : 114.71
+  50D Avg           : 347.44
+  200D Avg          : 242.74
+
+  P/E (TTM)         : 175.57
+  Forward P/E       : 40.22
+  PEG Ratio         : 1.31
+  Price/Book        : 13.23
+  EV/EBITDA         : 113.68
+  Book Value        : 39.55
+
+  Revenue (TTM)     : $37.45B
+  Gross Profit      : $19.87B
+  EBITDA            : $7.43B
+  Net Income        : $4.93B
+  Gross Margin      : 53.1%
+  Op Margin         : 14.4%
+  Profit Margin     : 13.4%
+  ROE               : 8.1%
+  ROA               : 3.6%
+
+  EPS (TTM)         : 2.98
+  Forward EPS       : 13.01
+
+  Cash              : $12.35B
+  Total Debt        : $3.87B
+  D/E Ratio         : 6.00
+  Current Ratio     : 2.73
+  FCF (TTM)         : $7.17B
+
+  Div Yield         : 0.00%
+  Payout Ratio      : 0.0%
+
+  Analyst Target    : $482.69
+  Target High       : $665.00
+  Target Low        : $225.00
+  Recommendation    : STRONG_BUY
+
+============================================================
+  INCOME STATEMENT — AMD (Quarterly)
+============================================================
+                         Q1'26       Q4'25       Q3'25       Q2'25
+  ----------------------------------------------------------------
+           Revenue  $  10.253B  $  10.270B  $   9.246B  $   7.685B
+      Gross Profit  $   5.416B  $   5.577B  $   4.780B  $   3.059B
+         Op Income  $   1.476B  $   1.752B  $   1.270B  $  -134.0M
+            EBITDA  $   2.398B  $   2.861B  $   2.106B  $   721.0M
+        Net Income  $   1.383B  $   1.511B  $   1.243B  $   872.0M
+               R&D  $   2.397B  $   2.330B  $   2.139B  $   1.894B
+              SG&A  $   1.253B  $   1.198B  $   1.069B  $   991.0M
+     EPS (Diluted)       0.84       0.92       0.75       0.54
+
+============================================================
+  BALANCE SHEET — AMD (Quarterly)
+============================================================
+                         Q1'26       Q4'25       Q3'25       Q2'25
+  ----------------------------------------------------------------
+  Cash & ST Invest  $  12.347B  $  10.552B  $   7.243B  $   5.867B
+     Accounts Recv  $   6.035B  $   6.315B  $   6.201B  $   5.115B
+         Inventory  $   8.045B  $   7.920B  $   7.313B  $   6.677B
+      Total Assets  $  79.642B  $  76.926B  $  76.891B  $  74.820B
+        Total Debt  $   3.871B  $   3.847B  $   3.870B  $   3.886B
+            Equity  $  64.462B  $  62.999B  $  60.790B  $  59.665B
+     Tangible Book  $  22.964B  $  21.168B  $  18.457B  $  16.770B
+   Working Capital  $  18.122B  $  17.492B  $  15.300B  $  14.676B
+   Goodwill+Intang  $  41.498B  $  41.831B  $  42.333B  $  42.895B
+
+============================================================
+  CASH FLOW — AMD (Quarterly)
+============================================================
+                         Q1'26       Q4'25       Q3'25       Q2'25
+  ----------------------------------------------------------------
+      Operating CF  $   2.955B  $   2.600B  $   2.159B  $   2.011B
+             Capex  $  -389.0M  $  -222.0M  $  -258.0M  $  -282.0M
+    Free Cash Flow  $   2.566B  $   2.378B  $   1.901B  $   1.729B
+    Stock Buybacks  $  -355.0M  $  -160.0M  $  -460.0M  $  -524.0M
+        Stock Comp  $   487.0M  $   486.0M  $   419.0M  $   369.0M
+
+============================================================
+  INSIDER TRANSACTIONS — AMD
+============================================================
+    Shares       Value URL                                                                     Text                  Insider                  Position Transaction Start Date Ownership
+0    10447   5453334.0                                              Sale at price 522.00 per share.            DENZEL NORA M                  Director             2026-06-02         D
+1     8237    281623.0      Conversion of Exercise of derivative security at price 34.19 per share.    NORROD FORREST EUGENE                   Officer             2026-05-20         D
+2    19487   8406784.0                                     Sale at price 427.80 - 435.91 per share.    NORROD FORREST EUGENE                   Officer             2026-05-20         D
+3     2613         NaN                                                                                  HOUSEHOLDER JOSEPH A                  Director             2026-05-14         D
+4     2613         NaN                                                                                         DENZEL NORA M                  Director             2026-05-14         D
+5     2613         NaN                                                                               VANDERSLICE ELIZABETH W                  Director             2026-05-14         D
+6   125000  55688359.0                                     Sale at price 433.26 - 457.41 per share.                SU LISA T   Chief Executive Officer             2026-05-13         D
+7     2350         0.0                                          Stock Gift at price 0.00 per share.       PAPERMASTER MARK D  Chief Technology Officer             2026-05-11         D
+8    24376  10832451.0                                              Sale at price 444.39 per share.       GRASBY PAUL DARREN                   Officer             2026-05-08         D
+9    31320  10962000.0                                              Sale at price 350.00 per share.       PAPERMASTER MARK D  Chief Technology Officer             2026-04-24         D
+10   33109   8988215.0                                     Sale at price 255.54 - 275.00 per share.       PAPERMASTER MARK D  Chief Technology Officer             2026-04-16         D
+11    6000    509100.0      Conversion of Exercise of derivative security at price 84.85 per share.       PAPERMASTER MARK D  Chief Technology Officer             2026-04-15         D
+12    3293    740925.0                                              Sale at price 225.00 per share.       PAPERMASTER MARK D  Chief Technology Officer             2026-04-06         D
+13   85000  16895157.0                                     Sale at price 197.42 - 203.15 per share.                SU LISA T   Chief Executive Officer             2026-03-12         D
+14    7500   1536525.0                                              Sale at price 204.87 per share.       GRASBY PAUL DARREN                   Officer             2026-03-11         D
+
+============================================================
+  NEWS — AMD (last 7 days)
+============================================================
+
+• Intel, AMD, Micron shares trim losses after Broadcom results spark semiconductor sector sell-off
+  Source : Yahoo Finance
+  Date   : 2026-06-04
+  Summary: Semiconductor stocks declined as Broadcom's forecast weighed down the broader complex.
+
+• AMD Upgrade Highlights AI Growth Potential
+  Source : GuruFocus.com
+  Date   : 2026-06-05
+  Summary: Analysts remain optimistic about AMD's AI and data center opportunities.
+
+• Latest News In AI Chips - Navitas Partners With NVIDIA For Advanced AI Infrastructure
+  Source : Simply Wall St.
+  Date   : 2026-06-05
+  Summary: Navitas Semiconductor recently announced its collaboration with NVIDIA's MGX™ ecosystem, showcasing advancements in AI chip infrastructure at the COMPUTEX 2026 event in Taipei. By integrating its GaNFast and GeneSiC power semiconductor technologies, Navitas aims to enhance the efficiency and scalabi
+
+• Nasdaq, S&P futures decline as semiconductors slip; payrolls in focus
+  Source : Reuters
+  Date   : 2026-06-05
+  Summary: By Medha Singh and Twesha Dikshit June 5 (Reuters) - S&P 500 and Nasdaq futures fell on Friday, as chipmakers lost steam following a strong rally and investors stayed cautious ahead of the May
+
+• AMD, Broadcom, Quantinuum, and More Stocks That Explain Today’s Market
+  Source : Barrons.com
+  Date   : 2026-06-05
+  Summary: Investors are slamming the brakes on the AI rally, dragging down shares in Broadcom, AMD, and Nvidia.
+
+• Broadcom and Intel Stocks Drop. The Chip Selloff Has Legs.
+  Source : Barrons.com
+  Date   : 2026-06-05
+  Summary: Chip makers have powered the market to record highs in recent months—but the rally may be about to grind to a halt.
+
+• Chip Selloff Hits SOX After Broadcom's 13% Drop
+  Source : GuruFocus.com
+  Date   : 2026-06-05
+  Summary: Broadcom's AI forecast pressured semiconductor shares, but options activity suggested some traders may be buying the dip.
+
+• NVDA, INTC, AMD, MU: Major Chip Stocks Fall For Second Day After AVGO's Soft AI Guidance
+  Source : Stocktwits
+  Date   : 2026-06-05
+  Summary: Broadcom’s AI forecasts, which some considered soft, triggered a sell-off in AI-linked stocks.
+
+• Morgan Stanley resets Nvidia stock forecast after key event
+  Source : TheStreet
+  Date   : 2026-06-05
+  Summary: Nvidia (NVDA) stock is up about 15.98% year to date, at the time of writing, Thursday afternoon, June 4. Meanwhile, the SPDR S&P 500 index (SPY) is up about 10.97% in the same period. While the stock has outpaced the S&P 500, its growth has lagged that of other computer-related ...
+
+• The Zacks Analyst Blog Highlights Micron, Advanced Micro Devices, Broadcom and NVIDIA
+  Source : Zacks
+  Date   : 2026-06-05
+  Summary: MU has soared 271% YTD on AI-driven memory demand, but strong earnings growth, sold-out HBM supply and a low valuation may support further gains.
+
+============================================================
+  REDDIT SENTIMENT — AMD
+============================================================
+
+[r/wallstreetbets — 5 posts via RSS — sorted by top votes, scores unavailable (Reddit API blocked)]
+  [2026-05-29] AMD why you do this?
+    ↳ submitted by /u/Fun_Training6342 [link] [comments]
+  [2026-06-02] Thank you Lisa Su! Arvind and spez please take it from here.
+    ↳ Got lucky on some amd calls back in October predicting the open AI deal. Everything was jumping 30% in September and October 2025 (just as it is today) and AMD was one of the last semis without a big 
+  [2026-06-01] Japan Joins U.S. ‘AI Manhattan Project,’ Pledging $500 Million to Counter China in AI-Driven Science
+    ↳ Japan has finalized its participation in the U.S.-led Genesis Mission , a major initiative to harness artificial intelligence for accelerating scientific breakthroughs. According to reporting from Yom
+  [2026-05-29] TSMC is the Hormuz Strait of semiconductors. I moved 30% of my portfolio over today.
+    ↳ Today I moved 30% of my portfolio to Taiwan Semiconductor, and I plan to hold it for 3-5 years. I am convinced this stock is under priced relative to other megacap stocks, for a few key reasons. First
+  [2026-05-31] I bought terrible meme stuff like ARKK as it all tanked to the lows, then diversified. This is the result:
+    ↳ Some stuff is actually bankrupt and will never recover, some stuff is up big time. My strategy was: Having zero clue wtf I was doing and just kept buying. For a long time, I was down over 400k. Now I 
+
+[r/stocks — 4 posts via RSS — sorted by top votes, scores unavailable (Reddit API blocked)]
+  [2026-05-29] Nvidia went from 95% to zero market share in China's AI chips while the US can't decide whether to sell there or not
+    ↳ Jensen Huang went on CNBC after Nvidia's Q1 earnings last week and said something that deserves way more attention than it got. His exact words about China: "We've evacuated that market. We've really 
+  [2026-05-29] Up 300% on my AMD investment. Should I sell, hold or keep buying?
+    ↳ I started investing in AMD around 5 years ago. Since then, I've steadily been DCAing and buying more on a consistent basis, regardless of the stock price. I'm now up by over 300%. I'm considering sell
+  [2026-05-30] TSMC is the Hormuz Strait of semiconductors. I moved 30% of my portfolio over today.
+    ↳ Yesterday I moved 30% of my portfolio to Taiwan Semiconductor, and I plan to hold it for 3-5 years. I am convinced this stock is under priced relative to other megacap stocks, for a few key reasons. F
+  [2026-06-03] Is it too late?
+    ↳ How does one get in at this point? I've been heavy in cash for decades. I'll be pretty much poor when I'm forced out of the work force in a few years. I'm looking to go all in to semis and tickers sur
+
+[r/investing — 2 posts via RSS — sorted by top votes, scores unavailable (Reddit API blocked)]
+  [2026-06-01] What's with the massive single-name moves lately?
+    ↳ Just today, this is outrageous: AAPL + 2.1% AMZN -4.1% AVGO +5.7% COST -1.1% GOOG -2.2% NVDA +6.0% TSLA -5.0% And that's not any of the chip stocks lik AMD, MU or whatever hot chip stocks people have.
+  [2026-06-04] I'm new what am I supposed to do here.
+    ↳ I just randomly checked my stocks and one stock that I bought at $100 is now worth $517... Do I sell? What am I supposed to do with this... I've never owned stocks before and I don't know what I'm doi
+
+============================================================
+  STOCKTWITS SENTIMENT — AMD
+============================================================
+  Bullish: 7 (23%) · Bearish: 5 (17%) · Unlabeled: 18 · Total: 30
+
+  [2026-06-05 · @LLCools · Bullish] $AVGO $AMD $NVDA $GOOG   It’s all cyclical. Every is rotating out of tech stocks, until there are buy-zone alerts, and everyone will be back in. 😂.   Just buy if you can, and hold. You’ll see in about a week or two.
+  [2026-06-05 · @ChipDistribution7 · no-label] $AMD — This far, no further… for now.    Price between $496–$614 looks like it’s forming an intermediate top. Trend is intact, but I’m expecting a correction first—likely below $450, maybe even a retest of the May ’26 earnings gap near $393.    Rally isn’t over, but timing matter
+  [2026-06-05 · @Iamwillwexler · no-label] $AMD unexpectedly
+  [2026-06-05 · @cubie · no-label] $QQQ  $ARM $AMD $MU $SPY   jobs really good but good news is bad news bc Fed might raise interest rates now. oh the irony, The new Fed head that orange tard got in to replace Jpow  have higher likelihood of raising Interest rates now instead lowering interest rates that orange ta
+  [2026-06-05 · @itsfloridaking · no-label] $AMD expected price target $451.07 – $377.94 expected date 6/12
+  [2026-06-05 · @2bitinvestor · Bearish] $AMD  I don&#39;t understand why an investor would not ask themselves why a profitable company refuses to pay any dividend to it&#39;s investors.   That is what investing is all about.  Investing to get a quarterly share of the profits.  Then you don&#39;t sweat ups and downs. Bu
+  [2026-06-05 · @Floridaorange · Bullish] $AMD see you @ $2K - dips on Semi rippers with years of growth and insane demand by the worlds biggest companies are healthy.
+  [2026-06-05 · @richieisadeafalien · Bullish] $AMD is
+  [2026-06-05 · @cubie · no-label] @Jeremymartin007 @simon58 @judgeyoung2 @jenbunn @ribbey @EBE_day @TraderRapp @Godreal1 @tonyctl @zuby34  $ARM $QQQ $AMD $mu $SPY  who buys after this epic run???!!!!  jobs reports so strong jer, 62% of a Rate hike.now by end of year!
+  [2026-06-05 · @Iamwillwexler · no-label] $AMD ladies and gentlemen - we got &#39;em! @Passw0rd is bullish on this stock!!!
+  [2026-06-05 · @Passw0rd · no-label] $AMD I remain quite bullish and will add dips!
+  [2026-06-05 · @Lil_VWAP · Bullish] $AMD chart says retrace to 400 I would buy back what I sold there
+  [2026-06-05 · @Iamwillwexler · no-label] $AMD
+  [2026-06-05 · @Pd211 · no-label] $RDW it’s early butit looks like it’s trying to build a coil/consolidation  $NVDA $SNDK $AMD
+  [2026-06-05 · @solar1 · no-label] $AMD this pig needs to come down hard
+  [2026-06-05 · @BGESGroup · Bullish] $NLST $MU $AMD $NVDA The AI Memory Wars: Why Netlist (NLST) May Be One of the Most Overlooked Technology Stories of the Decade    https://garywallach.substack.com/p/the-ai-memory-wars-why-netlist-nlst
+  [2026-06-05 · @UltraInstinctSISU · no-label] $MU $AMD Chips dumping past couple days even on top of jobs data. they taking that refund money out of the market 🚬    $SPY $QQQ
+  [2026-06-05 · @Jimbonada · Bullish] $AMD Strange how markets see the unexpected job growth as a negative
+  [2026-06-05 · @naanje · no-label] $AMD Good jobs market report.  I believe we will move positive after  9:30am  usually  this happens with these good 👍 job report,  even doe the market is red now.
+  [2026-06-05 · @Passw0rd · no-label] $AMD We going back up today, watcha think?
+  [2026-06-05 · @SPQR23 · no-label] $AMD sub 500 prob 490 today.  more consolidation to 450
+  [2026-06-05 · @Luvaly_Ray · Bearish] $QQQ $AMD $MRVL Good jub numbers == No Rate cuts, not good for Tech company spending.
+  [2026-06-05 · @stock_BEER · no-label] Honestly debating if I should take my profits on $AMD today to fund my new AM5 PC build. The chart looks a bit extended here on the daily timeframe and we are heading into the weekend. Might scale out of 25% of my position before the closing bell just to lock it in. 💻💸
+  [2026-06-05 · @Warrent_jr · Bearish] $AMD Nobody fucks with Mama Cathie — she&#39;s coming for that $300!
+  [2026-06-05 · @naanje · no-label] $AMD Good luck 👍 to everyone at 8:30am after the jobs report.
+  [2026-06-05 · @Warrent_jr · Bearish] $AMD  Nobody fucks with Mama Cathie — she&#39;s coming for that $300!
+  [2026-06-05 · @BoomPilot · no-label] $AMD if you are so convinced today is going to be an epic drop, buy the highest put you can afford and make thousands.   You can make money on the march to $600 even during the pullbacks.   But the endless hand-wringing and fretting is getting tiresome.
+  [2026-06-05 · @APEWOO · Bullish] $AMD $540 today
+  [2026-06-05 · @taylorx12345 · Bearish] $AMD ONLY sells. Zero buys. This isn’t trading, this is manipulation. It’s clear as day the algos want this lower. 450 today.
+  [2026-06-05 · @Iamwillwexler · no-label] $AMD oh noes - everybody panic!
+
+============================================================
+  GLOBAL MACRO NEWS
+============================================================
+
+[CNBC Markets]
+  • The May jobs report will be released Friday. Here's what to expect
+  • Long-term unemployment is surging in the U.S. There are hidden costs for workers and the economy
+  • Private payrolls grew by 122,000 in May, stronger than expected, ADP reports
+  • U.S. proposes fresh tariffs on 60 economies over forced labor trade practices
+  • U.S., Iran intensify attacks as ceasefire frays, peace talks stall
+  • Job openings in April surged to 7.6 million, the highest in nearly two years
+  • Inflation hits 3.2% in the euro zone as Iran war pushes energy costs higher
+  • Iran war cost: Average U.S. household paying $450 more on gas and energy
+
+[FT Markets]
+  • The dollar’s decline is overstated — but still real
+  • Bond investors bet Colombia’s ‘Tiger’ will slash public spending
+  • UK retail investor demand for SpaceX surges to tens of thousands
+  • The battle over Ben & Jerry’s gets ugly
+  • The Musk exception on banking fees for SpaceX
+  • Apollo drops £1.5bn bid for London-listed Bodycote
+  • India scraps capital gains tax for foreign bond buyers to shore up rupee
+  • SpaceX won’t make the S&P 500
+
+############################################################
+  END OF DATA
+############################################################

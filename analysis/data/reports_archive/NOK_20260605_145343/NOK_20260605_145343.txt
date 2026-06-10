@@ -1,0 +1,302 @@
+
+############################################################
+  MARKET DATA REPORT
+  Ticker    : NOK
+  Date      : 2026-06-05
+  Generated : 2026-06-05 14:53:43
+  Run ID    : NOK_20260605_145343
+  Data file : reports/NOK_20260605_145343/NOK_20260605_145343.txt
+  Report dir: reports/NOK_20260605_145343/
+############################################################
+
+[Claude: Follow ANALYSIS_PROCESS.md. Data file is reports/NOK_20260605_145343/NOK_20260605_145343.txt. Report dir is reports/NOK_20260605_145343/. Do NOT read any other files.]
+
+
+============================================================
+  PRICE & TECHNICALS — NOK
+============================================================
+
+[Last 20 Trading Days]
+
+Date             Open     High      Low    Close       Volume
+--------------------------------------------------------------
+2026-05-07      12.81    12.84    12.13    12.35  128,229,200
+2026-05-08      12.35    13.05    12.35    12.82   97,077,400
+2026-05-11      12.97    14.05    12.76    13.92  143,926,900
+2026-05-12      13.50    13.62    12.83    13.17  104,242,900
+2026-05-13      13.81    14.83    13.47    14.71  151,685,500
+2026-05-14      15.15    15.19    14.30    14.46  137,481,600
+2026-05-15      13.74    14.06    13.62    13.95  109,259,600
+2026-05-18      14.37    14.48    13.50    13.74   91,726,800
+2026-05-19      13.42    13.99    13.09    13.67   82,613,300
+2026-05-20      13.92    14.05    13.30    13.62   79,252,100
+2026-05-21      13.66    14.22    13.62    14.18   63,920,600
+2026-05-22      14.70    15.78    14.58    15.47  127,724,400
+2026-05-26      15.99    16.63    15.66    16.46  191,317,800
+2026-05-27      16.00    16.05    15.54    15.68  123,792,300
+2026-05-28      15.82    15.83    15.08    15.28  117,360,600
+2026-05-29      15.18    15.26    14.53    14.84  113,012,700
+2026-06-01      15.07    16.52    14.93    16.25  172,998,700
+2026-06-02      16.56    17.11    16.45    16.85  136,069,500
+2026-06-03      16.99    17.45    16.41    16.73  148,764,200
+2026-06-04      15.79    16.68    15.53    16.62  128,968,300
+
+============================================================
+  KEY INDICATORS (latest trading day)
+============================================================
+  Close        : $16.62
+  Prev Close   : $16.73
+  Day Change   : -0.11 (-0.66%)
+
+  EMA 10       : $15.81
+  SMA 50       : $12.04
+  SMA 200      : $7.71
+  VWMA 20      : $14.94
+
+  RSI (14)     : 64.32
+  MFI (14)     : 60.91
+  MACD         : 1.28
+  MACD Signal  : 1.21
+  MACD Hist    : 0.07
+
+  Bollinger Up : $17.49
+  Bollinger Mid: $14.74
+  Bollinger Low: $11.99
+  ATR (14)     : $1.00
+
+============================================================
+  PRICE vs MOVING AVERAGES
+============================================================
+  Price is 38.0% above SMA 50 ($12.04)
+  Price is 115.6% above SMA 200 ($7.71)
+  Price is 5.1% above EMA 10 ($15.81)
+
+============================================================
+  LIVE QUOTE — NOK (intraday — NOT used in indicator calculations)
+============================================================
+  Current Price : $15.43
+  Change Today  : -0.75 (-4.64%)
+  Prev Close    : $16.18
+  Day High      : $15.67
+  Day Low       : $15.00
+  Volume (so far): 56,712,017
+  Market Cap    : $86.14B
+
+  [Note: indicators above are based on completed daily candles only]
+
+============================================================
+  FUNDAMENTALS OVERVIEW — NOK
+============================================================
+  Company           : Nokia Oyj
+  Sector            : Technology
+  Industry          : Communication Equipment
+  Exchange          : NYQ
+  Currency          : USD
+  Market Cap        : $86.08B
+  Beta              : 0.78
+  52W High          : 17.45
+  52W Low           : 4.00
+  50D Avg           : 11.88
+  200D Avg          : 7.65
+
+  P/E (TTM)         : 96.38
+  Forward P/E       : 31.62
+  PEG Ratio         : 1.60
+  Price/Book        : 3.51
+  EV/EBITDA         : 35.69
+  Book Value        : 4.40
+
+  Revenue (TTM)     : $20.00B
+  Gross Profit      : $9.07B
+  EBITDA            : $2.54B
+  Net Income        : $0.77B
+  Gross Margin      : 45.4%
+  Op Margin         : 5.3%
+  Profit Margin     : 4.0%
+  ROE               : 3.7%
+  ROA               : 2.8%
+
+  EPS (TTM)         : 0.16
+  Forward EPS       : 0.49
+
+  Cash              : $5.83B
+  Total Debt        : $3.32B
+  D/E Ratio         : 15.63
+  Current Ratio     : 1.57
+  FCF (TTM)         : $1.60B
+
+  Div Yield         : 99.00%
+  Payout Ratio      : 99.8%
+
+  Analyst Target    : $13.68
+  Target High       : $20.00
+  Target Low        : $8.50
+  Recommendation    : BUY
+
+============================================================
+  INCOME STATEMENT — NOK (Quarterly)
+============================================================
+                         Q1'26       Q4'25       Q3'25       Q2'25
+  ----------------------------------------------------------------
+           Revenue  $   4.497B  $   6.125B  $   4.828B  $   4.546B
+      Gross Profit  $   1.988B  $   2.754B  $   2.110B  $   1.971B
+         Op Income  $    63.0M  $   437.0M  $   239.0M  $    80.0M
+            EBITDA  $   272.0M  $   1.073B  $   525.0M  $   365.0M
+        Net Income  $    86.0M  $   542.0M  $    78.0M  $    90.0M
+               R&D  $   1.239B  $   1.376B  $   1.174B  $   1.161B
+              SG&A  $   664.0M  $   880.0M  $   729.0M  $   744.0M
+     EPS (Diluted)       0.02       0.10       0.01       0.02
+
+============================================================
+  BALANCE SHEET — NOK (Quarterly)
+============================================================
+                         Q1'26       Q4'25       Q3'25       Q2'25
+  ----------------------------------------------------------------
+  Cash & ST Invest  $   6.123B  $   6.763B  $   6.065B  $   6.081B
+     Accounts Recv  $   4.562B  $   4.975B  $   3.990B  $   3.750B
+         Inventory  $   2.381B  $   2.209B  $   2.380B  $   2.479B
+      Total Assets  $  37.286B  $  37.597B  $  36.044B  $  36.028B
+        Total Debt  $   3.325B  $   4.413B  $   4.065B  $   4.100B
+            Equity  $  21.181B  $  20.967B  $  19.582B  $  19.721B
+     Tangible Book  $  13.713B  $  13.572B  $  12.069B  $  12.131B
+   Working Capital  $   5.432B  $   5.788B  $   4.650B  $   4.487B
+   Goodwill+Intang  $   7.468B  $   7.395B  $   7.513B  $   7.590B
+
+============================================================
+  CASH FLOW — NOK (Quarterly)
+============================================================
+                         Q1'26       Q4'25       Q3'25       Q2'25
+  ----------------------------------------------------------------
+      Operating CF  $   783.0M  $   375.0M  $   597.0M  $   209.0M
+             Capex  $  -154.0M  $  -148.0M  $  -168.0M  $  -121.0M
+    Free Cash Flow  $   629.0M  $   227.0M  $   429.0M  $    88.0M
+    Stock Buybacks  $    -9.0M       0.00       0.00  $   -78.0M
+
+============================================================
+  INSIDER TRANSACTIONS — NOK
+============================================================
+  No insider transactions reported.
+
+============================================================
+  NEWS — NOK (last 7 days)
+============================================================
+
+• Is It Too Late To Consider Nokia Oyj (HLSE:NOKIA) After Its 220% One-Year Surge?
+  Source : Simply Wall St.
+  Date   : 2026-06-04
+  Summary: If you are wondering whether Nokia Oyj at €14.81 is still offering value after a strong run, the key is to look past the headline share price and into what different valuation methods actually say about it. The stock has recently shown strong momentum, with returns of 9.9% over 7 days, 30.0% over 30
+
+• European Equities Traded in the US as American Depositary Receipts Rise in Thursday Trading
+  Source : MT Newswires
+  Date   : 2026-06-04
+  Summary: European equities traded in the US as American depositary receipts were tracking higher late Thursda
+
+• Jim Cramer Says Nokia Is Back: How a 20-Year Smartphone Casualty Became an AI Infrastructure Play
+  Source : 24/7 Wall St.
+  Date   : 2026-06-04
+  Summary: Jim Cramer spent a segment on CNBC’s Mad Money on June 2, 2026 reintroducing investors to a company most stopped thinking about around the launch of the original iPhone. “Take Nokia, a river in Finland that seemed to run dry nearly 20 years ago,” Cramer said. “Back in the pre-smartphone days, Nokia 
+
+• Jim Cramer on Nokia: “You Might Get a Better, Lower Chance”
+  Source : Insider Monkey
+  Date   : 2026-06-04
+  Summary: Nokia Oyj (NYSE:NOK) was among the stocks Jim Cramer talked about as he discussed the recent rally in several AI-related stocks. Cramer highlighted the company’s position in AI development, as he said: Nokia is now a player in the fourth industrial revolution. The first phase is about building giant
+
+• BB Or NOK: Which Fallen Phone Giant’s Stock Is The Better AI Bet Right Now?
+  Source : Stocktwits
+  Date   : 2026-06-04
+  Summary: BlackBerry and Nokia have reinvented themselves as AI plays, with shares up 156% and 219%, respectively, over the past year.
+
+• European Equities Traded in the US as American Depositary Receipts Track Lower in Wednesday Trading
+  Source : MT Newswires
+  Date   : 2026-06-03
+  Summary: European equities traded in the US as American depositary receipts were declining late Wednesday mor
+
+• Nokia Stock Extends Rally After Hitting 17-Year High: AI Boom, Insider Buying Fire Up Retail Bulls
+  Source : Stocktwits
+  Date   : 2026-06-03
+  Summary: Nokia’s senior executive bought over 44,000 shares worth $706,000.
+
+• Nokia Rises 159.6% in the Past Six Months: Is There More Upside Ahead?
+  Source : Zacks
+  Date   : 2026-06-02
+  Summary: NOK surges 159.6% in six months as AI networking and broadband initiatives gain traction, but telecom weakness and competition remain risks.
+
+• European Equities Traded in the US as American Depositary Receipts Rise in Tuesday Trading
+  Source : MT Newswires
+  Date   : 2026-06-02
+  Summary: European equities traded in the US as American depositary receipts were tracking higher late Tuesday
+
+• Jim Cramer on Nokia: “People Are Going Crazy for It”
+  Source : Insider Monkey
+  Date   : 2026-06-01
+  Summary: Nokia Oyj (NYSE:NOK) was one of the stocks on Jim Cramer’s radar on Mad Money as he explained that many investors might be missing out on the market’s biggest winners. A caller asked about the stock during the lightning round, and here’s what Cramer had to say: You know what? This is one that it […]
+
+============================================================
+  REDDIT SENTIMENT — NOK
+============================================================
+
+[r/wallstreetbets — 3 posts via RSS — sorted by top votes, scores unavailable (Reddit API blocked)]
+  [2026-05-30] $250k $NOK yolo - AI infra
+    ↳ submitted by /u/its-me-reek [link] [comments]
+  [2026-06-02] 18k NOK yolo
+    ↳ First bought $20 leaps on May 8th and have been slowly adding. Should’ve yolo’d it all then. Nvidia 2.9% stake, crazy call OTM volume, potential mention at computex?? Just broke $17, see y’all at $20 
+  [2026-06-01] lil sum sum from nokia
+    ↳ submitted by /u/JoocePop [link] [comments]
+
+[r/stocks — 2 posts via RSS — sorted by top votes, scores unavailable (Reddit API blocked)]
+  [2026-06-03] Nokia Partners with QuStream to Advance Quantum-Safe Networking: Next-Gen Security on High-Performance Hardware
+    ↳ In a significant step forward for quantum-resistant communications, Nokia $NOK has partnered with QuStream $QST to develop and deploy the QuStream Quantum Safe Network (QQSN) running on Nokia’s advanc
+  [2026-05-30] I have $33,000 that I want to invest in a higher risk stock. I can’t decide between Nokia(Nok) and Redwire (RDW).
+    ↳ I have never took the plunge into a risky investment and really want to take a stab at it. I won’t be crushed financially if I lose my money but obviously don’t want to. I really like Nokias realignme
+
+[r/investing]
+  No posts found mentioning NOK in the past 7 days.
+
+============================================================
+  STOCKTWITS SENTIMENT — NOK
+============================================================
+  Bullish: 16 (53%) · Bearish: 2 (7%) · Unlabeled: 12 · Total: 30
+
+  [2026-06-05 · @LoriLaws5 · no-label] $NOK This was another &#39;buy the dip&#39; day. I bought more NOK shares at $15.03. So, I&#39;m calling it a day. Off to the beach ... I wish everyon
+  [2026-06-05 · @SmileyMisfxt · Bullish] $NOK
+  [2026-06-05 · @sng383838 · Bullish] $NOK HOLD
+  [2026-06-05 · @freedomtrader6 · no-label] Just scooped up 1k more $NOK at $15.2     Not gonna lie… every little dip makes me go “yep, let’s grab a bit more”     Feels like one of those sleeper
+  [2026-06-05 · @GurlwFatazzpurse · no-label] $NOK Added
+  [2026-06-05 · @Godsa · no-label] $NOK around 11 am and or 2 pm  Eastern time  You will see if I institutions are stepping in the scoop it up and if that happens they just showed you t
+  [2026-06-05 · @thatsmartshort · Bearish] $NOK raise your hand if you fell into this bull trap.
+  [2026-06-05 · @eccentriccapitalism · Bullish] $NOK NOK NOK NOKING on more 52 week highs!
+  [2026-06-05 · @ChartSniper33 · no-label] $NOK trash
+  [2026-06-05 · @ArmyRat · Bullish] $AVGO $MRVL $NBIS $NOK Healthy dip going on, nothing wrong with theses companies, most tech is taking a breather right now. Buy with confidence, Buy t
+  [2026-06-05 · @janjana3 · no-label] $NOK addedat that dip
+  [2026-06-05 · @nebra · Bullish] $NOK added
+  [2026-06-05 · @QuietTrader · Bullish] $NOK Doubled down my position at 15.20 this morning. It’s hitting the trough of my trading channel and I just had to buy. Part of my big time shopping
+  [2026-06-05 · @ClosetIguana · Bullish] $NOK  Load up and trust the process.
+  [2026-06-05 · @sogenerous · no-label] $NOK $LPTH added little
+
+============================================================
+  GLOBAL MACRO NEWS
+============================================================
+
+[CNBC Markets]
+  • The May jobs report will be released Friday. Here's what to expect
+  • Long-term unemployment is surging in the U.S. There are hidden costs for workers and the economy
+  • Private payrolls grew by 122,000 in May, stronger than expected, ADP reports
+  • U.S. proposes fresh tariffs on 60 economies over forced labor trade practices
+  • U.S., Iran intensify attacks as ceasefire frays, peace talks stall
+  • Job openings in April surged to 7.6 million, the highest in nearly two years
+  • Inflation hits 3.2% in the euro zone as Iran war pushes energy costs higher
+  • Iran war cost: Average U.S. household paying $450 more on gas and energy
+
+[FT Markets]
+  • Franklin’s Western Asset Management agrees $100mn settlement with SEC
+  • India exempts foreign investors from tax on bonds to shore up rupee
+  • Musk’s SpaceX lines up retail investors for record IPO allocation
+  • The dollar’s decline is overstated — but still real
+  • Bond investors bet Colombia’s ‘Tiger’ will slash public spending
+  • UK retail investor demand for SpaceX surges to tens of thousands
+  • The battle over Ben & Jerry’s gets ugly
+  • The Musk exception on banking fees for SpaceX
+
+############################################################
+  END OF DATA
+############################################################

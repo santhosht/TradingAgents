@@ -1,0 +1,335 @@
+
+############################################################
+  MARKET DATA REPORT
+  Ticker    : NVDA
+  Date      : 2026-06-06
+  Generated : 2026-06-06 01:53:16
+  Run ID    : NVDA_20260606_015316
+  Data file : reports/NVDA_20260606_015316/NVDA_20260606_015316.txt
+  Report dir: reports/NVDA_20260606_015316/
+############################################################
+
+[Claude: Follow ANALYSIS_PROCESS.md. Data file is reports/NVDA_20260606_015316/NVDA_20260606_015316.txt. Report dir is reports/NVDA_20260606_015316/. Do NOT read any other files.]
+
+
+============================================================
+  PRICE & TECHNICALS — NVDA
+============================================================
+
+[Last 20 Trading Days]
+
+Date             Open     High      Low    Close       Volume
+--------------------------------------------------------------
+2026-05-08     212.78   217.55   212.64   214.95  136,421,400
+2026-05-11     213.79   222.04   213.64   219.18  160,685,800
+2026-05-12     218.30   223.49   214.67   220.52  159,176,600
+2026-05-13     224.67   227.57   221.31   225.57  150,405,400
+2026-05-14     229.58   236.26   229.03   235.47  180,782,900
+2026-05-15     229.49   231.23   223.98   225.06  180,977,600
+2026-05-18     229.60   229.73   218.12   222.06  146,280,900
+2026-05-19     219.36   224.22   217.66   220.35  140,948,200
+2026-05-20     222.92   225.87   220.24   223.21  184,201,600
+2026-05-21     222.03   227.14   217.68   219.25  203,381,800
+2026-05-22     220.64   220.75   214.55   215.08  169,275,700
+2026-05-26     216.29   217.93   211.75   214.61  187,202,600
+2026-05-27     213.87   213.90   208.54   212.35  167,601,200
+2026-05-28     211.03   215.27   210.97   214.00  143,996,000
+2026-05-29     214.33   217.61   210.88   210.89  289,410,600
+2026-06-01     215.48   224.61   215.45   224.10  212,850,700
+2026-06-02     226.92   232.01   221.09   222.56  193,362,900
+2026-06-03     221.46   222.56   214.26   214.50  160,907,000
+2026-06-04     213.91   221.60   210.97   218.66  169,022,200
+2026-06-05     214.43   214.87   204.34   205.10  215,650,478
+
+============================================================
+  KEY INDICATORS (latest trading day)
+============================================================
+  Close        : $205.10
+  Prev Close   : $218.66
+  Day Change   : -13.56 (-6.20%)
+
+  EMA 10       : $215.39
+  SMA 50       : $203.22
+  SMA 200      : $188.34
+  VWMA 20      : $218.60
+
+  RSI (14)     : 34.33
+  MFI (14)     : 28.92
+  MACD         : 2.33
+  MACD Signal  : 4.26
+  MACD Hist    : -1.93
+
+  Bollinger Up : $232.01
+  Bollinger Mid: $218.87
+  Bollinger Low: $205.73
+  ATR (14)     : $8.61
+
+============================================================
+  PRICE vs MOVING AVERAGES
+============================================================
+  Price is 0.9% above SMA 50 ($203.22)
+  Price is 8.9% above SMA 200 ($188.34)
+  Price is 4.8% below EMA 10 ($215.39)
+
+============================================================
+  LIVE QUOTE — NVDA (intraday — NOT used in indicator calculations)
+============================================================
+  Current Price : $205.10
+  Change Today  : -11.21 (-5.18%)
+  Prev Close    : $216.31
+  Day High      : $214.87
+  Day Low       : $204.34
+  Volume (so far): 215,650,478
+  Market Cap    : $4967.73B
+
+  [Note: indicators above are based on completed daily candles only]
+
+============================================================
+  FUNDAMENTALS OVERVIEW — NVDA
+============================================================
+  Company           : NVIDIA Corporation
+  Sector            : Technology
+  Industry          : Semiconductors
+  Exchange          : NMS
+  Currency          : USD
+  Market Cap        : $4967.73B
+  Beta              : 2.20
+  52W High          : 236.54
+  52W Low           : 138.83
+  50D Avg           : 202.05
+  200D Avg          : 188.24
+
+  P/E (TTM)         : 31.46
+  Forward P/E       : 16.17
+  PEG Ratio         : 0.66
+  Price/Book        : 31.69
+  EV/EBITDA         : 29.75
+  Book Value        : 6.47
+
+  Revenue (TTM)     : $253.49B
+  Gross Profit      : $187.95B
+  EBITDA            : $165.51B
+  Net Income        : $159.61B
+  Gross Margin      : 74.1%
+  Op Margin         : 65.6%
+  Profit Margin     : 63.0%
+  ROE               : 114.3%
+  ROA               : 52.7%
+
+  EPS (TTM)         : 6.52
+  Forward EPS       : 12.68
+
+  Cash              : $53.17B
+  Total Debt        : $12.81B
+  D/E Ratio         : 6.55
+  Current Ratio     : 3.44
+  FCF (TTM)         : $46.34B
+
+  Div Yield         : 49.00%
+  Payout Ratio      : 0.6%
+
+  Analyst Target    : $298.07
+  Target High       : $500.00
+  Target Low        : $180.00
+  Recommendation    : STRONG_BUY
+
+============================================================
+  INCOME STATEMENT — NVDA (Quarterly)
+============================================================
+                         Q2'26       Q1'26       Q4'25       Q3'25
+  ----------------------------------------------------------------
+           Revenue  $  81.615B  $  68.127B  $  57.006B  $  46.743B
+      Gross Profit  $  61.157B  $  51.093B  $  41.849B  $  33.853B
+         Op Income  $  53.536B  $  44.299B  $  36.010B  $  28.440B
+            EBITDA  $  71.002B  $  51.283B  $  38.748B  $  31.937B
+        Net Income  $  58.321B  $  42.960B  $  31.910B  $  26.422B
+               R&D  $   6.321B  $   5.512B  $   4.705B  $   4.291B
+              SG&A  $   1.300B  $   1.282B  $   1.134B  $   1.122B
+     EPS (Diluted)       2.39       1.76       1.30       1.08
+
+============================================================
+  BALANCE SHEET — NVDA (Quarterly)
+============================================================
+                         Q2'26       Q1'26       Q4'25       Q3'25
+  ----------------------------------------------------------------
+  Cash & ST Invest  $  80.572B  $  62.556B  $  60.608B  $  53.991B
+     Accounts Recv  $  40.710B  $  38.466B  $  33.391B  $  27.808B
+         Inventory  $  25.797B  $  21.403B  $  19.784B  $  14.962B
+      Total Assets  $ 259.474B  $ 206.803B  $ 161.148B  $ 140.740B
+        Total Debt  $  12.348B  $  11.040B  $  10.481B  $  10.598B
+            Equity  $ 195.474B  $ 157.293B  $ 118.897B  $ 100.131B
+     Tangible Book  $ 171.460B  $ 133.155B  $ 111.700B  $  93.621B
+   Working Capital  $ 107.111B  $  93.442B  $  90.417B  $  77.962B
+   Goodwill+Intang  $  24.014B  $  24.138B  $   7.197B  $   6.510B
+
+============================================================
+  CASH FLOW — NVDA (Quarterly)
+============================================================
+                         Q2'26       Q1'26       Q4'25       Q3'25
+  ----------------------------------------------------------------
+      Operating CF  $  50.344B  $  36.188B  $  23.751B  $  15.365B
+             Capex  $  -1.757B  $  -1.284B  $  -1.636B  $  -1.895B
+    Free Cash Flow  $  48.587B  $  34.904B  $  22.115B  $  13.470B
+    Stock Buybacks  $ -19.312B  $  -3.815B  $ -12.456B  $  -9.720B
+        Stock Comp  $   1.928B  $   1.633B  $   1.654B  $   1.625B
+
+============================================================
+  INSIDER TRANSACTIONS — NVDA
+============================================================
+      Shares      Value                Insider                 Position Transaction Start Date Ownership
+0     307500          0         STEVENS MARK A                 Director             2026-06-04         I
+1    1000000  221102600         STEVENS MARK A                 Director             2026-06-04         I
+2        625     133750          DABIRI JOHN O                 Director             2026-05-27         D
+3       5396     942944  ROBERTSON DONALD F JR                  Officer             2026-03-20         D
+4      62650   10956706       KRESS COLETTE M.  Chief Financial Officer             2026-03-20       D/I
+5     221682   38502524         STEVENS MARK A                 Director             2026-03-20         I
+6      19000    3357549           SHAH AARTI S                 Director             2026-03-19         D
+7     300000   54676140            PURI AJAY K                  Officer             2026-03-18         I
+8   58962602          0         HUANG JEN-HSUN  Chief Executive Officer             2026-03-18         I
+9        530          0       SEAWELL A BROOKE                 Director             2026-03-17         D
+10      3004     555440          DABIRI JOHN O                 Director             2026-03-13         D
+11    300000   54756044            PURI AJAY K                  Officer             2026-03-10         I
+12     47048          0      SHOQUIST DEBORA C                  Officer             2026-03-09         D
+13     47048          0            PURI AJAY K                  Officer             2026-03-09         D
+14     47048          0       KRESS COLETTE M.  Chief Financial Officer             2026-03-09         D
+
+============================================================
+  NEWS — NVDA (last 7 days)
+============================================================
+
+• Chip sell-off rattles markets
+  Source : Yahoo Finance Video
+  Date   : 2026-06-05
+  Summary: Yahoo Finance Senior Reporter Ines Ferre joins Market Domination Overtime to break down the chip stock sell-off that sent shockwaves through the market on Friday, June 5.
+
+• SpaceX to rent AI capacity to Google for $920 million per month
+  Source : Yahoo Finance
+  Date   : 2026-06-05
+  Summary: Google (GOOG, GOOGL) has entered into an agreement with SpaceX to rent computing capacity from the rocket company to power its AI capabilities.
+
+• The stock market's scorching run means the rich will keep getting richer: Chart
+  Source : Yahoo Finance
+  Date   : 2026-06-05
+  Summary: Stock market wealth is piling up for the rich.
+
+• Anthropic (Claude) May Be the Only $1 Trillion IPO Worth Buying
+  Source : Motley Fool
+  Date   : 2026-06-06
+  Summary: Anthropic, the parent company of Claude, has confidentially filed for an initial public offering.
+
+• Why Archer Aviation Stock Plummeted Today
+  Source : Motley Fool
+  Date   : 2026-06-06
+  Summary: Archer Aviation stock just got hit with a double-digit valuation slide.
+
+• If You Buy Rivian Right Now, Could It Make You a Millionaire?
+  Source : Motley Fool
+  Date   : 2026-06-06
+  Summary: Rivian is rolling out its new, lower-cost R2 truck, which is a pivotal development for the EV maker.
+
+• Here's What I Think Is Going on With Broadcom Stock
+  Source : Motley Fool
+  Date   : 2026-06-06
+  Summary: Record results and a sharply higher forecast still couldn't keep the chip stock from tumbling.
+
+• Avoid Zillow: This Infrastructure Redirect Is a “No-Brainer” Buy as the Housing Market Stalls
+  Source : 24/7 Wall St.
+  Date   : 2026-06-06
+  Summary: Every headline this week wants you to buy Zillow Group (NASDAQ:Z) on the back of an earnings beat and a fresh AI-platform pitch from CEO Jeremy Wacksman. But here is what you should actually be watching. Zillow is a leveraged bet on a housing market that the company itself, in its own forward guidan
+
+• Why Palantir Stock Sank Today
+  Source : Motley Fool
+  Date   : 2026-06-06
+  Summary: Palantir hasn't participated in this year's AI rally, but that doesn't mean it's immune to new valuation pressures in the space.
+
+• Arm Insiders Sold $25.6 Million in Stock. They Missed a Historic Rally.
+  Source : Barrons.com
+  Date   : 2026-06-06
+  Summary: Arm Holdings executives unloaded millions worth of stock before an announcement from Nvidia drove shares to a record high.
+
+============================================================
+  REDDIT SENTIMENT — NVDA
+============================================================
+
+[r/wallstreetbets — 5 posts via RSS — sorted by top votes, scores unavailable (Reddit API blocked)]
+  [2026-06-01] Michael Burry's Chart on How Elon Musk-Nvidia Deal is Putting US Retirees at Risk
+    ↳ https://www.ibtimes.co.uk/michael-burry-ai-bubble-warning-1800028
+  [2026-06-01] Japan Joins U.S. ‘AI Manhattan Project,’ Pledging $500 Million to Counter China in AI-Driven Science
+    ↳ Japan has finalized its participation in the U.S.-led Genesis Mission , a major initiative to harness artificial intelligence for accelerating scientific breakthroughs. According to reporting from Yom
+  [2026-06-03] I messed up again— “best of luck to you” - Schwab Risk Management Team
+    ↳ TL;DR: Sold premium, collected pennies, accidentally became a six-figure NVDA investor overnight. Schwab called. Risk desk said “good luck.” Sleep is canceled until market open. Need NVDA to open over
+  [2026-06-02] In the AI Gold Rush, What Are the Shovels?
+    ↳ Everyone is chasing the models. The better question is who sells the shovels. The AI gold rush is loud. The shovel sellers are quiet. They do not need the models to become conscious, replace humanity,
+  [2026-06-05] My head is aching, my legs are shaking
+    ↳ Never felt this alive
+
+[r/stocks — 5 posts via RSS — sorted by top votes, scores unavailable (Reddit API blocked)]
+  [2026-05-30] Am I supposed to just keep holding forever? When do people actually sell?
+    ↳ I’m in my early 30s and honestly feel like I’ve gotten more lucky than skilled. I don’t have a formal investing strategy. I’ve mostly bought companies I hear from investing friends and held them. Now 
+  [2026-05-30] What to do with SpaceX IPO as a retail trader
+    ↳ I’ve got 35k in my “fun” money portfolio. 12k liquid cash right now. I’ve only been investing for a year in random stocks I read about on Reddit (ASTS, NVDA, etc). Got involved in a few call options t
+  [2026-06-02] $NVDA and $MSFT have great moves coming forward
+    ↳ MSFT Microsoft $MSFT announces Project Solara at Build: chips will run AI agents rather than apps, communicating directly with cloud data centers. Desktop device built with MediaTek silicon previewed,
+  [2026-06-03] STMicroelectronics (STM) is one of the best and most undervalued European stocks - DD update 2.5 years later
+    ↳ This is a follow-up to my December 2023 DD, which you can find here: https://reddit.com/r/stocks/comments/189qrsw/stmicroelectronics_stm_is_one_of_the_best_and/ My original thesis Back in late 2023, S
+  [2026-06-01] NVDA Computex 2026 Summary: Vera CPU, Rubin Production, Physical AI and Robotaxis
+    ↳ NVIDIA press releases from GTC Taipei at Computex 2026: Next-Gen Hardware & Silicon Architecture * Vera (CPU for Agents): New CPU architecture designed to handle the heavy workloads of AI agents. * Ve
+
+[r/investing — 4 posts via RSS — sorted by top votes, scores unavailable (Reddit API blocked)]
+  [2026-06-01] Hypothetical Basket to capture AI energy needs and oil shortage
+    ↳ I did some research into nuclear, oil, and gas companies, and then put them into latticeAI and this was the suggested basket with $2500 and an emphasis on value: Ticker Role Optimized % Dollar Amount 
+  [2026-06-01] ServiceNow, Uipath or Lenovo
+    ↳ Which one do you think has the most value? They are have all been performing well for the last month ServiceNow has transformed its platform into an AI-first enterprise system. The SaaS drawdown is no
+  [2026-06-01] What's with the massive single-name moves lately?
+    ↳ Just today, this is outrageous: AAPL + 2.1% AMZN -4.1% AVGO +5.7% COST -1.1% GOOG -2.2% NVDA +6.0% TSLA -5.0% And that's not any of the chip stocks lik AMD, MU or whatever hot chip stocks people have.
+  [2026-06-04] Is avgo still a good buy or is this its end?
+    ↳ I always heard that avgo is a good buy, but it dropped hard after earning, but the same happened to nvda, which makes me think it is still a good buy and what happened is like a black Friday sale, do 
+
+============================================================
+  STOCKTWITS SENTIMENT — NVDA
+============================================================
+  Bullish: 8 (27%) · Bearish: 6 (20%) · Unlabeled: 16 · Total: 30
+
+  [2026-06-06 · @lhes · no-label] $NVDA https://x.com/milkroadai/status/2063007119809695771?s=46&amp;t=l93XRGubLXswOcsZR9Nfhw
+  [2026-06-06 · @Defen · no-label] $NVDA this looks different today!!
+  [2026-06-06 · @xF1Driver · Bullish] $NVDA https://x.com/BullMarketBoss/status/2063048698335211632?s=20
+  [2026-06-06 · @MeetJoeBlackBeard · Bearish] $NVDA     red monday.
+  [2026-06-06 · @flip_calls · Bullish] $MU Broader semi conductor sell off   This should back up nicely on Monday   $NVDA $SNDK
+  [2026-06-06 · @2old2 · no-label] $NVDA Several contributing factors pushed us over the edge today. Is AI akin to the Industrial Revolution or are we in a hyper inflated bubble? That’s
+  [2026-06-06 · @TickrTalk0007 · no-label] $NVDA get ready for the pump next week https://finance.yahoo.com/sectors/technology/articles/trump-says-team-look-u-182943171.html
+  [2026-06-06 · @iatsebob · Bullish] $SNDK seems like SpaceX is raising a ton of $$$ so they can spend it on $NVDA $MU  and Sandisk. Maybe some $STX with that $75 Billion.
+  [2026-06-06 · @212fab · no-label] $NVDA any sign of life is positive
+  [2026-06-06 · @TheCheezits · Bearish] $NVDA I will buy you with everything in my heart and soul when it feels right.. when it feels right.  165. 131.  Bob is your uncle.
+  [2026-06-06 · @ezekeil · no-label] $NVDA $AMD $ARM $MU $META   Google and Meta’s massive capital raises signal a shift from &quot;cash-rich&quot; dominance to a desperate need for exter
+  [2026-06-06 · @NVDA808 · Bullish] $NVDA I have zero sympathy for options players.  They ruin stocks for their own gain. So when they lose their ass on options I have no sympathy.
+  [2026-06-06 · @cubie · no-label] @Jeremymartin007 @simon58 @judgeyoung2 @jenbunn @ribbey @EBE_day @TraderRapp @Godreal1 @tonyctl @zuby34  $NVDA $AMD $AVGO $TSM $intc Cubie likes the l
+  [2026-06-06 · @cubie · no-label] @zuby34 @Jeremymartin007 @simon58 @judgeyoung2 @jenbunn @ribbey @EBE_day @TraderRapp @Godreal1 @tonyctl $MU $NVDA $CIEN $ALAB  But he has $RBLX tho. T
+  [2026-06-06 · @RunningBull26 · Bullish] $NVDA Iran war starts back up we may see $120.
+
+============================================================
+  GLOBAL MACRO NEWS
+============================================================
+
+[CNBC Markets]
+  • The May jobs report will be released Friday. Here's what to expect
+  • Long-term unemployment is surging in the U.S. There are hidden costs for workers and the economy
+  • Private payrolls grew by 122,000 in May, stronger than expected, ADP reports
+  • U.S. proposes fresh tariffs on 60 economies over forced labor trade practices
+  • U.S., Iran intensify attacks as ceasefire frays, peace talks stall
+  • Job openings in April surged to 7.6 million, the highest in nearly two years
+  • Inflation hits 3.2% in the euro zone as Iran war pushes energy costs higher
+  • Iran war cost: Average U.S. household paying $450 more on gas and energy
+
+[FT Markets]
+  • Nasdaq tumbles 4% as shares in chip and memory groups sink
+  • Bond investors bet Colombia’s ‘Tiger’ will slash public spending
+  • Could you be the FT’s new stock picking champion?
+  • Bitcoin tumbles after Strategy sale unnerves crypto traders
+  • Franklin’s Western Asset Management agrees $100mn settlement with SEC
+  • India exempts foreign investors from tax on bonds to shore up rupee
+  • Musk’s SpaceX lines up retail investors for record IPO allocation
+  • The dollar’s decline is overstated — but still real
+
+############################################################
+  END OF DATA
+############################################################

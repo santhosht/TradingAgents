@@ -3,7 +3,8 @@
 **Trigger:** User says "cleanup stale", "clean pending", or "stale cleanup"
 
 **Key rules:**
-- Only affects Pending positions — never touch Open or Closed positions
+- Only affects **Pending** positions — never touch Open, Orders Placed, or Closed positions
+- Orders Placed are active broker orders — do NOT remove them during stale cleanup; they expire on their own GTC date
 - Always show the full stale list before taking any action
 - Only update POSITIONS.md after user confirms action for each symbol
 - Re-run means triggering ANALYSIS_PROCESS.md — do not do it silently
@@ -12,7 +13,7 @@
 
 ## Step 1 — Read POSITIONS.md and find stale pending symbols
 
-Read POSITIONS.md. For each pending symbol extract:
+Read POSITIONS.md. For each **Pending** symbol extract (skip Open and Orders Placed entirely):
 - Report age (trading days only, Mon–Fri) — from the report folder date
 - Entry zone
 - Any catalyst noted (e.g. "STALE AFTER date" or "post-earnings" notes)

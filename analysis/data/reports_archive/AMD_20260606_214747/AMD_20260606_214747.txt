@@ -1,0 +1,325 @@
+
+############################################################
+  MARKET DATA REPORT
+  Ticker    : AMD
+  Date      : 2026-06-06
+  Generated : 2026-06-06 21:47:47
+  Run ID    : AMD_20260606_214747
+  Data file : reports/AMD_20260606_214747/AMD_20260606_214747.txt
+  Report dir: reports/AMD_20260606_214747/
+############################################################
+
+[Claude: Follow ANALYSIS_PROCESS.md. Data file is reports/AMD_20260606_214747/AMD_20260606_214747.txt. Report dir is reports/AMD_20260606_214747/. Do NOT read any other files.]
+
+
+============================================================
+  PRICE & TECHNICALS — AMD
+============================================================
+
+[Last 20 Trading Days]
+
+Date             Open     High      Low    Close       Volume
+--------------------------------------------------------------
+2026-05-08     418.59   456.29   418.29   455.19   58,134,900
+2026-05-11     460.55   469.22   450.88   458.79   46,085,400
+2026-05-12     449.25   458.80   426.11   448.29   39,140,100
+2026-05-13     457.04   459.50   432.65   445.50   30,423,400
+2026-05-14     440.60   453.31   435.68   449.70   26,113,600
+2026-05-15     433.34   439.00   423.36   424.10   29,131,600
+2026-05-18     429.50   438.80   410.71   420.99   28,432,100
+2026-05-19     412.60   428.75   393.36   414.05   38,756,900
+2026-05-20     428.04   449.39   426.05   447.58   36,137,500
+2026-05-21     441.99   451.20   431.60   449.59   27,252,000
+2026-05-22     469.84   481.41   461.71   467.51   34,758,600
+2026-05-26     484.74   506.96   480.23   503.89   38,473,800
+2026-05-27     508.00   510.21   486.66   495.54   27,589,300
+2026-05-28     499.00   527.20   493.52   518.09   31,438,500
+2026-05-29     520.80   522.00   503.43   516.10   30,803,200
+2026-06-01     500.16   517.50   486.80   510.13   33,309,200
+2026-06-02     506.30   522.49   501.22   521.54   24,293,200
+2026-06-03     533.75   546.44   524.30   542.52   29,411,100
+2026-06-04     514.75   532.19   499.87   523.20   29,110,000
+2026-06-05     499.53   505.62   463.95   466.38   46,735,900
+
+============================================================
+  KEY INDICATORS (latest trading day)
+============================================================
+  Close        : $466.38
+  Prev Close   : $523.20
+  Day Change   : -56.82 (-10.86%)
+
+  EMA 10       : $496.86
+  SMA 50       : $358.72
+  SMA 200      : $245.97
+  VWMA 20      : $471.73
+
+  RSI (14)     : 58.55
+  MFI (14)     : 62.56
+  MACD         : 43.42
+  MACD Signal  : 47.59
+  MACD Hist    : -4.17
+
+  Bollinger Up : $551.65
+  Bollinger Mid: $473.93
+  Bollinger Low: $396.21
+  ATR (14)     : $31.73
+
+============================================================
+  PRICE vs MOVING AVERAGES
+============================================================
+  Price is 30.0% above SMA 50 ($358.72)
+  Price is 89.6% above SMA 200 ($245.97)
+  Price is 6.1% below EMA 10 ($496.86)
+
+============================================================
+  LIVE QUOTE — AMD (intraday — NOT used in indicator calculations)
+============================================================
+  Current Price : $466.38
+  Change Today  : -47.77 (-9.29%)
+  Prev Close    : $514.15
+  Day High      : $505.62
+  Day Low       : $463.95
+  Volume (so far): 46,735,900
+  Market Cap    : $760.48B
+
+  [Note: indicators above are based on completed daily candles only]
+
+============================================================
+  FUNDAMENTALS OVERVIEW — AMD
+============================================================
+  Company           : Advanced Micro Devices, Inc.
+  Sector            : Technology
+  Industry          : Semiconductors
+  Exchange          : NMS
+  Currency          : USD
+  Market Cap        : $760.48B
+  Beta              : 2.49
+  52W High          : 546.44
+  52W Low           : 114.71
+  50D Avg           : 347.44
+  200D Avg          : 242.74
+
+  P/E (TTM)         : 156.50
+  Forward P/E       : 35.67
+  PEG Ratio         : 1.12
+  Price/Book        : 11.79
+  EV/EBITDA         : 101.21
+  Book Value        : 39.55
+
+  Revenue (TTM)     : $37.45B
+  Gross Profit      : $19.87B
+  EBITDA            : $7.43B
+  Net Income        : $4.93B
+  Gross Margin      : 53.1%
+  Op Margin         : 14.4%
+  Profit Margin     : 13.4%
+  ROE               : 8.1%
+  ROA               : 3.6%
+
+  EPS (TTM)         : 2.98
+  Forward EPS       : 13.08
+
+  Cash              : $12.35B
+  Total Debt        : $3.87B
+  D/E Ratio         : 6.00
+  Current Ratio     : 2.73
+  FCF (TTM)         : $7.17B
+
+  Div Yield         : 0.00%
+  Payout Ratio      : 0.0%
+
+  Analyst Target    : $482.69
+  Target High       : $665.00
+  Target Low        : $225.00
+  Recommendation    : STRONG_BUY
+
+============================================================
+  INCOME STATEMENT — AMD (Quarterly)
+============================================================
+                         Q1'26       Q4'25       Q3'25       Q2'25
+  ----------------------------------------------------------------
+           Revenue  $  10.253B  $  10.270B  $   9.246B  $   7.685B
+      Gross Profit  $   5.416B  $   5.577B  $   4.780B  $   3.059B
+         Op Income  $   1.476B  $   1.752B  $   1.270B  $  -134.0M
+            EBITDA  $   2.398B  $   2.861B  $   2.106B  $   721.0M
+        Net Income  $   1.383B  $   1.511B  $   1.243B  $   872.0M
+               R&D  $   2.397B  $   2.330B  $   2.139B  $   1.894B
+              SG&A  $   1.253B  $   1.198B  $   1.069B  $   991.0M
+     EPS (Diluted)       0.84       0.92       0.75       0.54
+
+============================================================
+  BALANCE SHEET — AMD (Quarterly)
+============================================================
+                         Q1'26       Q4'25       Q3'25       Q2'25
+  ----------------------------------------------------------------
+  Cash & ST Invest  $  12.347B  $  10.552B  $   7.243B  $   5.867B
+     Accounts Recv  $   6.035B  $   6.315B  $   6.201B  $   5.115B
+         Inventory  $   8.045B  $   7.920B  $   7.313B  $   6.677B
+      Total Assets  $  79.642B  $  76.926B  $  76.891B  $  74.820B
+        Total Debt  $   3.871B  $   3.847B  $   3.870B  $   3.886B
+            Equity  $  64.462B  $  62.999B  $  60.790B  $  59.665B
+     Tangible Book  $  22.964B  $  21.168B  $  18.457B  $  16.770B
+   Working Capital  $  18.122B  $  17.492B  $  15.300B  $  14.676B
+   Goodwill+Intang  $  41.498B  $  41.831B  $  42.333B  $  42.895B
+
+============================================================
+  CASH FLOW — AMD (Quarterly)
+============================================================
+                         Q1'26       Q4'25       Q3'25       Q2'25
+  ----------------------------------------------------------------
+      Operating CF  $   2.955B  $   2.600B  $   2.159B  $   2.011B
+             Capex  $  -389.0M  $  -222.0M  $  -258.0M  $  -282.0M
+    Free Cash Flow  $   2.566B  $   2.378B  $   1.901B  $   1.729B
+    Stock Buybacks  $  -355.0M  $  -160.0M  $  -460.0M  $  -524.0M
+        Stock Comp  $   487.0M  $   486.0M  $   419.0M  $   369.0M
+
+============================================================
+  INSIDER TRANSACTIONS — AMD
+============================================================
+    Shares       Value                  Insider                  Position Transaction Start Date Ownership
+0    10447   5453334.0            DENZEL NORA M                  Director             2026-06-02         D
+1    19487   8406784.0    NORROD FORREST EUGENE                   Officer             2026-05-20         D
+2     8237    281623.0    NORROD FORREST EUGENE                   Officer             2026-05-20         D
+3     2613         NaN  VANDERSLICE ELIZABETH W                  Director             2026-05-14         D
+4     2613         NaN            DENZEL NORA M                  Director             2026-05-14         D
+5     2613         NaN     HOUSEHOLDER JOSEPH A                  Director             2026-05-14         D
+6   125000  55688359.0                SU LISA T   Chief Executive Officer             2026-05-13         D
+7     2350         0.0       PAPERMASTER MARK D  Chief Technology Officer             2026-05-11         D
+8    24376  10832451.0       GRASBY PAUL DARREN                   Officer             2026-05-08         D
+9    31320  10962000.0       PAPERMASTER MARK D  Chief Technology Officer             2026-04-24         D
+10   33109   8988215.0       PAPERMASTER MARK D  Chief Technology Officer             2026-04-16         D
+11    6000    509100.0       PAPERMASTER MARK D  Chief Technology Officer             2026-04-15         D
+12    3293    740925.0       PAPERMASTER MARK D  Chief Technology Officer             2026-04-06         D
+13   85000  16895157.0                SU LISA T   Chief Executive Officer             2026-03-12         D
+14    7500   1536525.0       GRASBY PAUL DARREN                   Officer             2026-03-11         D
+
+============================================================
+  NEWS — AMD (last 7 days)
+============================================================
+
+• AI Chip Stocks Sold Off This Week. Is AMD a Buying Opportunity or a Falling Knife?
+  Source : Motley Fool
+  Date   : 2026-06-06
+  Summary: The chipmaker's business is firing on all cylinders, but the recent pullback raises a familiar question for investors.
+
+• TD Cowen Raises PT on Advanced Micro Devices (AMD) Stock
+  Source : Insider Monkey
+  Date   : 2026-06-06
+  Summary: Advanced Micro Devices, Inc. (NASDAQ:AMD) is one of the Best Big Company Stocks to Buy Right Now. On June 1, TD Cowen lifted its price target on the company’s stock to $600 from $500 and maintained a “Buy” rating on the shares post meeting with management. As per the analyst, Advanced Micro Devices,
+
+• Retail Investors Are Beating Wall Street Benchmarks With AI Stocks. Why That Could Change Soon.
+  Source : Barchart
+  Date   : 2026-06-06
+  Summary: Retail investors have outperformed Wall Street benchmarks in 2026 by concentrating on leading AI stocks like Micron and Nvidia, raising the question of whether their winning streak can continue.
+
+• SpaceX IPO Could Create More Wealth Than All IPOs in the Last 20 Years Combined. Here’s Why Early Investors Are Banking On It
+  Source : 24/7 Wall St.
+  Date   : 2026-06-06
+  Summary: On a recent Earn Your Leisure segment, co-host Rashaad Bilal quoted investor Barry Atlas with a claim that stops you mid-scroll: “these companies are going to make more money than all of the IPOs in the last 20 years put together,” creating “a whole new class of billionaires” from just a handful of 
+
+• Did Nvidia Just Say Checkmate to AMD and Intel?
+  Source : Motley Fool
+  Date   : 2026-06-06
+  Summary: Nvidia spotted a new multibillion-dollar market.
+
+• Why Nvidia (NVDA) Shares Are Getting Obliterated Today
+  Source : StockStory
+  Date   : 2026-06-06
+  Summary: Shares of leading designer of graphics chips Nvidia (NASDAQ:NVDA) fell 5.9% in the afternoon session after macro pressure and an impending Senate hearing on China chip sales overwhelmed the impressive product updates earlier in the week.
+
+• Is AMD or Broadcom the Best AI Chip Stock After Nvidia?
+  Source : Motley Fool
+  Date   : 2026-06-06
+  Summary: There's more to AI chips than Nvidia. Both of these contenders have much to offer, but one is a clear winner moving forward.
+
+• Jensen Huang Just Said This AI Chip Stock Could Be the Next $1 Trillion Company (Hint: It's Not AMD or Sandisk)
+  Source : Motley Fool
+  Date   : 2026-06-06
+  Summary: The partnership between Nvidia and Marvell could be quite lucrative for both companies.
+
+• Why AMD (AMD) Shares Are Trading Lower Today
+  Source : StockStory
+  Date   : 2026-06-05
+  Summary: Shares of computer processor maker AMD (NASDAQ:AMD) fell 6.5% in the morning session after the AVGO earnings overhang and the stronger-than-expected jobs report combined to drive one of the broadest global chip selloff of the year.
+
+• Chips sector bloodbath drags Nasdaq down 4.2%
+  Source : Axios
+  Date   : 2026-06-05
+  Summary: Tech stocks plunged Friday amid rising bond yields and concerns about the massive growth expectations that have been fueling the AI trade .
+
+============================================================
+  REDDIT SENTIMENT — AMD
+============================================================
+
+[r/wallstreetbets — 5 posts via RSS — sorted by top votes, scores unavailable (Reddit API blocked)]
+  [2026-06-02] Thank you Lisa Su! Arvind and spez please take it from here.
+    ↳ Got lucky on some amd calls back in October predicting the open AI deal. Everything was jumping 30% in September and October 2025 (just as it is today) and AMD was one of the last semis without a big 
+  [2026-06-01] Japan Joins U.S. ‘AI Manhattan Project,’ Pledging $500 Million to Counter China in AI-Driven Science
+    ↳ Japan has finalized its participation in the U.S.-led Genesis Mission , a major initiative to harness artificial intelligence for accelerating scientific breakthroughs. According to reporting from Yom
+  [2026-05-31] I bought terrible meme stuff like ARKK as it all tanked to the lows, then diversified. This is the result:
+    ↳ Some stuff is actually bankrupt and will never recover, some stuff is up big time. My strategy was: Having zero clue wtf I was doing and just kept buying. For a long time, I was down over 400k. Now I 
+  [2026-06-01] Taking profits $rklb $amd $now
+    ↳ Hello. Looking for advice. Learning to trim profits is something I struggle with. As I use to be able to grow my account 10-15% per month with deposits. So selling seemed pointless if my portfolio wou
+  [2026-06-05] Got bullied by perma bulls when I said sell May and go away.
+    ↳ submitted by /u/Scribble_Box [link] [comments]
+
+[r/stocks — 2 posts via RSS — sorted by top votes, scores unavailable (Reddit API blocked)]
+  [2026-06-03] Is it too late?
+    ↳ How does one get in at this point? I've been heavy in cash for decades. I'll be pretty much poor when I'm forced out of the work force in a few years. I'm looking to go all in to semis and tickers sur
+  [2026-05-30] TSMC is the Hormuz Strait of semiconductors. I moved 30% of my portfolio over today.
+    ↳ Yesterday I moved 30% of my portfolio to Taiwan Semiconductor, and I plan to hold it for 3-5 years. I am convinced this stock is under priced relative to other megacap stocks, for a few key reasons. F
+
+[r/investing — 2 posts via RSS — sorted by top votes, scores unavailable (Reddit API blocked)]
+  [2026-06-01] What's with the massive single-name moves lately?
+    ↳ Just today, this is outrageous: AAPL + 2.1% AMZN -4.1% AVGO +5.7% COST -1.1% GOOG -2.2% NVDA +6.0% TSLA -5.0% And that's not any of the chip stocks lik AMD, MU or whatever hot chip stocks people have.
+  [2026-06-04] I'm new what am I supposed to do here.
+    ↳ I just randomly checked my stocks and one stock that I bought at $100 is now worth $517... Do I sell? What am I supposed to do with this... I've never owned stocks before and I don't know what I'm doi
+
+============================================================
+  STOCKTWITS SENTIMENT — AMD
+============================================================
+  Bullish: 9 (30%) · Bearish: 1 (3%) · Unlabeled: 20 · Total: 30
+
+  [2026-06-06 · @wader2k · no-label] $MRVL is at #3  $MU is #5 and $AMD at #8 on the NAS 100 top 25 list. Once again my entire team made the list!
+  [2026-06-06 · @wader2k · no-label] $AMD at #8 and $MU at #4 on the S&amp;P top25 list. In a few more weeks $MRVL will be joining the S&amp;P....
+  [2026-06-06 · @Schmock · no-label] @2bitinvestor I’m up 1,382% in $META 155% in $AMD 7% in $PLTR and 60% in $TSLA … I’ll be okay but thanks for shopping.
+  [2026-06-06 · @No1knowz · no-label] $NVDA $AMD $PLTR $SPY $QQQ did they manipulate Friday for the trump ai news? Leg up Sunday overnight Monday run?
+  [2026-06-06 · @iatsebob · Bullish] $AMD $INTC $MU $SNDK Bad headline: “50% of AI data centers cancelled.” Accurate headline: “A large share of announced 2026 AI data-center capacity may
+  [2026-06-06 · @DragonTiger · Bearish] $SNDK  50% AI data centers quietly cancelled  https://youtu.be/w-DVTHH1ux8?si=ZaYfwSmIW3evVY-M  $AMD $MU  $INTC
+  [2026-06-06 · @wealthpower · no-label] The bull case for $AMD isn&#39;t hard to understand. The harder question is how much of that future growth is already reflected in the stock.    Meanw
+  [2026-06-06 · @MorganHoratio · no-label] It’s recognizing the biggest secular trend in decades while it’s still unfolding.    • $TSM    • $ORCL    • $DELL     • $AMD     This exact four-stock
+  [2026-06-06 · @iatsebob · Bullish] $AMD $MU $NVDA $SNDK $TSM My blunt take: Jensen’s narrative is probably closer to the truth for high-end AI memory. The bearish analyst narrative is m
+  [2026-06-06 · @independentresearch1 · no-label] Everyone is watching names like $AMD and $MU, which makes sense given how important they&#39;ve become to the AI buildout.    The challenge is that wh
+  [2026-06-06 · @Spicy_Trade · no-label] Advanced Micro Devices, Inc. ( $AMD ) SpicyTrade - Daily Stock Analysis https://youtu.be/bLaEaQBkYHM?si=vr3oWV-W2uf4mU_9
+  [2026-06-06 · @ArcValueTrade · no-label] Clues for Stock market directions                                                                                                                     
+  [2026-06-06 · @SwingTraderPro1 · no-label] Market anxiety? Chill. The AI juggernauts are still on a multi-year climb.    $NVDA, $AMD, $TSM, $MU, $SNDK – these aren’t story stocks, they’re suppl
+  [2026-06-06 · @TalkMarkets · no-label] Two-Month Market Rally: What Comes Next? $ADBE $AMD $AVGO $BTC.X $INTC https://talkmarkets.com/article/two-month-market-rally-what-comes-next-17807750
+  [2026-06-06 · @Iamwillwexler · no-label] $AMD Bill Wexler sighting checking his ST   https://x.com/dayxtrading/status/2063304270921990412?s=46
+
+============================================================
+  GLOBAL MACRO NEWS
+============================================================
+
+[CNBC Markets]
+  • The May jobs report will be released Friday. Here's what to expect
+  • Long-term unemployment is surging in the U.S. There are hidden costs for workers and the economy
+  • Private payrolls grew by 122,000 in May, stronger than expected, ADP reports
+  • U.S. proposes fresh tariffs on 60 economies over forced labor trade practices
+  • U.S., Iran intensify attacks as ceasefire frays, peace talks stall
+  • Job openings in April surged to 7.6 million, the highest in nearly two years
+  • Inflation hits 3.2% in the euro zone as Iran war pushes energy costs higher
+  • Iran war cost: Average U.S. household paying $450 more on gas and energy
+
+[FT Markets]
+  • Oil tanker owners fear market crash after Iran war drove record profits
+  • Pricing the oil inventory drawdown
+  • Directors’ Deals: BP veteran hives off nearly £2mn in shares ahead of Manifold brouhaha
+  • Wasting China’s solar panel surplus is madness
+  • Are US Treasuries becoming a financial chokepoint?
+  • Nasdaq tumbles 4% as shares in chip and memory groups sink
+  • Bond investors bet Colombia’s ‘Tiger’ will slash public spending
+  • Could you be the FT’s new stock picking champion?
+
+############################################################
+  END OF DATA
+############################################################

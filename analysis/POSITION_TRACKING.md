@@ -12,13 +12,15 @@
 
 ## Step 1 — Read POSITIONS.md and ask which to check
 
-Read POSITIONS.md. For each pending symbol check report age (trading days only, Mon–Fri). Show all open and pending symbols with staleness warnings:
+Read POSITIONS.md. For each pending symbol check report age (trading days only, Mon–Fri). Show all open, orders-placed, and pending symbols with staleness warnings:
 
 ```
 "You have these positions:
  Open:
    1. AMD
    2. MKC
+ Orders Placed (limit submitted — awaiting fill):
+   1. FTNT — limit $130.50 — expires 2026-06-24
  Pending:
    1. ADBE  ⚠ 12 trading days old — consider removing or re-running
    2. INTU
@@ -29,10 +31,12 @@ Read POSITIONS.md. For each pending symbol check report age (trading days only, 
 ```
 
 Pending staleness rule: if report age > 10 trading days, show ⚠ next to the symbol. No action required here — stale cleanup is a separate process.
+Orders Placed staleness rule: show ⚠ if GTC expiry date has passed — flag as "order may have expired, confirm with broker."
 
 Wait for user to select.
 
 - If **Open**: proceed to Step 2
+- If **Orders Placed**: skip Step 2, go directly to Step 3, then use Orders Placed format in Step 5
 - If **Pending**: skip Step 2, go directly to Step 3
 
 ---
@@ -117,6 +121,23 @@ Action: [Hold / Take partial at T1 / Trail stop to $X / Exit — reason]
 
 Repeat Entry lines for each entry. Thesis, News, Catalyst, and Action are shared across all entries — shown once at the bottom.
 
+### Orders Placed format
+
+```
+SYMBOL — Limit Order — [date]
+
+Limit:    $[limit_price] GTC (placed [placed_date], expires [expiry_date])
+Current:  $[price] ([X%] above/below limit)
+Stop on fill: $[stop] | Target 1: $[t1] | Target 2: $[t2]
+
+Status: [Waiting — price above limit / ⚠ Near limit — may have filled / ⚠ Order expired]
+
+⚠ Flags:
+  Price ≤ limit + 2%  → "Check broker — may have filled. Set stop $[stop] immediately if so."
+  Price > limit + 15% → "Price well above limit — consider cancelling or re-evaluating."
+  Expiry passed       → "GTC order may have expired — confirm with broker."
+```
+
 ### Pending position format
 
 ```
@@ -149,7 +170,10 @@ Only update when the user explicitly reports an action:
 
 | Event | Action |
 |-------|--------|
-| User enters a trade | Move from Pending → Open with actual entry price, size, date |
+| User places a limit order | Move from Pending → Orders Placed with limit price and GTC expiry |
+| User says limit filled | Move from Orders Placed → Open with actual fill price, size, date; remind to set stop |
+| User cancels order | Remove from Orders Placed |
+| User enters a trade (no prior limit) | Move from Pending → Open with actual entry price, size, date |
 | User closes a trade | Move from Open → Closed with exit price and result % |
 | Stop hit | Move to Closed, record "stopped out at $X" |
 | Target 1 reached | Note partial exit in Open, update remaining size |

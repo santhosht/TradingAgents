@@ -16,13 +16,15 @@
 
 ## Step 1 — List positions and ask which to check
 
-Read POSITIONS.md. For each pending symbol check report age (trading days only, Mon–Fri). Show all open and pending symbols with entry count and staleness warnings:
+Read POSITIONS.md. For each pending symbol check report age (trading days only, Mon–Fri). Show all open, orders-placed, and pending symbols with entry count and staleness warnings:
 
 ```
 "You have these positions:
  Open:
    1. AMD (2 entries)
    2. MKC (1 entry)
+ Orders Placed (limit submitted — awaiting fill):
+   1. FTNT — limit $130.50 — expires 2026-06-24
  Pending:
    1. ADBE  ⚠ 12 trading days old — consider removing or re-running
    2. INTU
@@ -33,6 +35,7 @@ Read POSITIONS.md. For each pending symbol check report age (trading days only, 
 ```
 
 Pending staleness rule: if report age > 10 trading days, show ⚠ next to the symbol. No action required here — stale cleanup is a separate process.
+Orders Placed staleness rule: show ⚠ if the GTC expiry date has passed — flag as "order may have expired, confirm with broker".
 
 Wait for user to select symbols.
 
@@ -47,7 +50,7 @@ For each selected symbol extract:
 
 ---
 
-## Step 3 — Loop per symbol → branch on open vs pending
+## Step 3 — Loop per symbol → branch on open vs orders-placed vs pending
 
 - If **Open**: show its entries and ask which to check:
 
@@ -59,6 +62,8 @@ For each selected symbol extract:
 ```
 
 Wait for user to select entries. Then for each selected entry run Steps 3a–5.
+
+- If **Orders Placed**: skip entry selection. Go directly to Step 3a. In Step 5 use the Orders Placed format (see below) — check whether price is near/in/below the limit zone and flag fill status.
 
 - If **Pending**: skip entry selection. Go directly to Step 3a using the report from the "Based on" field in POSITIONS.md.
 
@@ -87,7 +92,7 @@ Age > 5 trading days + today is weekend:
 
 ```
 "How much detail for SYMBOL?
- A) Standard — decision.md + manager.md (recommended, fast)
+ A) Standard — decision.md + manager.md + news.md (recommended)
  B) Full — complete_report.md (⚠ heavy operation, slow)"
 ```
 
@@ -95,15 +100,16 @@ Default to A if no answer within one exchange.
 
 ### Step 3c — Read entry report
 
-From "Based on" field in POSITIONS.md:
+From "Based on" field in POSITIONS.md, read all three in parallel:
 - Read analysis/data/reports/SYMBOL_YYYYMMDD_HHMMSS/5_portfolio/decision.md
 - Read analysis/data/reports/SYMBOL_YYYYMMDD_HHMMSS/2_research/manager.md
+- Read analysis/data/reports/SYMBOL_YYYYMMDD_HHMMSS/1_analysts/news.md
 
 ### Step 3d — Read latest report
 
 Find latest report folder (highest timestamp in analysis/data/reports/SYMBOL_*):
 - If same as entry report → skip, already read
-- If different → read decision.md + manager.md (or complete_report.md if user chose B)
+- If different → read all three files (decision.md + manager.md + news.md) in parallel
 
 ---
 
@@ -121,16 +127,25 @@ Also fetch Finviz in parallel (ONCE per symbol):
 
 ```
 WebFetch: https://finviz.com/quote.ashx?t=SYMBOL
-Extract: analyst price target, recent news headlines (top 3–5)
+Extract: analyst price target, recent news headlines (top 3–5), any PT changes
 ```
 
-Use the news headlines in Step 5 to flag any exit triggers (earnings miss, sector contagion, guidance cut, analyst downgrade).
+After Finviz, cross-reference headlines against the catalysts and risks named in news.md. If Finviz headlines are thin or miss a named risk, fetch additional live news:
+
+**When to go deeper (do this proactively, don't wait to be asked):**
+- A named catalyst in news.md is within 3 days (earnings, testimony, regulatory event, product launch) → do a targeted WebSearch: "SYMBOL [catalyst keyword] June 2026"
+- Finviz shows a PT cut or downgrade → search for the full analyst note context
+- A macro risk named in news.md (export controls, tariffs, rate decision) has a live headline today → fetch the specific article
+- Any headline mentions a competitor by name that maps to a risk in news.md → search for more detail
+
+**Depth rule:** One extra fetch per named catalyst or gap. Don't fetch more than 3 additional sources per symbol — surface the most important gap and go deeper on that one.
 
 ---
 
 ## Step 5 — Output per entry
 
 - If **Open**: show Part A then Part B (if applicable)
+- If **Orders Placed**: show Part C only (order status check)
 - If **Pending**: skip Part A, go directly to Part B
 
 ### Part A — Current entry status
@@ -196,6 +211,26 @@ ZONE MISSED (price moved above zone top):
 ZONE BROKEN (price dropped below zone bottom):
   → "Price below $[zone bottom] — do not enter"
 ```
+
+### Part C — Orders Placed status check
+
+```
+SYMBOL — Limit Order Status — [date]
+
+Limit:    $[limit_price] GTC (placed [date], expires [expiry])
+Current:  $[price] ([X%] above/below limit)
+Status:   [Not yet filled / ⚠ Price at/below limit — may have filled / ⚠ Order expired]
+
+Stop on fill: $[stop] | Target 1: $[t1] | Target 2: $[t2]
+
+⚠ Flags (only shown if triggered):
+  Price ≤ limit + 2%  → "Price near/below your limit — check broker, may have filled. Set stop $[stop] immediately if filled."
+  Price > limit + 15% → "Price has moved well above limit — order unlikely to fill. Consider cancelling or re-evaluating."
+  Breakout condition  → "Price near/above $[breakout_level] — if close >$[breakout_level] vol >[vol], cancel limit and buy $[breakout_entry] per plan."
+  Expiry passed       → "⚠ GTC order may have expired — confirm with broker."
+```
+
+If price is at or below the limit, always prompt: **"Did your $[limit] limit fill? If yes, tell me and I'll update POSITIONS.md and remind you to set your stop."**
 
 ---
 

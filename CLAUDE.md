@@ -10,6 +10,19 @@
 ## Data Files
 - `analysis/data/POSITIONS.md` — user's live open/closed/pending positions. Always check this when the user asks about a ticker or position.
 
+## POSITIONS.md — Section Definitions
+
+| Section | Meaning |
+|---|---|
+| **Open Positions** | Limit/order filled; position is live in the broker |
+| **Orders Placed** | Limit order submitted to broker; awaiting fill — NOT pending analysis |
+| **Pending** | Analysis done, entry recommended, but NO order placed yet |
+| **Closed** | Exited positions |
+
+- When user says "I placed a limit order for X": move X from Pending → Orders Placed
+- When user says "filled" or "it filled": move from Orders Placed → Open Positions (add actual fill price)
+- Orders Placed entries are NOT stale in the same way as Pending — do not clean them up on stale sweeps; only remove if user cancels the order or it expires
+
 ## When to Read What
 
 | User asks... | Read first |

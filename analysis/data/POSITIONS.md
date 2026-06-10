@@ -18,7 +18,19 @@
 
 ---
 
-## Pending (not yet entered — from recent analysis)
+## Orders Placed (limit order submitted — awaiting fill)
+
+### FTNT — limit $130.50 GTC — placed 2026-06-10 — expires ~2026-06-24
+
+- Limit order: $130.50 | Size: 3% | Stop on fill: $122.50 (set immediately)
+- Target 1: $149 (sell half) | Target 2: $170 (sell rest)
+- Q2 2026 earnings (~Aug): FCF ≥$500M + revenue ≥$1.80B → add to 4%; FCF <$400M or rev <$1.75B → exit
+- Breakout alt: close >$150.07 vol >7.5M → cancel limit, buy 2% at $151–$153 (stop $141)
+- Based on: analysis/data/reports/FTNT_20260610_133733
+
+---
+
+## Pending (analysis done — no order placed yet)
 
 ### NVDA — report 2026-06-10 — STALE AFTER 2026-06-17 or post-Jun-11 Senate testimony
 
