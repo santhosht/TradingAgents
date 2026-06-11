@@ -10,6 +10,10 @@
 ## Data Files
 - `analysis/data/POSITIONS.md` — user's live open/closed/pending positions. Always check this when the user asks about a ticker or position.
 
+## Knowledge Base
+- `analysis/data/knowledge_base/` — macro and industry research documents. Not stock-specific. Use when user asks about sectors, themes, or industries, or when context from a knowledge base doc would improve stock analysis.
+- When user asks to save/add industry research or a thematic analysis, write it here as a new `.md` file.
+
 ## POSITIONS.md — Section Definitions
 
 | Section | Meaning |
