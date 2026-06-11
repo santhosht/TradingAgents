@@ -5,7 +5,7 @@
 - `analysis/POSITION_TRACKING.md` — how to manage, review, and update positions. Read this before any position-related response.
 - `analysis/MORNING_CHECK.md` — daily morning check process. Read this when user says "morning check".
 - `analysis/STALE_CLEANUP.md` — cleanup stale pending positions. Read this when user says "cleanup stale", "clean pending", or "stale cleanup".
-- `analysis/ENTRY_STOP_CHECK.md` — entry & stop check: live-price scan of open positions vs stops/targets, plus entry readiness check for pending positions with news. Read this when user says "stop check", "check stops", "check positions", "entry check", or "position monitor".
+- `analysis/ENTRY_STOP_CHECK.md` — two modes: **stop check** (fast, open positions only) and **full entry check** (stops + pending entry readiness + news). Read this when user says "stop check", "check stops", "entry check", "check positions", or "position monitor".
 - `analysis/TRADING_LEARNINGS.md` — log of lessons from real trades. Context only — not a rulebook. Suggest additions when new lessons emerge from analysis or real trades.
 
 ## Data Files
@@ -37,7 +37,8 @@
 | Review past trade learnings | `analysis/TRADING_LEARNINGS.md` |
 | Says "morning check" | `analysis/MORNING_CHECK.md` |
 | Says "cleanup stale" / "clean pending" / "stale cleanup" | `analysis/STALE_CLEANUP.md` |
-| Says "stop check" / "check stops" / "check positions" / "entry check" / "position monitor" | `analysis/ENTRY_STOP_CHECK.md` |
+| Says "stop check" / "check stops" | `analysis/ENTRY_STOP_CHECK.md` — **stop check mode** (open positions + orders only, fast) |
+| Says "entry check" / "check positions" / "position monitor" | `analysis/ENTRY_STOP_CHECK.md` — **full check mode** (stops + pending entry + news) |
 
 ## MANDATORY: Position Review Protocol
 

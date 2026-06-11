@@ -1,13 +1,13 @@
 # Entry & Stop Check Process
 
-**Trigger:** User says "stop check", "check stops", "check positions", "entry check", or "position monitor"
+## Triggers
 
-**Purpose:** Two-part scan — (1) fast stop/target check on all Open positions, (2) entry readiness check on all Pending positions with live prices + fresh news.
+| User says | Run |
+|-----------|-----|
+| "stop check" / "check stops" | **Stop Check only** — Part 1 + Part 3 (open positions + orders placed). Fast. No pending scan, no news. |
+| "entry check" / "position monitor" / "check positions" | **Full Check** — Part 1 + Part 2 + Part 3 (everything). |
 
-**Key rules:**
-- Open positions: price vs stops and targets
-- Pending positions: price vs entry zones + breakout alts + recent news (web search, last 48–72h)
-- Orders Placed: quick fill-status check
+**Key rules (both modes):**
 - No stop-limit orders are set in broker — these checks ARE the stop enforcement mechanism
 - If a stop is hit: surface it immediately and ask "did you want to exit?"
 - Never update POSITIONS.md unless user confirms an action
@@ -104,6 +104,7 @@ After the dashboard, for each 🔴 flag prompt the user:
 ---
 
 ## Part 2 — Entry Check (Pending Positions)
+### ⚠ Full Check only — skip this entire section for "stop check"
 
 ### Step 6 — Read POSITIONS.md Pending section
 
@@ -198,6 +199,62 @@ Orders Placed — quick status:
 Flag if:
 - Price ≤ limit + 2% (may have filled — confirm with broker)
 - Expiry date has passed
+
+---
+
+## Step 11 — Write output file
+
+Each mode writes its own file — no reading needed, just overwrite.
+
+**Stop check** → overwrite `analysis/data/checks/LAST_STOP_CHECK.md`:
+```
+# Last Stop Check
+**Run:** [date time]
+
+> ⚠️ ALERTS
+> 🔴 SYMBOL — STOP HIT — current $X below stop $Y — exit?
+> 🟠 SYMBOL — STOP CLOSE — stop $Y is X% away
+> 🟢 SYMBOL — T1 NEAR — $T1 is X% away
+>
+> ✓ All clear   ← use this line instead if no flags
+
+## Open Positions
+[stop/target table]
+
+## Orders Placed
+[orders table]
+```
+
+**Full entry check** → overwrite `analysis/data/checks/LAST_ENTRY_CHECK.md`:
+```
+# Last Entry Check
+**Run:** [date time]
+
+> ⚠️ ALERTS
+> 🔴 SYMBOL — STOP HIT — current $X below stop $Y — exit?
+> 🟠 SYMBOL — STOP CLOSE — stop $Y is X% away
+> 🟢 SYMBOL — T1 NEAR / ENTRY ZONE / BREAKOUT NEAR — one line each
+> 🚀 SYMBOL — BREAKOUT NEAR — $X trigger X% away
+>
+> ✓ All clear   ← use this line instead if no flags
+
+## Open Positions
+[stop/target table]
+
+## Orders Placed
+[orders table]
+
+## Pending Positions
+[entry table]
+
+## News Highlights
+[one line per symbol]
+
+## Actions
+[numbered list]
+```
+
+No confirmation needed — always write after every run.
 
 ---
 

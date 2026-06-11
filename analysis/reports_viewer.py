@@ -13,6 +13,7 @@ ET = ZoneInfo("America/New_York")
 
 REPORTS_DIR = Path(__file__).parent / "data" / "reports"
 KB_DIR = Path(__file__).parent / "data" / "knowledge_base"
+CHECKS_DIR = Path(__file__).parent / "data" / "checks"
 
 app = Flask(__name__)
 
@@ -207,6 +208,15 @@ BASE_HTML = """<!DOCTYPE html>
                 white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .nav-kb a:hover { background: var(--hover-bg); color: var(--text); }
     .nav-kb a.current { background: var(--current-bg); color: var(--accent); }
+
+    /* ── Live Checks section ── */
+    .nav-checks { border-top: 1px solid var(--border); padding: 8px 14px 12px; }
+    .nav-checks-label { font-size: 10px; font-weight: 700; text-transform: uppercase;
+                        letter-spacing: 0.8px; color: var(--muted); margin-bottom: 6px; }
+    .nav-checks a { display: block; font-size: 12px; padding: 4px 6px;
+                    color: var(--muted); text-decoration: none; border-radius: 3px; }
+    .nav-checks a:hover { background: var(--hover-bg); color: var(--text); }
+    .nav-checks a.current { background: var(--current-bg); color: var(--accent); }
   </style>
 </head>
 <body>
@@ -228,6 +238,7 @@ BASE_HTML = """<!DOCTYPE html>
     {{ nav_top | safe }}
     {{ nav_date | safe }}
     {{ nav_symbol | safe }}
+    {{ nav_checks | safe }}
     {{ nav_kb | safe }}
   </div>
 </div>
@@ -355,6 +366,8 @@ BASE_HTML = """<!DOCTYPE html>
     try {
       const fragmentUrl = href.startsWith('/kb/')
         ? '/kb_fragment/' + href.slice(4)
+        : href.startsWith('/checks/')
+        ? '/checks_fragment/' + href.slice(8)
         : '/fragment' + href.replace(/^[/]view/, '');
       const res = await fetch(fragmentUrl);
       if (!res.ok) { window.location = href; return; }
@@ -730,6 +743,19 @@ def build_nav_kb(current_path):
     return html
 
 
+def build_nav_checks(current_path):
+    files = sorted(CHECKS_DIR.glob("LAST_*.md"), key=lambda f: f.name)
+    if not files:
+        return ""
+    html = '<div class="nav-checks"><div class="nav-checks-label">Live Checks</div>'
+    for f in files:
+        name = f.stem.replace("_", " ").title()
+        cls = " current" if current_path and f == current_path else ""
+        html += f'<a class="nav-file{cls}" href="/checks/{f.name}" title="{f.name}">{name}</a>'
+    html += '</div>'
+    return html
+
+
 # ── Routes ─────────────────────────────────────────────────────────────────
 
 @app.route("/")
@@ -738,6 +764,7 @@ def index():
     program = request.args.get("program", "all")
     nav_top, nav_date, nav_symbol = build_nav(runs, top_default, top_programs, None, program)
     nav_kb = build_nav_kb(None)
+    nav_checks = build_nav_checks(None)
     program_options = build_program_options(top_programs, program)
     total = len(filter_runs(runs, program))
     content = (
@@ -749,7 +776,7 @@ def index():
     return render_template_string(
         BASE_HTML, title="Reports",
         nav_top=nav_top, nav_date=nav_date, nav_symbol=nav_symbol,
-        nav_kb=nav_kb, program_options=program_options, content=content,
+        nav_kb=nav_kb, nav_checks=nav_checks, program_options=program_options, content=content,
     )
 
 
@@ -760,7 +787,8 @@ def nav_fragment():
     program = request.args.get("program", "all")
     nav_top, nav_date, nav_symbol = build_nav(runs, top_default, top_programs, None, program)
     nav_kb = build_nav_kb(None)
-    return nav_top + nav_date + nav_symbol + nav_kb
+    nav_checks = build_nav_checks(None)
+    return nav_top + nav_date + nav_symbol + nav_checks + nav_kb
 
 
 @app.route("/view/<path:relpath>")
@@ -777,6 +805,7 @@ def view_file(relpath):
     program = request.args.get("program", "all")
     nav_top, nav_date, nav_symbol = build_nav(runs, top_default, top_programs, filepath, program)
     nav_kb = build_nav_kb(None)
+    nav_checks = build_nav_checks(None)
     program_options = build_program_options(top_programs, program)
 
     text = filepath.read_text(encoding="utf-8", errors="replace")
@@ -792,7 +821,7 @@ def view_file(relpath):
     return render_template_string(
         BASE_HTML, title=filepath.name,
         nav_top=nav_top, nav_date=nav_date, nav_symbol=nav_symbol,
-        nav_kb=nav_kb, program_options=program_options, content=content,
+        nav_kb=nav_kb, nav_checks=nav_checks, program_options=program_options, content=content,
     )
 
 
@@ -836,6 +865,7 @@ def view_kb_file(filename):
     program = request.args.get("program", "all")
     nav_top, nav_date, nav_symbol = build_nav(runs, top_default, top_programs, None, program)
     nav_kb = build_nav_kb(filepath)
+    nav_checks = build_nav_checks(None)
     program_options = build_program_options(top_programs, program)
 
     text = filepath.read_text(encoding="utf-8", errors="replace")
@@ -848,7 +878,7 @@ def view_kb_file(filename):
     return render_template_string(
         BASE_HTML, title=title,
         nav_top=nav_top, nav_date=nav_date, nav_symbol=nav_symbol,
-        nav_kb=nav_kb, program_options=program_options, content=content,
+        nav_kb=nav_kb, nav_checks=nav_checks, program_options=program_options, content=content,
     )
 
 
@@ -866,6 +896,54 @@ def kb_fragment(filename):
     file_content = f'<div class="content">{body}</div>'
     title = filepath.stem.replace("_", " ").title()
     breadcrumb = f'<div class="breadcrumb"><a href="/">Home</a> / Knowledge Base / {filepath.name}</div>'
+    return breadcrumb + f"<h1>{title}</h1>" + file_content
+
+
+@app.route("/checks/<path:filename>")
+def view_checks_file(filename):
+    filepath = CHECKS_DIR / filename
+    if not filepath.exists() or not filepath.is_file():
+        abort(404)
+    try:
+        filepath.resolve().relative_to(CHECKS_DIR.resolve())
+    except ValueError:
+        abort(403)
+
+    runs, top_default, top_programs = get_runs()
+    program = request.args.get("program", "all")
+    nav_top, nav_date, nav_symbol = build_nav(runs, top_default, top_programs, None, program)
+    nav_kb = build_nav_kb(None)
+    nav_checks = build_nav_checks(filepath)
+    program_options = build_program_options(top_programs, program)
+
+    text = filepath.read_text(encoding="utf-8", errors="replace")
+    body = md.markdown(text, extensions=["tables", "fenced_code", "nl2br"])
+    file_content = f'<div class="content">{body}</div>'
+    title = filepath.stem.replace("_", " ").title()
+    breadcrumb = f'<div class="breadcrumb"><a href="/">Home</a> / Live Checks / {filepath.name}</div>'
+    content = breadcrumb + f"<h1>{title}</h1>" + file_content
+
+    return render_template_string(
+        BASE_HTML, title=title,
+        nav_top=nav_top, nav_date=nav_date, nav_symbol=nav_symbol,
+        nav_kb=nav_kb, nav_checks=nav_checks, program_options=program_options, content=content,
+    )
+
+
+@app.route("/checks_fragment/<path:filename>")
+def checks_fragment(filename):
+    filepath = CHECKS_DIR / filename
+    if not filepath.exists() or not filepath.is_file():
+        abort(404)
+    try:
+        filepath.resolve().relative_to(CHECKS_DIR.resolve())
+    except ValueError:
+        abort(403)
+    text = filepath.read_text(encoding="utf-8", errors="replace")
+    body = md.markdown(text, extensions=["tables", "fenced_code", "nl2br"])
+    file_content = f'<div class="content">{body}</div>'
+    title = filepath.stem.replace("_", " ").title()
+    breadcrumb = f'<div class="breadcrumb"><a href="/">Home</a> / Live Checks / {filepath.name}</div>'
     return breadcrumb + f"<h1>{title}</h1>" + file_content
 
 
