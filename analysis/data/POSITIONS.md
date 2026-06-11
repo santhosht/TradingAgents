@@ -9,16 +9,18 @@
   After T1: move stop up to $475 (breakeven)
   Next check: Q2 earnings Aug 2026 — revenue >$10.5B, EPS >$0.84
 
-### MKC — open
-
-- Entry 1: $46.80 | Stop: $43.80 | Size: 4% | Based on: analysis/data/reports/MKC_20260607_185008
-  Target 1: $51.00 (sell half) | Target 2: $61.31 (sell rest)
-  After T1: move stop up to $46.80 (breakeven)
-  Next check: Q2 earnings Jun 25 — watch operating margin vs 15%
 
 ---
 
 ## Orders Placed (limit order submitted — awaiting fill)
+
+### AVGO — limit $360.00 — placed 2026-06-11 — expires 2026-06-12 8PM ET
+
+- Limit order: $360.00 | Size: 5% | Stop on fill: $320 (set immediately)
+- Target 1: $450 (sell half) | Target 2: $522 (sell rest)
+- Q3 2026 earnings (~Sep): revenue ≥$27B + no hyperscaler allocation reduction → hold; miss → cut/exit
+- Breakout alt: close >$403.55 vol >42M → cancel limit, buy 2% at $406–$410 (stop $368)
+- Based on: analysis/data/reports/AVGO_20260611_030637
 
 ### FTNT — limit $130.50 GTC — placed 2026-06-10 — expires ~2026-06-24
 
@@ -31,6 +33,12 @@
 ---
 
 ## Pending (analysis done — no order placed yet)
+
+### MKC — report 2026-06-07 — STALE AFTER 2026-06-14
+- Suggested entry: $46.80 | Size: 4% | Stop: $43.80
+- Target 1: $51.00 (sell half) | Target 2: $61.31 (sell rest)
+- Key trigger: Q2 earnings Jun 25 — watch operating margin vs 15%
+- Based on: analysis/data/reports/MKC_20260607_185008
 
 ### NVDA — report 2026-06-10 — STALE AFTER 2026-06-17 or post-Jun-11 Senate testimony
 
