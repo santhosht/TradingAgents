@@ -1,28 +1,47 @@
 # Last Stop Check
-**Run:** 2026-06-12
+**Run:** 2026-06-13
 
 > ⚠️ ALERTS
-> 🟠 AVGO — LIMIT NEAR — current $385.57 is $0.43 BELOW your $386.00 limit — may have filled, confirm with broker
->
-> ✓ NVDA and AMD inside stops, no targets triggered
+> 🔴 MSFT — STOP HIT — current $390.74 below stop $393 — exit?
+> 🔴 BABA — STOP HIT — current $112.82 below stop $113 — exit?
+> 🟠 AAPL — STOP CLOSE — stop $291 is 0.04% away ($291.13 current) — essentially at stop
+> 🟠 GLD — STOP CLOSE — stop $386 is 0.1% away ($386.54 current) — essentially at stop
+> 🟠 AMZN — STOP CLOSE — stop $234 is 1.9% away ($238.55 current)
+> 🟢 AMD E2 — T1 NEAR — $523 target is 2.2% away ($511.57 current)
+> 🟢 FTNT — T1 NEAR — $150 target is 2.5% away ($146.30 current)
+> ⚠️ AMD E1 — above $490 analyst mean — June 9 trim decision pending ($511.57)
+> ⚠️ UNH — June 9 trim 30–35% still pending ($408.52)
+> ⚠️ FTNT — June 9 trim 55–60% still pending ($146.30)
+> ⚠️ ETHA — June 9 exit flag still pending ($12.57)
+> ⚠️ SpaceX — no stop or targets set (analysis planned ~2026-06-19)
 
 ## Open Positions
 
-| Symbol | Entry   | Current  | P&L     | Stop        | → T1         | → T2        |
-|--------|---------|----------|---------|-------------|--------------|-------------|
-| NVDA   | $201.00 | $204.87  | +1.9%   | $189 (7.8%) | $235 (14.7%) | $298 (45.5%)|
-| AMD    | $475.00 | $488.45  | +2.8%   | $419 (14.2%)| $523 (7.1%)  | $600 (22.8%)|
-
-✓ All positions inside stops, no targets triggered.
-
-**NVDA notes:** RSI 39.5 (oversold), MACD bearish, price below VWMA20 ($216). Thesis-break rule: needs two consecutive closes <$199 — last 5 days show $200.42 then $204.87, not triggered.
-
-**AMD notes:** RSI 56.5, up +10.86% today on 29.1M vol. Price above VWMA20 ($477.80) and above entry. Strong day.
+| Symbol | Entry | Current | P&L | Stop | Stop Dist | → T1 | → T2 |
+|--------|-------|---------|-----|------|-----------|------|------|
+| NVDA E1 | $131.29 | $205.19 | +56.3% | $196 | 4.5% | $309 (+50.6%) | $370+ |
+| NVDA E2 | $201.00 | $205.19 | +2.1% | $189 | 7.9% | $235 (+14.5%) | $298 (+45.2%) |
+| AVGO | $385.85 | $382.07 | -1.0% | $346 | 9.4% | $422 (+10.5%) | $522 (+36.6%) |
+| AMD E1 | ~$201 | $511.57 | +154.5% | $446 | 12.8% | $530 (+3.6%) | $600 (+17.3%) |
+| AMD E2 | $475.00 | $511.57 | +7.7% | $419 | 18.1% | $523 (+2.2%) 🟢 | $600 (+17.3%) |
+| SpaceX | $135.00 | — | — | NOT SET | — | NOT SET | — |
+| MSFT | $440.28 | $390.74 | -11.3% | $393 | 🔴 STOP HIT | $559 | $620+ |
+| MSTR | $379.48 | $123.97 | -67.3% | $103 | 16.9% | $336 | $457 |
+| TSLA | $441.00 | $406.43 | -7.8% | $384 | 5.5% | $450 (+10.7%) | $498 (+22.5%) |
+| GLD | $441.15 | $386.54 | -12.4% | $386 | 0.1% 🟠 | $450 (+16.4%) | $509 (+31.7%) |
+| SPY | $679.24 | $741.75 | +9.2% | Trail 5% (~$705) | ~5% | Hold always | — |
+| UNH | $296.93 | $408.52 | +37.6% | $391 | 4.3% | $450 (+10.2%) | — |
+| CRWV | $106.52 | $100.55 | -5.6% | $87 | 13.5% | $138 (+37.2%) | $187 (+86.0%) |
+| GOOGL | $253.90 | $359.68 | +41.7% | $348 | 3.2% | $433 (+20.4%) | $500+ |
+| AMZN | $215.53 | $238.55 | +10.7% | $234 | 1.9% 🟠 | $317 (+32.9%) | $380+ |
+| BABA | $166.00 | $112.82 | -32.0% | $113 | 🔴 STOP HIT | $192 | — |
+| AAPL | $197.57 | $291.13 | +47.4% | $291 | 0.04% 🟠 | $316 (+8.5%) | $370+ |
+| FTNT | $85.68 | $146.30 | +70.7% | $135 | 7.7% | $150 (+2.5%) 🟢 | — |
+| KLAR | $40.00 | $16.23 | -59.4% | $12.06 | 25.7% | $22–26 | $34–38 |
+| VIA | $44.00 | $15.10 | -65.7% | $12.95 | 14.2% | $22–25 | $34–40 |
+| STUB | $20.32 | $11.46 | -43.6% | $8.50 | 25.8% | $14–15 | $20–22 |
+| ETHA | $16.96 | $12.57 | -25.9% | ETH<$1,600 | check ETH | — | — |
 
 ## Orders Placed
 
-| Symbol | Limit   | Current  | Distance | Status                          |
-|--------|---------|----------|----------|---------------------------------|
-| AVGO   | $386.00 | $385.57  | -0.11%   | ⚠ BELOW LIMIT — may have filled |
-
-AVGO expires 2026-06-13 8PM ET — still active. Price traded below limit today — confirm fill status with broker.
+None.

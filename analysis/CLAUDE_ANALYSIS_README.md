@@ -54,3 +54,36 @@ pkill -f reports_viewer.py
 ```bash
 tail -f reports_viewer.log
 ```
+
+---
+
+## Process Comparison: Morning Check vs Stop Check vs Entry Check vs Position Tracking
+
+| | Morning Check | Stop Check | Entry Check | Position Tracking |
+|---|---|---|---|---|
+| **Trigger** | "morning check" | "stop check" / "check stops" | "entry check" / "check positions" / "position monitor" | "how is X doing?" / ticker question |
+| **Scope** | All positions | Open + Orders Placed | Open + Orders Placed + Pending | One symbol at a time |
+| **Open positions** | ✓ | ✓ | ✓ | ✓ |
+| **Orders Placed** | ✓ | ✓ | ✓ | ✓ |
+| **Pending positions** | ✓ | ✗ | ✓ | ✓ |
+| **Reads decision.md** | ✓ | ✗ | ✗ | ✓ (always) |
+| **Reads manager.md** | ✓ | ✗ | ✗ | ✓ (if needed) |
+| **Reads news.md** | ✓ | ✗ | ✗ | ✗ |
+| **Reads fundamentals.md** | ✗ | ✗ | ✗ | ✓ (if needed) |
+| **Live news fetch** | ✓ Finviz + WebSearch | ✗ | ✓ WebSearch | ✓ Finviz |
+| **4-source web fetch** | ✗ | ✗ | ✗ | ✓ (Yahoo + Finviz + StockAnalysis ×2) |
+| **Entry confidence rating** | ✓ HIGH/MED/LOW/NO ENTRY | ✗ | basic zone check | ✗ |
+| **Interactive (asks which symbols)** | ✓ | ✗ | ✗ | ✓ |
+| **Speed** | Slow | Fast | Medium | Medium |
+| **Saves output file** | ✗ | `data/checks/LAST_STOP_CHECK.md` | `data/checks/LAST_ENTRY_CHECK.md` | ✗ |
+
+### What each process is for
+
+- **Morning Check** — Start-of-day review. Interactive, thesis-aware, reads full reports, gives entry confidence ratings. Most thorough.
+- **Stop Check** — Fast price-only alert. Are stops hit? Targets near? No report reading, no news. Use intraday.
+- **Entry Check** — Stop check + pending entry scan with live news. Are any pending entries now in zone or breaking out?
+- **Position Tracking** — Deep dive on one stock. Reads the decision report, fetches 4 live data sources, full thesis + action recommendation.
+
+### Who reads the output files
+
+`LAST_STOP_CHECK.md` and `LAST_ENTRY_CHECK.md` are written by Stop Check and Entry Check respectively. They are **not read by any of the 4 processes** — they are consumed by the **Reports Viewer UI** (sidebar "Live Checks" section) for persistent reference between runs.

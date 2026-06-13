@@ -131,3 +131,27 @@ These actions were recommended June 9 — confirm if you executed them:
 | Sell 40–50% | AMD | At $490 (pre-AI shares) — did you trim? |
 | Exit | XRP, ADA, SOL | Crypto — did you sell? |
 | Exit | ETHA | Did you sell? |
+
+---
+
+## Not Tracked in POSITIONS.md
+
+### NFLX — open (tiny)
+- Shares: 0.12 | Avg cost: $82.07 | Cost basis: ~$10 | Size: 0.1%
+- Stop: $75 | Target 1: $116 | Target 2: $134
+- Note: negligible position — no active management needed
+
+### COPP — open (tiny)
+- Shares: 0.24 | Avg cost: $40.93 | Cost basis: ~$10 | Size: 0.1%
+- Stop: $36.50 | Target 1: $43.75 | Target 2: $45.87
+- Note: $10 test position — no active management needed
+
+### GEMI — held for sell
+- Shares: 21.00 | Avg cost: $28.06 | Cost basis: ~$589 | Size: 4.9%
+- Stop: NOT SET | Targets: NOT SET
+- Note: sell orders placed at breakeven — awaiting separate analysis
+
+### FRMI — held for sell
+- Shares: 14.00 | Avg cost: $21.00 | Cost basis: ~$294 | Size: 2.4%
+- Stop: NOT SET | Targets: NOT SET
+- Note: sell orders placed — awaiting separate analysis. Watch for: signed replacement anchor tenant announcement → revisit immediately
