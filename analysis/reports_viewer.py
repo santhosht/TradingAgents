@@ -187,6 +187,8 @@ BASE_HTML = """<!DOCTYPE html>
     .content li { line-height: 1.7; }
     .pre { background: var(--code-bg); padding: 20px; border-radius: 6px;
            font-size: 13px; white-space: pre-wrap; line-height: 1.6; color: var(--pre-color); }
+    .html-frame { width: 100%; height: calc(100vh - 140px); border: 1px solid var(--border);
+                  border-radius: 8px; background: #fff; }
 
     /* Rating / mode badges */
     .badge { font-size: 9px; font-weight: 700; padding: 1px 4px; border-radius: 3px;
@@ -524,7 +526,7 @@ def get_runs():
             elif entry.is_dir():
                 if is_run_folder(entry.name):
                     # default (non-program) run
-                    files = sorted(entry.rglob("*.md")) + sorted(entry.rglob("*.txt"))
+                    files = sorted(entry.rglob("*.md")) + sorted(entry.rglob("*.txt")) + sorted(entry.rglob("*.html"))
                     if files:
                         ticker, date_str, time_str = parse_run(entry)
                         runs.append({
@@ -543,7 +545,7 @@ def get_runs():
                             elif sub.is_dir():
                                 if is_run_folder(sub.name):
                                     # standard TICKER_DATE_TIME run
-                                    files = sorted(sub.rglob("*.md")) + sorted(sub.rglob("*.txt"))
+                                    files = sorted(sub.rglob("*.md")) + sorted(sub.rglob("*.txt")) + sorted(sub.rglob("*.html"))
                                     if files:
                                         ticker, date_str, time_str = parse_run(sub)
                                         runs.append({
@@ -553,7 +555,7 @@ def get_runs():
                                         })
                                 else:
                                     # non-standard subfolder — show as named collapsible session
-                                    session_files = sorted(sub.rglob("*.md")) + sorted(sub.rglob("*.txt"))
+                                    session_files = sorted(sub.rglob("*.md")) + sorted(sub.rglob("*.txt")) + sorted(sub.rglob("*.html"))
                                     if session_files:
                                         top_programs[prog]["sessions"][sub.name] = session_files
                     except PermissionError:
@@ -808,12 +810,15 @@ def view_file(relpath):
     nav_checks = build_nav_checks(None)
     program_options = build_program_options(top_programs, program)
 
-    text = filepath.read_text(encoding="utf-8", errors="replace")
-    if filepath.suffix == ".md":
-        body = md.markdown(text, extensions=["tables", "fenced_code", "nl2br"])
-        file_content = f'<div class="content">{body}</div>'
+    if filepath.suffix == ".html":
+        file_content = f'<iframe src="/html/{relpath}" class="html-frame" frameborder="0"></iframe>'
     else:
-        file_content = f'<div class="pre">{text}</div>'
+        text = filepath.read_text(encoding="utf-8", errors="replace")
+        if filepath.suffix == ".md":
+            body = md.markdown(text, extensions=["tables", "fenced_code", "nl2br"])
+            file_content = f'<div class="content">{body}</div>'
+        else:
+            file_content = f'<div class="pre">{text}</div>'
 
     breadcrumb = f'<div class="breadcrumb"><a href="/">Home</a> / {relpath}</div>'
     content = breadcrumb + f"<h1>{filepath.name}</h1>" + file_content
@@ -833,12 +838,15 @@ def render_file_content(relpath):
         filepath.resolve().relative_to(REPORTS_DIR.resolve())
     except ValueError:
         return None
-    text = filepath.read_text(encoding="utf-8", errors="replace")
-    if filepath.suffix == ".md":
-        body = md.markdown(text, extensions=["tables", "fenced_code", "nl2br"])
-        file_content = f'<div class="content">{body}</div>'
+    if filepath.suffix == ".html":
+        file_content = f'<iframe src="/html/{relpath}" class="html-frame" frameborder="0"></iframe>'
     else:
-        file_content = f'<div class="pre">{text}</div>'
+        text = filepath.read_text(encoding="utf-8", errors="replace")
+        if filepath.suffix == ".md":
+            body = md.markdown(text, extensions=["tables", "fenced_code", "nl2br"])
+            file_content = f'<div class="content">{body}</div>'
+        else:
+            file_content = f'<div class="pre">{text}</div>'
     breadcrumb = f'<div class="breadcrumb"><a href="/">Home</a> / {relpath}</div>'
     return breadcrumb + f"<h1>{filepath.name}</h1>" + file_content
 
@@ -849,6 +857,21 @@ def fragment(relpath):
     if html is None:
         abort(404)
     return html
+
+
+@app.route("/html/<path:relpath>")
+def serve_html(relpath):
+    """Serve a raw HTML file from within a report run folder (used by iframe)."""
+    filepath = REPORTS_DIR / relpath
+    if not filepath.exists() or not filepath.is_file():
+        abort(404)
+    try:
+        filepath.resolve().relative_to(REPORTS_DIR.resolve())
+    except ValueError:
+        abort(403)
+    if filepath.suffix != ".html":
+        abort(403)
+    return filepath.read_text(encoding="utf-8", errors="replace"), 200, {"Content-Type": "text/html; charset=utf-8"}
 
 
 @app.route("/kb/<path:filename>")

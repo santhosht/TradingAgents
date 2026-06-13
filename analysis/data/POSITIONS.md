@@ -13,6 +13,13 @@
   Breakout scale: close >$220 vol >175M → consider adding
   Next check: Q3 earnings (~Sep) — revenue ≥15% QoQ growth, gross margin >72%
 
+### AVGO — open
+
+- Entry 1: $385.85 (filled 2026-06-12) | Stop: $346.00 (set immediately in broker) | Size: 2.5% | Based on: analysis/data/reports/AVGO_20260612_032425
+  Target 1: $422 (sell 40%) | Target 2: $522 (sell remaining 60%)
+  Secondary entry: $357–$365 (SMA 200 zone — add 1.5% separate tranche if dips there)
+  Next check: Q3 FY2026 earnings (~Sep) — revenue ≥$22.5B → hold; <$21B → exit immediately
+
 ### AMD — open
 
 - Entry 1: $475 | Stop: $419 | Size: 3.5% | Based on: analysis/data/reports/AMD_20260607_042515
@@ -20,19 +27,19 @@
   After T1: move stop up to $475 (breakeven)
   Next check: Q2 earnings Aug 2026 — revenue >$10.5B, EPS >$0.84
 
+### SpaceX — open
+
+- Entry: $135.00 (IPO allocation 2026-06-12) | Shares: 11
+- Stop: NOT SET — awaiting analysis
+- Targets: NOT SET — awaiting analysis
+- Next action: Run full analysis ~2026-06-19 (1 week post-IPO) — need price stability + news to set stop/targets
+
 
 ---
 
 ## Orders Placed (limit order submitted — awaiting fill)
 
-### AVGO — limit $360.00 — placed 2026-06-11 — expires EOD 2026-06-11 (day order)
-
-- Limit order: $360.00 | Size: 5% | Stop on fill: $320 (set immediately)
-- Target 1: $450 (sell half) | Target 2: $522 (sell rest)
-- Q3 2026 earnings (~Sep): revenue ≥$27B + no hyperscaler allocation reduction → hold; miss → cut/exit
-- Breakout alt: close >$403.55 vol >42M → cancel limit, buy 2% at $406–$410 (stop $368)
-- Based on: analysis/data/reports/AVGO_20260611_030637
-
+_None._
 
 ---
 
@@ -52,13 +59,6 @@
 - Key trigger: Add-on signal — COPP close >$39.77 on vol >140K within 10 trading days → add to 7% next open
 - Based on: analysis/data/reports/COPP_20260611_175013
 
-### MKC — report 2026-06-07 — STALE AFTER 2026-06-14
-- Suggested entry: $46.80 | Size: 4% | Stop: $43.80
-- Target 1: $51.00 (sell half) | Target 2: $61.31 (sell rest)
-- Key trigger: Q2 earnings Jun 25 — watch operating margin vs 15%
-- Based on: analysis/data/reports/MKC_20260607_185008
-
-
 ### ADBE — report 2026-06-11 — STALE AFTER 2026-06-18
 - **STATUS: WATCH AND WAIT — no order placed. Waiting for: (1) new CEO named, (2) Q3 guidance clarity from new management**
 
@@ -68,11 +68,6 @@
 - Key trigger: exit immediately if gross margin <89% any quarter, or new management guides >10% below consensus
 - Q3 FY2026 check (~Sep): revenue ≥$6.60B + gross margin ≥89% → hold; miss either → cut/exit
 - Based on: analysis/data/reports/ADBE_20260611_205123
-
-### INTU — report 2026-06-07 — STALE AFTER 2026-06-14
-- Suggested entry: $293–$297 (2% starter), second tranche $255–$275
-- Stop: $255 | Target 1: $350 | Target 2: $450
-- Based on: analysis/data/reports/INTU_20260607_182926
 
 ### LULU — report 2026-06-07 — STALE AFTER 2026-06-14
 - Suggested entry: $110–$114.50 | Size: 2–3% max | Stop: $104
