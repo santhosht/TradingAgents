@@ -83,6 +83,28 @@ If no flags → show: `✓ All positions inside stops, no targets triggered.`
 
 ---
 
+### Step 4b — Flag open positions with no analysis
+
+After fetching prices, check each Open position against `analysis/data/reports/` for a report folder matching the symbol. If none exists:
+
+| Condition | Flag |
+|-----------|------|
+| No report + stop within 5% | 🔴 NO ANALYSIS — stop close and no thesis to defend this position |
+| No report + target within 5% | 🟡 NO ANALYSIS — target near, no analysis to confirm hold or trim |
+| No report + position >6% of portfolio | 🟡 NO ANALYSIS — concentrated position with no thesis on record |
+| No report + any flag triggered | 🟡 NO ANALYSIS — [flag] triggered but no report to evaluate thesis |
+
+Add to the dashboard output after the main flags:
+```
+⚠ No analysis on file:
+  MSTR — 11.6% position, no report — consider running analysis
+  NVDA (entry 1) — no report for original entry
+```
+
+These are **not blockers** — stops and targets still apply. But when a flag triggers on a no-report position, note it and suggest running full analysis before acting.
+
+---
+
 ### Step 5 — Per-flag action prompts
 
 After the dashboard, for each 🔴 flag prompt the user:
@@ -139,6 +161,8 @@ Check price against:
 3. **Stale** — is today's date past the stale-after date?
 4. **Watch & wait** — does the entry have an explicit "do not enter yet" condition?
 
+**Important:** Stale does NOT skip the price check. Always scan price vs entry zone regardless of stale date. Flags can combine — a position can be both 🟢 ENTRY ZONE and 🗑 STALE at the same time. The stale flag only means: re-run analysis before placing the order.
+
 Apply flags:
 
 | Condition | Flag |
@@ -147,7 +171,7 @@ Apply flags:
 | price within 3% of breakout trigger | 🚀 BREAKOUT NEAR — $[X] trigger, [Y%] away — watch close |
 | price ≥ breakout trigger (check volume) | 🚀 BREAKOUT TRIGGERED — close >$[X] on vol >[Y]M — execute alt entry |
 | price well above entry, breakout not near | ⚪ TOO FAR — original entry $[X] is [Y%] below current, no breakout signal |
-| stale-after date passed | 🗑 STALE — report expired [date], re-analyze before acting |
+| stale-after date passed | 🗑 STALE — report expired [date] — re-run before placing order (price check still shown) |
 | explicit watch-and-wait status | ⏸ WATCH & WAIT — [condition from POSITIONS.md] |
 
 ---

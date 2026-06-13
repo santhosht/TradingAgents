@@ -161,6 +161,9 @@ Suggest re-running the full pipeline (`ANALYSIS_PROCESS.md`) when:
 - A major catalyst has passed (earnings, product launch, regulatory event)
 - Stock has moved >15% from entry in either direction
 - User asks "is this still a good buy?"
+- **Pending position: price is in entry zone AND report is stale** — morning check flags this; re-run before placing the order, not before
+
+**Stale does not mean skip.** For Pending positions, always check price vs zone regardless of stale date. Only re-run when morning check (or entry check) shows price is actually in zone and the user is ready to act.
 
 ---
 

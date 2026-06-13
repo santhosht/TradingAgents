@@ -72,6 +72,11 @@ Wait for user to select entries. Then for each selected entry run Steps 3a–5.
 Find latest report: scan analysis/data/reports/SYMBOL_* folders, pick highest timestamp.
 Calculate age in trading days only (Mon–Fri, skip weekends):
 
+**If symbol is Pending:**
+→ Skip age gate entirely — always proceed to Step 3b.
+→ Stale status is only surfaced in Step 5 Part B **if price is in the entry zone** (that's when it matters — not before).
+
+**If symbol is Open or Orders Placed:**
 ```
 Age <= 5 trading days:
   → Proceed to Step 3b
@@ -195,9 +200,11 @@ Output confidence rating:
 HIGH confidence (3+ calm days, volume shrinking, RSI cooling, price holding):
   → "ENTER — place limit at $[zone midpoint]
      Stop: $[stop] | Target 1: $[t1] | Target 2: $[t2]"
+  → If report is stale (>5 trading days): append "⚠ Analysis is [X] trading days old — re-run before placing order."
 
 MEDIUM confidence (2 calm days but volume still elevated):
   → "Enter half size only, watch closely"
+  → If report is stale: append "⚠ Analysis is [X] trading days old — re-run before placing order."
 
 LOW confidence (price in zone but RSI high / volume not shrinking):
   → "Wait one more day"
