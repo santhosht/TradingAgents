@@ -56,6 +56,18 @@
 | "cleanup stale" / "clean pending" / "stale cleanup" | `analysis/STALE_CLEANUP.md` |
 | Review past trade learnings | `analysis/TRADING_LEARNINGS.md` |
 
+## MANDATORY: Multi-Symbol Analysis — Background Agent Monitoring
+
+When running full analysis on multiple symbols sequentially (each as a background agent chained one after another):
+
+- If no completion notification arrives within **25 minutes**, manually check the report folder:
+  ```bash
+  ls -la analysis/data/reports/ | grep SYMBOL
+  ls -la analysis/data/reports/SYMBOL_*/
+  ```
+- If `5_portfolio/decision.md` and `complete_report.md` exist → run is complete; read decision.md and proceed to next symbol
+- Do NOT wait indefinitely — notifications can silently drop when context is heavy (100K+ tokens per run) or the harness tracking window expires
+
 ## MANDATORY: Position Review Protocol
 
 When the user asks ANYTHING about how a position is doing, its status, or whether to hold/exit — you MUST:

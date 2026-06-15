@@ -759,14 +759,38 @@ def build_nav_kb(current_path):
 
 
 def build_nav_checks(current_path):
-    files = sorted(CHECKS_DIR.glob("LAST_*.md"), key=lambda f: f.name)
-    if not files:
+    top_files = sorted(CHECKS_DIR.glob("LAST_*.md"), key=lambda f: f.name)
+    thesis_files = sorted((CHECKS_DIR / "thesis").glob("*.md"), key=lambda f: f.stem) if (CHECKS_DIR / "thesis").exists() else []
+    swing_files = sorted((CHECKS_DIR / "swing").glob("*.md"), key=lambda f: f.stem) if (CHECKS_DIR / "swing").exists() else []
+
+    if not top_files and not thesis_files and not swing_files:
         return ""
+
     html = '<div class="nav-checks"><div class="nav-checks-label">Live Checks</div>'
-    for f in files:
+
+    for f in top_files:
         name = f.stem.replace("_", " ").title()
         cls = " current" if current_path and f == current_path else ""
         html += f'<a class="nav-file{cls}" href="/checks/{f.name}" title="{f.name}">{name}</a>'
+
+    for label, files in [("Thesis", thesis_files), ("Swing", swing_files)]:
+        if not files:
+            continue
+        subdir = label.lower()
+        has_current = current_path and any(f == current_path for f in files)
+        hdr_cls = " has-current" if has_current else ""
+        html += (f'<div class="nav-section">'
+                 f'<div class="nav-section-hdr{hdr_cls}" style="padding-left:6px">'
+                 f'<span class="nav-chevron">▶</span>'
+                 f'<span class="nav-section-label" style="font-size:11px">{label}</span>'
+                 f'<span class="nav-section-meta">{len(files)}</span>'
+                 f'</div>'
+                 f'<div class="nav-section-body">')
+        for f in files:
+            cls = " current" if current_path and f == current_path else ""
+            html += f'<a class="nav-file{cls}" style="padding-left:22px" href="/checks/{subdir}/{f.name}" title="{f.name}">{f.stem}</a>'
+        html += '</div></div>'
+
     html += '</div>'
     return html
 

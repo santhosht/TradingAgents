@@ -16,11 +16,19 @@ from fetch_data import fetch_price_and_technicals, fetch_live_quote
 
 
 def morning_summary(ticker):
-    fi = yf.Ticker(ticker).fast_info
+    t          = yf.Ticker(ticker)
+    fi         = t.fast_info
     price      = fi.last_price
     prev_close = fi.previous_close
     volume     = fi.last_volume
     day_chg    = (price - prev_close) / prev_close * 100 if prev_close else 0
+
+    info         = t.info
+    market_state = info.get("marketState", "")
+    pre_price    = info.get("preMarketPrice")
+    pre_chg      = info.get("preMarketChangePercent")
+    post_price   = info.get("postMarketPrice")
+    post_chg     = info.get("postMarketChangePercent")
 
     df, err = fetch_price_and_technicals(ticker)
     if err or df is None:
@@ -58,6 +66,10 @@ def morning_summary(ticker):
 
     print(f"\n=== {ticker} ===")
     print(f"Price:      ${price:.2f}  ({day_chg:+.2f}%)  Vol: {volume/1e6:.1f}M")
+    if market_state == "PRE" and pre_price:
+        print(f"Pre-market: ${pre_price:.2f}  ({pre_chg:+.2f}%)")
+    elif market_state in ("POST", "POSTPOST") and post_price:
+        print(f"After-hrs:  ${post_price:.2f}  ({post_chg:+.2f}%)")
     print(f"EMA10:      ${ema10:.2f}  ATR: ${atr:.2f}")
     print()
     print(f"RSI:        {rsi:.1f}  ({rsi_label})")

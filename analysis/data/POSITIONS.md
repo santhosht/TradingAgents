@@ -5,7 +5,7 @@
 ---
 
 ## Portfolio Summary
-*Last updated: 2026-06-13*
+*Last updated: 2026-06-15*
 
 | Metric | Value |
 |--------|-------|
@@ -191,6 +191,24 @@ _None._
 - Q3 FY2026 check (~Sep): revenue ≥$6.60B + gross margin ≥89% → hold; miss either → cut/exit
 - Based on: analysis/data/reports/ADBE_20260611_205123
 
+### AAPL — report 2026-06-14 — STALE AFTER 2026-06-21
+
+- Suggested entry: $288–$292 | Size: 3% | Stop: $278
+- Target 1: $312–$315 (sell 40%, 6–9 months) | Target 2: $340–$345 (sell 60%, 12–18 months)
+- Secondary entry: $283–$285.50 (SMA 50 zone — add 1% if no Tata/EU DMA catalyst; total to 4%)
+- Breakout alt: close >$304 vol >55M → enter $305–$307 (stop $291)
+- Key trigger: Do NOT add if Tata India factory shutdown confirmed OR adverse EU DMA ruling mandating fee cuts >5pp — exit thesis if either fires
+- Note: New tranche — existing open position at $197.57 avg. This is a higher-cost-basis second tranche at the June 2026 pullback level.
+- Based on: analysis/data/reports/AAPL_20260614_043609
+
+### UNH — report 2026-06-14 — STALE AFTER 2026-06-21
+
+- Suggested entry: $392–$400 | Size: 3% | Stop: $376
+- Target 1: $450 | Target 2: $480
+- Key trigger: Q2 2026 earnings (~Aug 2026) — exit if gross margin <19% or FCF <$4B; hold/add if margin >20%
+- Note: New tranche — existing open position at $296.93 avg. This is a fresh entry on the Q1 2026 recovery thesis.
+- Based on: analysis/data/reports/UNH_20260614_050109
+
 ### LULU — report 2026-06-07 — STALE AFTER 2026-06-14
 - Suggested entry: $110–$114.50 | Size: 2–3% max | Stop: $104
 - Target 1: $135 | Target 2: $152
@@ -200,6 +218,43 @@ _None._
 - Suggested entry: $42.50–$43.50 | Size: 2% | Stop: $40.00
 - Target 1: $50 (sell 50%) | Target 2: $55
 - Based on: analysis/data/reports/NKE_20260607_054527
+
+### AMZN — report 2026-06-14 — STALE AFTER 2026-06-21
+
+- Suggested entry: $238–$242 | Size: 4% | Stop: $229
+- Target 1: $262 (sell half, 6–8 weeks) | Target 2: $305 (sell rest, 4–6 months)
+- Secondary entry: $233–$235 (SMA 200 zone — if primary fills at $239, add 50% tranche here for avg ~$236)
+- Key trigger: Q2'26 earnings (July) — exit if AWS revenue growth <15% YoY or capex guidance raised further
+- Note: New tranche — existing open position at $215.53 avg. This is a second tranche entry on the SMA 200 oversold reversal thesis.
+- Based on: analysis/data/reports/AMZN_20260614_164831
+
+### CRWV — report 2026-06-14 — STALE AFTER 2026-06-21
+
+- Suggested entry: $97–$99 | Size: 3.5–4% | Stop: $89.50
+- Target 1: $122 (sell 40%, 3–4 months) | Target 2: $140 (sell 60%, 5–8 months)
+- Key trigger: Trim 25% if price spikes to $115+ before June 22 (Nasdaq 100 inclusion date). Exit immediately if gross margin falls below 60% at any earnings report.
+- Note: New tranche — existing open position at $106.52 avg. This is a lower-cost-basis second tranche on the 200-day SMA support re-entry thesis.
+- Based on: analysis/data/reports/CRWV_20260614_052027
+
+### GOOGL — report 2026-06-14 — STALE AFTER 2026-06-21
+
+- Suggested entry: $354–$362 (target $358 limit) | Size: 3.5% (add to 5% at $340–$348 if stock tests lower Bollinger) | Stop: $338
+- Target 1: $404 (sell 35–40%, 3–4 months — Bollinger Upper / near-term resistance) | Target 2: $432 (sell remaining 60%, 6–9 months — analyst consensus mean)
+- Breakout alt: close >$376 vol >35M → cancel limit, buy $376–$380 next morning (stop $338)
+- Key trigger: Q2 2026 earnings (July) — exit or cut to half if revenue <$107B AND capex >$38B; hold if either condition avoids breach
+- Note: New tranche — existing open position at $253.90 avg (1.9%). This is a second, higher-cost-basis tranche on the macro-driven selloff oversold reversal thesis (rating: Overweight)
+- Based on: analysis/data/reports/GOOGL_20260614_164752
+
+### BABA — report 2026-06-15 — STALE AFTER 2026-06-22 [or post-Q2'26 earnings if reported before then]
+
+- Suggested entry: $108.00–$111.00 (limit, GTC 5 trading days; target center $109) | Size: 3% | Stop: $101.00
+- Target 1: $124.76 (sell 30%, ~3–4 months — Bollinger mid / VWMA) | Target 2: $150.00 (sell 40%, ~9–12 months — toward 200-SMA)
+- Breakout alt: close >$118.89 vol >13M → cancel limit, buy breakout; stop $101
+- Secondary entry: $103.00–$104.50 (add 1% only if 52W low $103.71 breaks and recovers with next-day close above $103.71)
+- Key trigger: Q2'26 earnings — exit immediately if Q2'26 FCF remains below -$30B AND operating income is negative again (thesis invalidated)
+- Conditional add-on: +2% (total 5%) if Q2'26 FCF above -$20B AND gross margin above 36%
+- Note: New tranche — existing open position at $166.00 avg, stop $113 (⚠ STOP AT RISK — current price $112.82 is below existing stop; review immediately). This new analysis is a separate lower-cost-basis second tranche on the deep value / oversold reversal thesis (rating: Overweight)
+- Based on: analysis/data/reports/BABA_20260615_043348
 
 ---
 
