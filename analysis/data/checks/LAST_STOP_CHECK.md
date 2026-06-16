@@ -1,49 +1,47 @@
-Stop Check — 2026-06-15 (live prices)
+Stop Check — 2026-06-16 (live prices)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Portfolio: +$223 (+1.9%) across 21 positions (SpaceX excluded from P&L — no live data)
+Portfolio: +$341 (+2.9%) across 22 symbols / 23 entries
 
 🎯 FLAGS:
-  🔴 BABA    — STOP HIT      — price $112.75 < stop $113 — say "exit BABA"
-  🟠 AAPL    — STOP CLOSE    — stop $291 is 0.3% away ($291.79 current) — watch closely
-  🟠 UNH     — STOP CLOSE    — stop $391 is 2.9% away ($402.58 current)
-  🟢 AMD E1  — T1 REACHED    — $546.55 > T1 $530 — sell 35–40%, say "sell AMD"
-  🟢 AMD E2  — T1 REACHED    — $546.55 > T1 $523 — sell half, say "sell AMD"
-  💰 NVDA E1 — QUICK WIN     — up 60.3%, T1 $309 (46.8% away)
-  💰 AAPL    — QUICK WIN     — up 47.7%, T1 $316 (8.3% away) — but STOP CLOSE takes priority
-  💰 GOOGL   — QUICK WIN     — up 46.1%, T1 $433 (16.7% away)
-  💰 FTNT    — QUICK WIN     — up 69.2%, T1 $150 (3.5% away)
-  ⚠ AMD      — ACTION PENDING — Jun 9 flagged trim 40–50% at analyst mean (~$490) — NOW ABOVE
-  ⚠ UNH      — ACTION PENDING — Jun 9 flagged trim 30–35%
-  ⚠ FTNT     — ACTION PENDING — Jun 9 flagged trim 55–60%
-  ⚠ ETHA     — ACTION PENDING — Jun 9 flagged exit — ETH stop: exit if ETH < $1,600
+  🟠 AAPL   — STOP CLOSE    — stop $291 is 2.7% away ($299.04 current) — watch closely
+  🟢 FTNT   — T1 NEAR       — limit sell at $149.41 placed; current $145.90, 2.1% away
+  ⚠ UNH    — ACTION PENDING — Jun 9 flagged trim 30–35%; position at 6.7%, above 5% target
+  ⚠ CRWV   — ACTION PENDING — price $118.20 above $115 trigger; Jun 22 Nasdaq 100 inclusion; trim 25% now
+  ⚠ GEMI   — SELL PENDING   — market sell order placed Jun 16, current $4.91; awaiting execution
+  ⚠ ETHA   — ACTION PENDING — Jun 9 flagged exit pending decision
+  💰 NVDA E1 — QUICK WIN    — up +59.6% ($131.29→$209.59); T1 $309 is 47% away; ⚠ analysis stale
+  💰 AMD     — QUICK WIN    — up +160.9% (~$201→$524.70); T1 ✅ passed; T2 $630 is 20.1% away
+  💰 GOOGL   — QUICK WIN    — up +46.8% ($253.90→$372.66); T1 $433 is 16.2% away
+  💰 SPCX    — QUICK WIN    — up +58.4% ($135→$213.76); NO STOP/TARGET SET; analysis due ~Jun 19
 
-── Open Positions ────────────────────────────────────────────────────
+── Open Positions ───────────────────────────────────────
 
-Symbol    | Entry    | Current  | P&L      | Stop          | → T1          | → T2
-----------|----------|----------|----------|---------------|---------------|----------
-NVDA E1   | $131.29  | $210.46  | +60.3%   | $196 (6.9%)   | $309 (46.8%)  | $370+
-NVDA E2   | $201.00  | $210.46  | +4.7%    | $189 (10.2%)  | $235 (11.7%)  | $298
-AVGO      | $385.85  | $393.73  | +2.0%    | $346 (12.1%)  | $422 (7.2%)   | $522
-AMD E1    | $201.00  | $546.55  | +171.9%  | $446 (18.4%)  | ✅ $530 HIT   | $600
-AMD E2    | $475.00  | $546.55  | +15.1%   | $419 (23.3%)  | ✅ $523 HIT   | $600
-SpaceX    | $135.00  | n/a      | —        | NOT SET       | NOT SET       | NOT SET
-MSFT      | $440.28  | $393.90  | -10.5%   | $367 (6.8%)   | $520 (32.0%)  | $559
-MSTR      | $379.48  | $134.33  | -64.6%   | $103 (23.3%)  | — (above)     | —
-TSLA      | $441.00  | $414.04  | -6.1%    | $384 (7.3%)   | $450 (8.7%)   | $498
-GLD       | $441.15  | $400.50  | -9.2%    | $386 (3.6%)   | $450 (12.4%)  | $509
-SPY       | $679.24  | $752.77  | +10.8%   | Trail 5% ($715)| — hold always | —
-UNH       | $296.93  | $402.58  | +35.6%   | $391 (2.9%) 🟠| $450 (11.8%)  | —
-CRWV      | $106.52  | $106.40  | -0.1%    | $87 (18.2%)   | $138 (29.7%)  | $187
-GOOGL     | $253.90  | $371.05  | +46.1%   | $348 (6.2%)   | $433 (16.7%)  | $500+
-AMZN      | $215.53  | $246.53  | +14.4%   | $222 (9.9%)   | $317 (28.6%)  | $380+
-BABA      | $166.00  | $112.75  | -32.1%   | $113 🔴 HIT   | $192          | —
-AAPL      | $197.57  | $291.79  | +47.7%   | $291 (0.3%) 🟠| $316 (8.3%)   | $370+
-FTNT      | $85.68   | $144.97  | +69.2%   | $135 (6.9%)   | $150 (3.5%)   | —
-KLAR      | $40.00   | $16.71   | -58.2%   | $12.06 (27.8%)| $22–26        | $34–38
-VIA       | $44.00   | $15.10   | -65.7%   | $12.95 (14.2%)| $22–25        | $34–40
-STUB      | $20.32   | $11.42   | -43.8%   | $8.50 (25.6%) | $14–15        | $20–22
-ETHA      | $16.96   | $13.73   | -19.0%   | ETH < $1,600  | — ETH proxy   | —
+Symbol     | Entry    | Current  | P&L     | Stop         | → T1          | → T2
+-----------|----------|----------|---------|--------------|---------------|----------
+NVDA E1    | $131.29  | $209.59  | +59.6%  | $196 (6.5%)  | $309 (47.4%)  | $370+ (76.5%)
+NVDA E2    | $201.00  | $209.59  | +4.3%   | $189 (9.8%)  | $235 (12.1%)  | $298 (42.2%)
+AVGO       | $385.85  | $379.21  | -1.7%   | $346 (8.8%)  | $422 (11.3%)  | $522 (37.7%)
+AMD        | ~$201    | $524.70  | +160.9% | $475 (9.5%)  | ✅ T1 passed  | $630 (20.1%)
+SPCX       | $135.00  | $213.76  | +58.4%  | NOT SET ⚠    | NOT SET       | —
+MSFT       | $440.28  | $392.76  | -10.8%  | $367 (6.6%)  | $520 (32.4%)  | $559 (42.3%)
+MSTR       | $379.48  | $125.39  | -66.9%  | $103 (17.9%) | $336 (168%)   | $457 (264%)
+TSLA       | $441.00  | $406.86  | -7.7%   | $360 (11.5%) | $445 (9.4%)   | $498 (22.4%)
+GLD        | $441.15  | $398.62  | -9.6%   | $386 (3.2%)  | $450 (12.9%)  | $509 (27.7%)
+SPY        | $679.24  | $753.84  | +11.0%  | Trail 5% (~$716) | Hold always| —
+UNH ⚠     | $296.93  | $411.25  | +38.5%  | $391 (4.9%)  | $450 (9.4%)   | $480 (16.7%)
+CRWV ⚠    | $106.52  | $118.20  | +11.0%  | $89.50 (24.3%)| $138 (16.8%) | $160 (35.4%)
+GOOGL      | $253.90  | $372.66  | +46.8%  | $348 (6.6%)  | $433 (16.2%)  | $515 (38.2%)
+AMZN       | $215.53  | $247.63  | +14.9%  | $229 (7.5%)  | $317 (28.0%)  | $350 (41.3%)
+BABA       | $166.00  | $109.80  | -33.9%  | $101 (8.0%)  | $192 (74.9%)  | $210 (91.3%)
+AAPL 🟠    | $197.57  | $299.04  | +51.4%  | $291 (2.7%)  | $316 (5.7%)   | $345 (15.4%)
+FTNT 🟢    | $85.68   | $145.90  | +70.3%  | $135 (7.5%)  | $149 (2.1%)   | $170 (16.5%)
+KLAR       | $40.00   | $17.65   | -55.9%  | $12.06 (31.7%)| $22–26 (24.6%)| $34–38
+VIA        | $44.00   | $14.05   | -68.1%  | $12.95 (7.8%)| $22–25 (56.6%)| $34–40
+STUB       | $20.32   | $11.23   | -44.7%  | $8.50 (24.3%)| $14–15 (24.7%)| $20–22
+GEMI ⚠    | $28.06   | $4.91    | -82.5%  | $3.91 (20.4%)| SELL ORDER PENDING |
+FRMI       | $21.00   | $7.22    | -65.6%  | $5.45 (24.5%)| $20.50 (184%) | $35.00 (385%)
+ETHA ⚠    | $16.96   | $13.41   | -20.9%  | ETH < $1,600  | EXIT FLAGGED Jun 9 |
 
-── Orders Placed ──────────────────────────────────────────────────────
+── Orders Placed ────────────────────────────────────────
 
-None.
+None (FTNT limit sell is in broker, not tracked here as an order placed entry).

@@ -760,8 +760,8 @@ def build_nav_kb(current_path):
 
 def build_nav_checks(current_path):
     top_files = sorted(CHECKS_DIR.glob("LAST_*.md"), key=lambda f: f.name)
-    thesis_files = sorted((CHECKS_DIR / "thesis").glob("*.md"), key=lambda f: f.stem) if (CHECKS_DIR / "thesis").exists() else []
-    swing_files = sorted((CHECKS_DIR / "swing").glob("*.md"), key=lambda f: f.stem) if (CHECKS_DIR / "swing").exists() else []
+    thesis_files = sorted((CHECKS_DIR / "thesis").glob("*.md"), key=lambda f: f.stat().st_mtime, reverse=True) if (CHECKS_DIR / "thesis").exists() else []
+    swing_files = sorted((CHECKS_DIR / "swing").glob("*.md"), key=lambda f: f.stat().st_mtime, reverse=True) if (CHECKS_DIR / "swing").exists() else []
 
     if not top_files and not thesis_files and not swing_files:
         return ""

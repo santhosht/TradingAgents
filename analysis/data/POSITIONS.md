@@ -10,7 +10,7 @@
 | Metric | Value |
 |--------|-------|
 | Total Equity | $12,100 |
-| Cash / Buying Power | $2,700.00 |
+| Cash / Buying Power | $3,463.00 |
 | Total Account | $14,800 |
 
 > Size % = cost basis ÷ total equity ($12,100). Healthy range: 3–5% per position. Above 8% = concentrated, review trim.
@@ -21,9 +21,9 @@
 
 ### NVDA — open
 
-- Entry 1: $131.29 avg | Shares: 8.08 | Size: 8.8% | Stop: $196 | T1: $309 (sell 35–40%) | T2: $370+
-  After T1: move stop to $200 area. Do not sell before T1 — analyst mean is $309.
-  ⚠ Analysis stale — June 11 Senate testimony passed; re-run before next action to refresh T1/T2
+- Entry 1: $131.29 avg | Shares: 8.08 | Size: 8.8% | Stop: $196 | T1: $299 (sell 35–40%) | T2: $370+
+  After T1: move stop to $200 area. Do not sell before T1 — analyst mean is $298.93 (refreshed Jun 16).
+  Analysis refreshed: analysis/data/reports/NVDA_20260616_083646
 - Entry 2: $201.00 (filled 2026-06-11) | Shares: 1 | Size: 1.7% | Stop: $189 | T1: $235 (sell half) | T2: $298
   After T1: move stop to $201 (breakeven)
   Thesis-break: close <$199 two consecutive days → exit immediately
@@ -83,9 +83,9 @@
 
 ### UNH — open
 
-- Entry 1: $296.93 avg | Shares: 2.72 | Size: 6.7% | Stop: $391 | T1: $450 | T2: $480
+- Entry 1: $296.93 avg | Shares: 1.87 (trimmed 0.8523sh at $410.64 on 2026-06-16) | Size: ~4.6% | Stop: $391 | T1: $450 | T2: $480
   Note: accumulated in 3 tranches ($303 → $295 → $290) — disciplined averaging.
-  ⚠ June 9 flagged trim 30–35% — position above healthy 5% range, bring down to ~4%
+  Trim executed Jun 16 — brought from 6.7% → 4.6%. Trail stop: raise above $391 once $430 holds 5 consecutive sessions.
 
 ### CRWV — open
 
@@ -123,11 +123,9 @@
 
 ### FTNT — open (pre-AI shares)
 
-- Entry 1: $85.68 avg | Shares: 3.46 | Size: 2.4% | Stop: $135 | T1: $149 (sell 55–60%) | T2: $170
-  After T1: move stop to $135 area
+- Entry 1: $85.68 avg | Shares: 1.46 (sold 2 shares at $149.41 on 2026-06-16) | Size: ~1.0% | Stop: $135 | T1: $149 ✅ (sold Jun 16) | T2: $170
+  Hold remaining 1.46 shares to T2 $170. Stop raised to $135.
   Note: bought well in Feb–Mar 2025 ($77–$111 range) — strong gains.
-  🟡 Limit sell placed: 2 shares at $149.41 (2026-06-16) — awaiting fill
-  On fill: shares → 1.46 | move stop to $135 | hold remaining to T2 $170
 
 ### KLAR — open (IPO)
 
@@ -150,14 +148,6 @@
   Note: 82% gross margins, Q1 earnings beat — operating losses are IPO stock-comp, not business failure
   Breakeven: $20.34
 
-
-### GEMI — open
-
-- Entry 1: $28.06 avg | Shares: 21 | Size: 4.9% | Stop: $3.91 (52W low — hard stop) | T1: $6.58 (analyst mean — trim 30–40%) | T2: $10.00 (analyst high)
-  🔴 Market sell order placed 2026-06-16 — awaiting execution
-  Hold condition: BTC holds + Q2'26 revenue rebounds above $55M + gross margin improves toward 0%
-  Exit immediately if: Q2'26 revenue declines again despite BTC strength OR dilutive capital raise announced
-  Based on: analysis/data/reports/GEMI_20260616_045142
 
 ### FRMI — open
 
@@ -281,6 +271,24 @@ _None._
 - Note: New tranche — existing open position at $166.00 avg, stop $101 (reset Jun 15). Separate lower-cost-basis second tranche on deep value / oversold reversal thesis (rating: Overweight)
 - Based on: analysis/data/reports/BABA_20260615_043348
 
+### NVDA — report 2026-06-16 — STALE AFTER 2026-06-23
+
+- Suggested entry: $203–$208 | Size: 3% (add 2% at $194–$199 secondary if primary fills) | Stop: $187.50
+- Target 1: $248 (sell 50%, 3–6 months) | Target 2: $299 (sell 50%, 9–12 months)
+- Breakout alt: close >$222 vol >175M → cancel limits, buy at market (only appropriate for PT2 hold)
+- Key trigger: Any hyperscaler explicitly cutting AI capex → exit immediately; Fed hiking (not holding) → reduce
+- Note: New tranche — existing open positions at $131.29 avg (8.08 shares) + $201.00 (1 share). This is a third tranche on the macro-driven pullback re-entry thesis (rating: Buy). Existing Entry 2 stop at $189 aligns with this trade's $187.50 stop.
+- Based on: analysis/data/reports/NVDA_20260616_083646
+
+### AMD — report 2026-06-16 — STALE AFTER 2026-06-23
+
+- Suggested entry: $490–$510 (limit GTC 5 days, midpoint $500) | Size: 4–5% | Stop: $440
+- Target 1: $575 (sell 40%, 4–8 weeks — post-52W high breakout zone) | Target 2: $650 (sell 60%, 6–12 months — MI400 EPS ramp)
+- Breakout alt: close >$560 vol >35M → cancel limit, buy $562–$565 next open (stop $510, size 3%)
+- Key trigger: Exit immediately if Q2 2026 revenue flat QoQ OR gross margin <50% — thesis invalidated. Hold through MI400 ramp if both above thresholds.
+- Note: New tranche — existing open position at ~$201 avg (1.55 shares, stop $475). This is a fresh high-cost-basis second tranche on the AI GPU cycle / MI400 ramp thesis (rating: Overweight)
+- Based on: analysis/data/reports/AMD_20260616_085711
+
 ### MRVL — queued for analysis
 
 - **STATUS: ANALYSIS PENDING — no report yet. Run full analysis before considering entry.**
@@ -293,4 +301,7 @@ _None._
 
 ## Closed Positions
 
-_None yet._
+### GEMI — closed 2026-06-16
+
+- Entry: $28.06 avg | Shares: 21 | Exit: ~$4.91 (market sell, Jun 16) | P&L: -82.5% (~-$487)
+  Based on: analysis/data/reports/GEMI_20260616_045142
