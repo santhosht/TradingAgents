@@ -5,14 +5,13 @@
 ---
 
 ## Portfolio Summary
-*Last updated: 2026-06-15*
+*Last updated: 2026-06-16*
 
 | Metric | Value |
 |--------|-------|
 | Total Equity | $12,100 |
-| Cash / Buying Power | $167.89 |
-| Crypto | $4,027 |
-| Total Account | $16,297 |
+| Cash / Buying Power | $2,700.00 |
+| Total Account | $14,800 |
 
 > Size % = cost basis ÷ total equity ($12,100). Healthy range: 3–5% per position. Above 8% = concentrated, review trim.
 
@@ -24,6 +23,7 @@
 
 - Entry 1: $131.29 avg | Shares: 8.08 | Size: 8.8% | Stop: $196 | T1: $309 (sell 35–40%) | T2: $370+
   After T1: move stop to $200 area. Do not sell before T1 — analyst mean is $309.
+  ⚠ Analysis stale — June 11 Senate testimony passed; re-run before next action to refresh T1/T2
 - Entry 2: $201.00 (filled 2026-06-11) | Shares: 1 | Size: 1.7% | Stop: $189 | T1: $235 (sell half) | T2: $298
   After T1: move stop to $201 (breakeven)
   Thesis-break: close <$199 two consecutive days → exit immediately
@@ -39,14 +39,11 @@
 
 ### AMD — open
 
-- Entry 1: ~$201 avg | Shares: 1.55 | Size: 2.7% | Stop: $446 | T1: $530 (sell 35–40%) | T2: $600
-  After T1: move stop to $475 area
-  ⚠ June 9 flagged trim 40–50% at analyst mean (~$490) — pending decision
-- Entry 2: $475.00 (filled 2026-06-09) | Shares: 1 | Size: 3.9% | Stop: $419 | T1: $523 (sell half) | T2: $600
-  After T1: move stop to $475 (breakeven)
-  Next check: Q2 earnings Aug 2026 — revenue >$10.5B, EPS >$0.84
+- Entry 1: ~$201 avg | Shares: 1.55 | Size: 2.6% | Stop: $475 (moved up 2026-06-15, post-T1) | T1: $530 ✅ passed | T2: $630
+  Hold to T2 — small position, let it ride. Re-entry on pullback to $500–$515 or post-Q2 earnings dip.
+  Next check: Q2 earnings Aug 2026 — revenue >$10.5B, EPS >$0.84 → confirm thesis
 
-### SpaceX — open
+### SPCX (SpaceX) — open
 
 - Entry: $135.00 (IPO allocation 2026-06-12) | Shares: 11 | Size: 12.3%
 - Stop: NOT SET — awaiting analysis
@@ -57,6 +54,7 @@
 
 - Entry 1: $440.28 avg | Shares: 1.85 | Size: 6.7% | Stop: $367 | T1: $520 (sell 35–40%) | T2: $559 (analyst mean — sell remaining)
   After T1: move stop to $440 (breakeven)
+  Trail stop: once price holds above $430 for 5 consecutive sessions → raise stop upward
   Stop override 2026-06-13: price at $390.74, stop widened $393 → $367 — thesis intact, holding through Fed meeting
   Note: 36% below analyst mean — best quality hold in portfolio
 
@@ -68,8 +66,9 @@
 
 ### TSLA — open
 
-- Entry 1: $441.00 avg | Shares: 1.00 | Size: 3.6% | Stop: $384 | T1: $450 | T2: $498
+- Entry 1: $441.00 avg | Shares: 1.00 | Size: 3.6% | Stop: $360 | T1: $445 (sell 50%) | T2: $498 (sell remaining 50%)
   Note: above analyst mean ($403) — no upside cushion. Let stop decide the exit.
+  ⚠ SPCX rebalance June 26–29 — mechanical selling headwind, expect volatility
 
 ### GLD — open
 
@@ -83,47 +82,51 @@
 
 ### UNH — open
 
-- Entry 1: $296.93 avg | Shares: 2.72 | Size: 6.7% | Stop: $391 | T1: $450
+- Entry 1: $296.93 avg | Shares: 2.72 | Size: 6.7% | Stop: $391 | T1: $450 | T2: $480
   Note: accumulated in 3 tranches ($303 → $295 → $290) — disciplined averaging.
   ⚠ June 9 flagged trim 30–35% — position above healthy 5% range, bring down to ~4%
 
 ### CRWV — open
 
-- Entry 1: $106.52 avg | Shares: 6.13 | Size: 5.4% | Stop: $87 | T1: $138 (sell 35–40%) | T2: $187
+- Entry 1: $106.52 avg | Shares: 6.13 | Size: 5.4% | Stop: $89.50 | T1: $138 (sell 35–40%) | T2: $160
   After T1: move stop to $106 area
   Note: AI infrastructure play, $100B backlog, analyst mean $138.
   ⚠ Sold 1 share at $80 near the bottom in May 2025 — do not panic sell again
+  ⚠ Nasdaq 100 inclusion June 22 — if price spikes to $115+ before then, trim 25%
 
 ### GOOGL — open
 
-- Entry 1: $253.90 avg | Shares: 0.89 | Size: 1.9% | Stop: $348 | T1: $433 (sell 35–40%) | T2: $500+
+- Entry 1: $253.90 avg | Shares: 0.89 | Size: 1.9% | Stop: $348 | T1: $433 (sell 35–40%) | T2: $515
   After T1: move stop to $370 area
   Note: small position — consider adding if price dips toward oversold levels
   ⚠ Sold original $150 entry in Oct 2025 and rebought at $276 — do not repeat, hold to T1
 
 ### AMZN — open
 
-- Entry 1: $215.53 avg | Shares: 1.05 | Size: 1.9% | Stop: $222 | T1: $317 (sell 35–40%) | T2: $380+
+- Entry 1: $215.53 avg | Shares: 1.05 | Size: 1.9% | Stop: $229 | T1: $317 (sell 35–40%) | T2: $350
   After T1: move stop to $250 area
   Note: RSI was oversold at time of analysis — 29% below analyst mean, strong recovery candidate
 
 ### BABA — open
 
-- Entry 1: $166.00 avg | Shares: 1.00 | Size: 1.4% | Stop: $113 | T1: $192
+- Entry 1: $166.00 avg | Shares: 1.00 | Size: 1.4% | Stop: $101 | T1: $192 | T2: $210
   Note: hold only if comfortable with China risk — small position, let stop decide
+  ⚠ Stop reset from $113 → $101 (old stop breached at $112.82 on 2026-06-15; new stop is structural floor below 52W low $103.71)
+  Exit immediately if Q2'26 FCF remains below -$30B AND operating income negative again
 
 ### AAPL — open
 
-- Entry 1: $197.57 avg | Shares: 1.44 | Size: 2.4% | Stop: $291 | T1: $316 (sell 35–40%) | T2: $370+
+- Entry 1: $197.57 avg | Shares: 1.44 | Size: 2.4% | Stop: $291 | T1: $316 (sell 35–40%) | T2: $345
   After T1: move stop to $200 area
   Note: bought well during April 2025 dip ($190) — blue chip, hold to analyst mean
 
 ### FTNT — open (pre-AI shares)
 
-- Entry 1: $85.68 avg | Shares: 3.46 | Size: 2.4% | Stop: $135 | T1: $150+ (trim at analyst mean)
+- Entry 1: $85.68 avg | Shares: 3.46 | Size: 2.4% | Stop: $135 | T1: $149 (sell 55–60%) | T2: $170
+  After T1: move stop to $135 area
   Note: bought well in Feb–Mar 2025 ($77–$111 range) — strong gains.
-  ⚠ June 9 flagged trim 55–60% — position already at analyst mean, lock in gains
-  Note: separate Pending entry below for new FTNT tranche at $130.50
+  🟡 Limit sell placed: 2 shares at $149.41 (2026-06-16) — awaiting fill
+  On fill: shares → 1.46 | move stop to $135 | hold remaining to T2 $170
 
 ### KLAR — open (IPO)
 
@@ -145,6 +148,21 @@
   After T1: move stop to $10 area
   Note: 82% gross margins, Q1 earnings beat — operating losses are IPO stock-comp, not business failure
   Breakeven: $20.34
+
+### GEMI — open
+
+- Entry 1: $28.06 avg | Shares: 21 | Size: 4.9% | Stop: $3.91 (52W low — hard stop) | T1: $6.58 (analyst mean — trim 30–40%) | T2: $10.00 (analyst high)
+  Hold condition: BTC holds + Q2'26 revenue rebounds above $55M + gross margin improves toward 0%
+  Exit immediately if: Q2'26 revenue declines again despite BTC strength OR dilutive capital raise announced
+  Based on: analysis/data/reports/GEMI_20260616_045142
+
+### FRMI — open
+
+- Entry 1: $21.00 avg | Shares: 14 | Size: 2.4% | Stop: $5.45 (Bollinger lower / June 10 gap floor) | T1: $20.50 (analyst mean — sell 35–40%) | T2: $35.00 (analyst high)
+  Catalyst: OpenAI lease at Project Matador (JMP Citizens: "imminent") — confirmation triggers new tranche entry at 3%
+  New tranche trigger: pullback to $6.50–$6.80 (VWMA/EMA 10 zone) OR on OpenAI lease confirmation at any price
+  Exit immediately if: OpenAI signs elsewhere OR proxy fight escalates to injunction OR capital raise below $5.45
+  Based on: analysis/data/reports/FRMI_20260616_045820
 
 ### ETHA — open (ETH ETF)
 
@@ -169,12 +187,14 @@ _None._
 - Note: New tranche — existing open position at $440.28 avg. This is a separate lower-cost-basis tranche.
 - Based on: analysis/data/reports/MSFT_20260613_051010
 
-### FTNT — report 2026-06-10 — STALE AFTER 2026-06-17
-- Suggested entry: $130.50 | Size: 3% | Stop: $122.50 (set immediately on fill)
-- Target 1: $149 (sell half) | Target 2: $170 (sell rest)
-- Q2 2026 earnings (~Aug): FCF ≥$500M + revenue ≥$1.80B → add to 4%; FCF <$400M or rev <$1.75B → exit
-- Breakout alt: close >$150.07 vol >7.5M → cancel limit, buy 2% at $151–$153 (stop $141)
-- Based on: analysis/data/reports/FTNT_20260610_133733
+### FTNT — report 2026-06-16 — STALE AFTER 2026-06-23
+
+- Suggested entry: $138.00–$143.00 (limit GTC, midpoint $140.50) | Size: 4% | Stop: $130.00
+- Target 1: $160.00 (sell half, 2–3 months — TD Cowen PT) | Target 2: $178.00 (sell rest, 6–9 months)
+- Breakout alt: close >$150.07 vol >7.5M → cancel limit, buy $150.50–$151.00 (stop $141.50, size 3%)
+- Key trigger: Q2 FY2026 earnings (~Aug) — exit if revenue <$1.80B OR operating margin <28%; hold if both beat
+- Note: New tranche — existing open position at $85.68 avg (pre-AI shares). This is a new higher-cost-basis tranche on the Q1'26 beat + re-rating thesis (rating: Overweight)
+- Based on: analysis/data/reports/FTNT_20260616_040945
 
 ### COPP — report 2026-06-11 — STALE AFTER 2026-06-18
 - Suggested entry: $39.80–$40.50 | Size: 4% (add to 7% on SMA 50 reclaim close >$39.77 vol >140K) | Stop: $36.50
