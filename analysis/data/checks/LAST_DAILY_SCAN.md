@@ -1,113 +1,127 @@
-# Last Daily Scan
-**Run:** 2026-06-13 (Friday)
+# Daily Scan — 2026-06-16 (morning)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Portfolio: +$179 (+1.5%) across 23 open positions
+Cost basis: ~$11,961 | Current value: ~$12,140
 
-Portfolio: -$50 (-0.5%) across 19 open positions (excl. SpaceX — no market price)
+🎯 TODAY'S ACTIONS:
+  🔴 GEMI — MARKET SELL ORDER PLACED — market sell placed Jun 16, confirm with broker if executed
+  🟠 AAPL — STOP CLOSE — $291 is 1.8% away (current $296.42) — watch intraday
+  🟠 GLD — STOP CLOSE — $386 is 2.7% away (current $396.55) — macro hedge, Iran fears easing
+  ⚠ UNH — ACTION PENDING — trim 30-35% flagged Jun 9, still unexecuted. Price $411.04, BofA $450 PT — trim still recommended
+  ⚠ ETHA — ACTION PENDING — exit flagged Jun 9, still unexecuted. ETH at $1,774 (stop $1,600 not triggered). ETHA +9.29% today.
+  ⚠ NVDA — ACTION PENDING — analysis stale (Jun 11 Senate testimony passed). Price $212.45 well above stops. Re-run before next action.
+  ⚠ BABA — ACTION NOTE — old stop $113 breached Jun 15 at $112.82; new stop $101 (structural floor). Pentagon listed Jun 9; Beijing rebuke Jun 11. Double negative catalysts — thesis under pressure. Current $112.55, stop 10.3% away.
+  ⚠ FTNT — NEAR LIMIT — limit sell 2 shares at $149.41 placed Jun 16; intraday at $148.55 (0.6% below limit). 52W high $150.07 = resistance. Monitor for fill.
+  ⚠ CRWV — ACTION PENDING — Nasdaq 100 inclusion confirmed Jun 12. If price reaches $115+ before Jun 22 → trim 25%. Current $106.71, 7.8% below trigger.
+  🟡 SPCX — NO ANALYSIS — 12.3% of portfolio (most concentrated position), no thesis on record. IPO at $135, now $192.50 (+42.6%). Analysis planned ~Jun 19. Stop and targets NOT SET.
 
----
-
-## 🎯 TODAY'S ACTIONS
-
-🔴 BABA — STOP HIT — $112.82 below stop $113 — say "exit BABA"
-🟠 GLD — STOP CLOSE — $386.54 vs stop $386 (0.1% away) — watch closely, near 52-week support
-🟠 AAPL — STOP CLOSE — $291.13 vs stop $291 (0.04% away) — essentially at stop, decide today
-🟢 AMD — T1 NEAR — Entry 2: $523 target is 2.2% away; Entry 1: $530 is 3.6% away — sell half on break
-🟢 FTNT (open tranche) — T1 NEAR — $150 target is 2.5% away; trim 55-60% flagged Jun 9 — act now
-🟢 MSFT (pending) — ENTRY ZONE — $390.74 in zone $384–$394 — run thesis check first, Fed meeting next week
-🚀 FTNT (pending) — BREAKOUT NEAR — $150.07 trigger is 2.6% away — watch vol >7.5M today
-⚠ AMD — ACTION PENDING — trim 40-50% flagged Jun 9; price now above analyst mean ($492) and near T1
-⚠ UNH — ACTION PENDING — trim 30-35% flagged Jun 9; price $408 at analyst mean ($408.28)
-⚠ ETHA — ACTION PENDING — exit flagged Jun 9; now $12.57, near 52-week low $11.62
-🟡 UNH — NO ANALYSIS — action pending + 6.7% position, no report on file — run full analysis before acting
-🟡 MSTR — NO ANALYSIS — 11.6% position, no report on file — concentrated position with no thesis
-
-## 💰 QUICK WINS (up 20%+ — no flag yet)
-💰 AMD Entry 1 — up 154% ($201 → $511) — T1 $530 is 3.6% away — also has trim action pending
-💰 FTNT (open) — up 71% ($85.68 → $146.30) — T1 $150 is 2.5% away — also has trim action pending
-💰 NVDA Entry 1 — up 56% ($131.29 → $205.19) — T1 $309, far away — no action yet
-💰 AAPL — up 47% ($197.57 → $291.13) — BUT stop essentially hit — priority: decide stop first
-💰 GOOGL — up 42% ($253.90 → $359.68) — stop $348 is 3.3% away — watch closely
-💰 UNH — up 38% ($296.93 → $408.52) — at analyst mean, trim pending
-
-## 📋 WATCH LIST
-⏰ LULU — stale TOMORROW Jun 14 — price $118.77, zone $110–$114.50 (too far above) — still interested?
-⏰ NKE — stale TOMORROW Jun 14 — price $44.93, zone $42.50–$43.50 (above zone) — still interested?
-⏰ FTNT (pending) — stale Jun 17 — breakout near, decide before it expires
-⏸ ADBE — WATCH & WAIT — CEO search ongoing; price $204.02 fell BELOW entry zone $212–$218 — conditions not met
-⚪ COPP — TOO FAR — $42.34 vs zone $39.80–$40.50; add-on vol signal (>140K) not triggered today (0.1M)
-🛸 SpaceX — no market price — next analysis check ~Jun 19
+📋 WATCH LIST:
+  🚀 FTNT (pending tranche) — BREAKOUT NEAR — $150.07 trigger (52W high), 1.0% above intraday $148.55. Watch volume >7.5M.
+  🚀 GOOGL (pending) — BREAKOUT NEAR — $376 trigger 1.8% away (current $369.35). Watch volume >35M.
+  ⏰ ADBE (pending) — STALE SOON (Jun 18) — ENTRY ZONE ($206.36 below $212 entry) + WATCH & WAIT (CEO not named; CFO also just left Jun 12 + multiple downgrades). Do not act yet.
+  ⏰ COPP (pending) — STALE SOON (Jun 18) — ⚪ TOO FAR ($43.78 vs $39.80–$40.50 entry). Re-assess or let expire.
+  ⏰ MSFT (pending) — STALE SOON (Jun 20) — ⚪ NEAR ZONE ($399.76 vs $384–$394 entry, barely above). Shareholder lawsuit filed Jun 15. Watch.
+  🗑 LULU — STALE — expired Jun 14, re-run before acting
+  🗑 NKE — STALE — expired Jun 14, re-run before acting
+  ⚠ TSLA — SPCX rebalance Jun 26–29 headwind — mechanical selling expected, expect volatility
+  💰 AMD — T1 $530 passed, stop at $475, riding to T2 $630. MEXT acquisition (Jun 15) drove +6.29%. No action needed.
 
 ---
 
-## ── Open Positions ───────────────────────────────────────
+## Open Positions — Full Detail
 
-| SYMBOL | Entry | Current | P&L | Stop | → T1 | → T2 |
-|--------|-------|---------|-----|------|------|------|
-| NVDA E1 | $131.29 | $205.19 | +56.5% | $196 (4.5%) | $309 (50.6%) | $370+ |
-| NVDA E2 | $201.00 | $205.19 | +2.1% | $189 (7.9%) | $235 (14.5%) | $298 |
-| AVGO | $385.85 | $382.07 | -1.0% | $346 (9.4%) | $422 (10.5%) | $522 |
-| AMD E1 | $201.00 | $511.57 | +154.5% | $446 (12.8%) | $530 (3.6%) 🟢 | $600 |
-| AMD E2 | $475.00 | $511.57 | +7.7% | $419 (18.1%) | $523 (2.2%) 🟢 | $600 |
-| MSFT | $440.28 | $390.74 | -11.3% | $367 (6.1%) | $520 (33.1%) | $559 |
-| MSTR | $379.48 | $123.97 | -67.3% | $103 (16.9%) | $336 (171%) | $457 |
-| TSLA | $441.00 | $406.43 | -7.8% | $384 (5.5%) | $450 (10.7%) | $498 |
-| GLD | $441.15 | $386.54 | -12.4% | $386 (0.1%) 🟠 | $450 (16.4%) | $509 |
-| SPY | $679.24 | $741.75 | +9.2% | Trail 5% | Hold | — |
-| UNH | $296.93 | $408.52 | +37.6% | $391 (4.3%) | $450 (10.2%) | — |
-| CRWV | $106.52 | $100.55 | -5.6% | $87 (13.5%) | $138 (37.2%) | $187 |
-| GOOGL | $253.90 | $359.68 | +41.7% | $348 (3.3%) ⚠ | $433 (20.4%) | $500+ |
-| AMZN | $215.53 | $238.55 | +10.7% | $222 (6.9%) | $317 (32.9%) | $380+ |
-| BABA | $166.00 | $112.82 | -32.0% | $113 🔴 HIT | $192 (70.2%) | — |
-| AAPL | $197.57 | $291.13 | +47.3% | $291 (0.04%) 🟠 | $316 (8.5%) | $370+ |
-| FTNT | $85.68 | $146.30 | +70.8% | $135 (7.7%) | $150 (2.5%) 🟢 | — |
-| KLAR | $40.00 | $16.23 | -59.4% | $12.06 (25.7%) | $22–26 | $34–38 |
-| VIA | $44.00 | $15.10 | -65.7% | $12.95 (14.2%) | $22–25 | $34–40 |
-| STUB | $20.32 | $11.46 | -43.6% | $8.50 (25.8%) | $14–15 (22%) | $20–22 |
-| ETHA | $16.96 | $12.57 | -25.9% | ETH $1,600 | — | — |
+SYMBOL | Entry    | Current  | P&L      | Stop           | → T1              | → T2
+-------|----------|----------|----------|----------------|-------------------|--------
+NVDA¹  | $131.29  | $212.45  | +61.8%   | $196 (7.7%)    | $309 (45.4%)      | $370
+NVDA²  | $201.00  | $212.45  | +5.7%    | $189 (11.0%)   | $235 (10.6%)      | $298
+AVGO   | $385.85  | $393.94  | +2.1%    | $346 (12.2%)   | $422 (7.1%)       | $522
+AMD    | $201.00  | $547.26  | +172.3%  | $475 (13.2%)   | $530 ✅ passed    | $630 (15.1%)
+SPCX   | $135.00  | $192.50  | +42.6%   | NOT SET        | NOT SET           | NOT SET
+MSFT   | $440.28  | $399.76  | -9.2%    | $367 (8.2%)    | $520 (30.1%)      | $559
+MSTR   | $379.48  | $131.14  | -65.4%   | $103 (21.5%)   | $336 (—)          | $457
+TSLA   | $441.00  | $411.15  | -6.8%    | $360 (12.4%)   | $445 (8.2%)       | $498
+GLD    | $441.15  | $396.55  | -10.1%   | $386 (2.7%) 🟠 | $450 (13.5%)      | $509
+SPY    | $679.24  | $754.83  | +11.1%   | Trail 5% ($717)| Hold always       | —
+UNH    | $296.93  | $411.04  | +38.4%   | $391 (4.9%)    | $450 (9.5%)       | $480
+CRWV   | $106.52  | $106.71  | +0.2%    | $89.50 (16.1%) | $138 (29.3%)      | $160
+GOOGL  | $253.90  | $369.35  | +45.5%   | $348 (5.8%)    | $433 (17.2%)      | $515
+AMZN   | $215.53  | $246.02  | +14.1%   | $229 (6.9%)    | $317 (28.9%)      | $350
+BABA   | $166.00  | $112.55  | -32.2%   | $101 (10.3%)   | $192 (70.6%)      | $210
+AAPL   | $197.57  | $296.42  | +50.1%   | $291 (1.8%) 🟠 | $316 (6.6%)       | $345
+FTNT   | $85.68   | $148.55* | +73.4%   | $135 (9.1%)    | $149 ≈ hit        | $170
+KLAR   | $40.00   | $17.60   | -56.0%   | $12.06 (31.5%) | $22–26 (25%)      | $34–38
+VIA    | $44.00   | $14.98   | -65.9%   | $12.95 (13.5%) | $22–25 (47%)      | $34–40
+STUB   | $20.32   | $11.50   | -43.4%   | $8.50 (26.1%)  | $14–15 (22%)      | $20–22
+GEMI   | $28.06   | $5.13    | -81.7%   | $3.91 (23.8%)  | 🔴 SELL ORDER PLACED | —
+FRMI   | $21.00   | $7.48    | -64.4%   | $5.45 (27.1%)  | $20.50            | $35.00
+ETHA   | $16.96   | $13.76   | -18.9%   | ETH<$1,600 (not triggered; ETH $1,774) | ⚠ EXIT FLAGGED Jun 9 | —
 
----
-
-## ── Orders Placed ────────────────────────────────────────
-
-None.
+*FTNT intraday Jun 16
 
 ---
 
-## ── Pending Positions ────────────────────────────────────
+## Pending Positions — Full Detail
 
-| SYMBOL | Entry Zone | Current | Breakout Alt | Status |
-|--------|------------|---------|--------------|--------|
-| MSFT | $384–$394 | $390.74 | — | 🟢 ENTRY ZONE |
-| FTNT | $130.50 | $146.30 | >$150.07 vol>7.5M | 🚀 BREAKOUT NEAR (2.6%) |
-| COPP | $39.80–$40.50 | $42.34 | >$39.77 vol>140K | ⚪ TOO FAR |
-| ADBE | $212–$218 | $204.02 | >$248.57 vol>8M | ⏸ WATCH & WAIT (below zone) |
-| LULU | $110–$114.50 | $118.77 | — | ⚪ TOO FAR ⏰ STALE TOMORROW |
-| NKE | $42.50–$43.50 | $44.93 | — | ⚪ TOO FAR ⏰ STALE TOMORROW |
-
----
-
-## ── News Highlights ──────────────────────────────────────
-
-BABA: Beijing rebuke Jun 11 (e-commerce crackdown) ← negative; $1.5B grocery bid Jun 12 ← speculative
-GLD: Gold -2% on US-Iran oil surge Jun 10 ← negative; "40% collapse by 2028" options wager ← bearish signal
-AAPL: Siri AI WWDC reception mixed, stock fell Jun 9 ← negative; China Siri blockage risk ← negative
-AMD: Citi upgrade to Buy, target $575 Jun 12 ← positive; BofA raised CPU TAM to $170B ← positive; up 5% today
-FTNT: Q1 earnings beat May 7 ← positive; analyst mean $112.09 — BELOW current $146 ← overextended
-UNH: FTC insulin settlement Jun 12 ← positive; BofA Buy $450 Jun 4 ← positive; at analyst mean ← neutral
-MSFT: Xbox spin-off rumors Jun 12 ← watch; Azure China layoffs Jun 10 ← negative; stock under pressure
-ETHA: Near 52-week low $11.62; ETH proxy down 44% YTD ← negative; exit flag pending since Jun 9
-MSTR: 845K BTC held (4% of supply); dilution concerns raised; analyst target $336 vs current $123 ← deeply underwater
+SYMBOL | Entry Zone     | Current  | Breakout Alt          | Status
+-------|----------------|----------|-----------------------|-------
+MSFT   | $384–$394      | $399.76  | —                     | ⏰ STALE SOON Jun 20 / ⚪ NEAR ZONE (barely above)
+FTNT   | $138–$143      | $148.55* | >$150.07 vol>7.5M     | 🚀 BREAKOUT NEAR (1.0% away)
+COPP   | $39.80–$40.50  | $43.78   | close>$39.77 vol>140K | ⏰ STALE SOON Jun 18 / ⚪ TOO FAR (+8.1%)
+ADBE   | $212–$218      | $206.36  | >$248.57 vol>8M       | ⏸ WATCH & WAIT + ⏰ STALE SOON Jun 18 + 🟢 ENTRY ZONE
+AAPL   | $288–$292      | $296.42  | >$304 vol>55M         | ⚪ TOO FAR (barely above $292)
+UNH    | $392–$400      | $411.04  | —                     | ⚪ TOO FAR (+2.8%)
+LULU   | $110–$114.50   | $116.21  | —                     | 🗑 STALE — expired Jun 14
+NKE    | $42.50–$43.50  | $45.20   | —                     | 🗑 STALE — expired Jun 14
+AMZN   | $238–$242      | $246.02  | SMA 200 $233–$235     | ⚪ TOO FAR (barely, +1.7%)
+CRWV   | $97–$99        | $106.71  | —                     | ⚪ TOO FAR (+7.8%)
+GOOGL  | $354–$362      | $369.35  | >$376 vol>35M         | 🚀 BREAKOUT NEAR (1.8% away)
+BABA   | $108–$111      | $112.55  | >$118.89 vol>13M      | ⚪ TOO FAR (barely, +1.4%)
 
 ---
 
-## ── FLAGGED SYMBOLS (for thesis check) ──────────────────
-SYMBOL | FLAG | PRICE | REPORT
-BABA | STOP_HIT | $112.82 | none
-GLD | STOP_CLOSE | $386.54 | none
-AAPL | STOP_CLOSE | $291.13 | none
-AMD | T1_NEAR,ACTION_PENDING | $511.57 | analysis/data/reports/AMD_20260609_164203
-FTNT | T1_NEAR,ACTION_PENDING,BREAKOUT_NEAR | $146.30 | analysis/data/reports/FTNT_20260610_133733
-UNH | ACTION_PENDING,NO_ANALYSIS | $408.52 | none
-ETHA | ACTION_PENDING | $12.57 | none
-MSFT | ENTRY_ZONE | $390.74 | analysis/data/reports/MSFT_20260613_051010
-MSTR | NO_ANALYSIS | $123.97 | none
-GOOGL | STOP_WATCH | $359.68 | none
+## News Highlights
+
+NVDA: Reclaimed $5T market cap (Jun 15) — positive. Upsized bond offering to $25B. Multiple analyst upgrades in May. Analyst mean $309.93. ← positive
+AVGO: $35B AI infrastructure platform with Apollo/Blackstone (Jun 9). Macquarie downgrade (Jun 4). Analyst mean $524. ← positive
+AMD: MEXT acquisition for AI flash-memory (Jun 15) — drove today's +6.29%. Citigroup upgraded Buy $575 (Jun 12). Near $900B valuation. ← positive
+SPCX: IPO completed $86.2B offering, greenshoe exercised (Jun 15). Musk targets $1T revenue by 2030. Wolfe $175 PT (stock already above at $192.50). ← positive / needs analysis
+MSFT: Shareholder lawsuit (Jun 15, misleading Azure growth/AI capex). Barron's "having a rough week." Analyst mean $559. ← watch
+MSTR: Holds 845K BTC (4% of total supply). BTC ~$60–66K (well above $48,500 floor). Rebuilt $1.1B USD reserve. ← stable
+TSLA: Gerber "worthless without SpaceX merger" (Jun 15). Cathie Wood dumped TSLA, bought SPCX. JP Morgan upgraded to Neutral Jun 5. ← neutral
+GLD: Gold +2.59% Jun 15 — "Benchmark Debate Builds." Goldman sees $5,400. Iran fears easing. ← positive for thesis; stop still close
+UNH: FTC/insulin settlement (Jun 12). BofA $450 PT (Jun 4). Beat Q1 + raised FY26 outlook. Berkshire exited Q1. Trim still overdue. ← positive but trim needed
+CRWV: Nasdaq 100 inclusion confirmed Jun 12. $7B European bond debut. Insider selling $2.3B since IPO (note). RSI 45.9 neutral. ← positive / watch $115 trigger
+GOOGL: Benefits from SPCX IPO. Samsung chip partnership talks. Analyst mean $434. Breakout trigger $376 approaching. ← positive
+AMZN: $200B 2026 AI/cloud capex announced (Jun 15). Missouri data center. $17.5B loan drawn. Anthropic's new model cited as AMZN positive. ← positive
+BABA: Pentagon listed Jun 9 (no sanctions, bars DoD contracts only; initial stock drop was just -0.8%). Beijing rebuke Jun 11. Michael Burry boosted stake Jun 15. Old stop $113 breached — now at $101. RSI 22.9 deeply oversold. ← negative catalysts / thesis under pressure
+AAPL: AI reset / Siri upgrade Jun 10. AI deepens Alphabet dependency (neutral). BofA raised PT to $380 (May 26). Oversold RSI 34.2 but near stop. ← mixed; watch stop
+FTNT: Q1 beat + raised FY26 guidance (May 7). Multiple upgrades. 52W high $150.07 = ceiling. Limit sell 2 shares at $149.41 placed today. ← positive
+GEMI: Q1 narrowing losses, $100M Winklevoss investment, CFTC DCO license. Multiple analyst downgrades (Citi Sell, Cantor Neutral, Truist Hold). Analyst mean $6.58. Market sell placed today. ← exit in progress
+FRMI: OpenAI "major capacity deal" report (Jun 10, not confirmed). Proxy fight vs ex-CEO ongoing. No confirmed anchor tenant. UBS/Evercore downgraded. ← speculative catalyst; no confirmation
+ADBE: CFO Dan Durn departed to Marvell (Jun 12). Q2 beat but AI monetization concerns. Multiple downgrades Jun 12. CEO Narayen still in role — WATCH & WAIT condition (new CEO named) NOT yet met. ← watch / do not act
+ETHA: ETH $1,774 — above $1,600 stop. ETHA +9.29% today (recovering). Exit flagged Jun 9 still pending user decision. ← decision needed
+COPP: Entry was $39.80–$40.50; now $43.78 (+8.1% above zone). No major recent news. Expires Jun 18. ← too far; likely let expire
+LULU/NKE: Both stale (expired Jun 14). No recent catalyst news. ← re-run before any action
+
+---
+
+## FLAGGED SYMBOLS
+SYMBOL | FLAG                | PRICE    | REPORT
+-------|---------------------|----------|-------------------------------------------
+GEMI   | MARKET_SELL_ORDER   | $5.13    | analysis/data/reports/GEMI_20260616_045142
+AAPL   | STOP_CLOSE          | $296.42  | analysis/data/reports/AAPL_20260614_043609
+GLD    | STOP_CLOSE          | $396.55  | none
+UNH    | ACTION_PENDING      | $411.04  | analysis/data/reports/UNH_20260614_050109
+ETHA   | ACTION_PENDING      | $13.76   | none
+NVDA   | ACTION_PENDING      | $212.45  | analysis/data/reports/NVDA_20260610_054246
+BABA   | ACTION_NOTE         | $112.55  | analysis/data/reports/BABA_20260615_043348
+FTNT   | NEAR_LIMIT          | $148.55  | analysis/data/reports/FTNT_20260616_040945
+CRWV   | ACTION_PENDING      | $106.71  | analysis/data/reports/CRWV_20260614_052027
+SPCX   | NO_ANALYSIS         | $192.50  | none
+FTNT   | BREAKOUT_NEAR       | $148.55  | analysis/data/reports/FTNT_20260616_040945
+GOOGL  | BREAKOUT_NEAR       | $369.35  | analysis/data/reports/GOOGL_20260614_164752
+ADBE   | STALE_SOON+WATCH    | $206.36  | analysis/data/reports/ADBE_20260611_205123
+MSFT   | STALE_SOON          | $399.76  | analysis/data/reports/MSFT_20260613_051010
+COPP   | STALE_SOON          | $43.78   | analysis/data/reports/COPP_20260611_175013
+LULU   | STALE               | $116.21  | analysis/data/reports/LULU_20260607_060748
+NKE    | STALE               | $45.20   | analysis/data/reports/NKE_20260607_054527

@@ -40,7 +40,8 @@
 ### AMD — open
 
 - Entry 1: ~$201 avg | Shares: 1.55 | Size: 2.6% | Stop: $475 (moved up 2026-06-15, post-T1) | T1: $530 ✅ passed | T2: $630
-  Hold to T2 — small position, let it ride. Re-entry on pullback to $500–$515 or post-Q2 earnings dip.
+  Hold to T2 — small position, let it ride. Recent swing trade $475→$540 closed Jun 2026.
+  ⚠ Analysis stale — re-run before re-entry to set fresh entry zone and updated T2
   Next check: Q2 earnings Aug 2026 — revenue >$10.5B, EPS >$0.84 → confirm thesis
 
 ### SPCX (SpaceX) — open
@@ -149,9 +150,11 @@
   Note: 82% gross margins, Q1 earnings beat — operating losses are IPO stock-comp, not business failure
   Breakeven: $20.34
 
+
 ### GEMI — open
 
 - Entry 1: $28.06 avg | Shares: 21 | Size: 4.9% | Stop: $3.91 (52W low — hard stop) | T1: $6.58 (analyst mean — trim 30–40%) | T2: $10.00 (analyst high)
+  🔴 Market sell order placed 2026-06-16 — awaiting execution
   Hold condition: BTC holds + Q2'26 revenue rebounds above $55M + gross margin improves toward 0%
   Exit immediately if: Q2'26 revenue declines again despite BTC strength OR dilutive capital raise announced
   Based on: analysis/data/reports/GEMI_20260616_045142
@@ -265,16 +268,26 @@ _None._
 - Note: New tranche — existing open position at $253.90 avg (1.9%). This is a second, higher-cost-basis tranche on the macro-driven selloff oversold reversal thesis (rating: Overweight)
 - Based on: analysis/data/reports/GOOGL_20260614_164752
 
-### BABA — report 2026-06-15 — STALE AFTER 2026-06-22 [or post-Q2'26 earnings if reported before then]
+### BABA — report 2026-06-15 — WATCH AND WAIT
 
-- Suggested entry: $108.00–$111.00 (limit, GTC 5 trading days; target center $109) | Size: 3% | Stop: $101.00
+- **STATUS: WATCH AND WAIT — no order placed. Waiting for: Q2'26 earnings to confirm FCF improvement before placing pending tranche order**
+- Watch condition: once Q2'26 earnings reported → run full analysis immediately to decide on pending tranche entry
+- Pentagon listing (Jun 9) and Beijing rebuke (Jun 11) are new negative catalysts — do NOT enter before earnings clarity
+- Suggested entry (post-earnings if thesis holds): $108.00–$111.00 (limit, GTC 5 trading days; target center $109) | Size: 3% | Stop: $101.00
 - Target 1: $124.76 (sell 30%, ~3–4 months — Bollinger mid / VWMA) | Target 2: $150.00 (sell 40%, ~9–12 months — toward 200-SMA)
 - Breakout alt: close >$118.89 vol >13M → cancel limit, buy breakout; stop $101
 - Secondary entry: $103.00–$104.50 (add 1% only if 52W low $103.71 breaks and recovers with next-day close above $103.71)
-- Key trigger: Q2'26 earnings — exit immediately if Q2'26 FCF remains below -$30B AND operating income is negative again (thesis invalidated)
-- Conditional add-on: +2% (total 5%) if Q2'26 FCF above -$20B AND gross margin above 36%
-- Note: New tranche — existing open position at $166.00 avg, stop $113 (⚠ STOP AT RISK — current price $112.82 is below existing stop; review immediately). This new analysis is a separate lower-cost-basis second tranche on the deep value / oversold reversal thesis (rating: Overweight)
+- Key trigger: Q2'26 earnings — exit immediately if Q2'26 FCF remains below -$30B AND operating income is negative again (thesis invalidated). If FCF improves above -$20B AND gross margin above 36% → run full analysis and place order
+- Note: New tranche — existing open position at $166.00 avg, stop $101 (reset Jun 15). Separate lower-cost-basis second tranche on deep value / oversold reversal thesis (rating: Overweight)
 - Based on: analysis/data/reports/BABA_20260615_043348
+
+### MRVL — queued for analysis
+
+- **STATUS: ANALYSIS PENDING — no report yet. Run full analysis before considering entry.**
+
+### MU — queued for analysis
+
+- **STATUS: ANALYSIS PENDING — no report yet. Run full analysis before considering entry.**
 
 ---
 
